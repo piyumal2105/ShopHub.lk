@@ -1,0 +1,66 @@
+.nav-item i {
+  padding-right: 20px;
+}
+
+.nav {
+  padding-top: 20px; /* Adjust the value as needed */
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+.container-color {
+  color: #a1a1a1;
+}
+.container-color:hover,
+.container-color-active {
+  color: #1e9aff;
+}
+
+.icon-color-default {
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+}
+
+.icon-color-default:hover {
+  background-color: #e6f4ff;
+  transition: all 0.2s;
+}
+
+.icon-color-active {
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  background-color: #e6f4ff;
+}
+
+.container-color-super {
+  color: #a1a1a1;
+}
+.container-color-super:hover,
+.container-color-super-active {
+  color: #1e9aff;
+  background-color: #e9f5ff;
+}
+/* NavBar.css */
+
+/* .nav-link:hover { */
+/* background-color: #7cdae8; Add your preferred hover background color */
+/* color: #333333; Add your preferred hover text color */
+/* } */
+
+/* Optional: Change the color of the car and file icons on hover */
+/* .nav-link:hover .fa-car,
+      .nav-link:hover .fa-file {
+        color: #007bff; Add your preferred hover icon color */
+/* } */
+
+/* .active { */
+/* background-color: #7cdae8; Add your preferred hover background color */
+/* color: #333333; Add your preferred hover text color */
+/* }  */
