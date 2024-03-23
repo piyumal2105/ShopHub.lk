@@ -10,6 +10,7 @@ import img01 from "../assets/img01.png";
 import img03 from "../assets/denim.png";
 import img04 from "../assets/shirt01.png";
 import img05 from "../assets/shirt02.png";
+import { Link } from "react-router-dom";
 
 function LandingPage() {
   const [customers, setCustomers] = useState(0);
@@ -39,7 +40,9 @@ function LandingPage() {
         className="d-flex justify-content-center align-items-center"
         style={{ backgroundColor: "black", color: "white", height: "60px" }}
       >
-        <center>Sign Up and get 10% off. Sign Up</center>
+        <center>--Sign Up and get 10% off--    <Link to= 'sign-up'>
+           <Button>Sign Up</Button>
+           </Link></center>
       </div>
       <br />
       <Header />
