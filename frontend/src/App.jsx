@@ -20,7 +20,7 @@ function App() {
                 <Route path="/Wheel" element={<LuckyWheel />} />
                 <Route path="/Wheel1" element={<LoyaltyPointPage />} />
                 <Route path="/Wheel1" element={<LoyaltyPointPage />} />
-                <Route path="/LO" element={<LP_admin />} />
+                <Route path="/LoyaltyRewordManagement" element={<LP_admin />} />
                 <Route path="/customers/login" element={<Login />} />
 
                 <Route path="/customers/register" element={<Register />} />

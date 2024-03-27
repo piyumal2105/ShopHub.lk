@@ -1,10 +1,24 @@
 // backend/routes/offerRoutes.js
 import express from "express";
-import { createOffer } from "../controllers/offerController.js";
+import {
+    createOffer,
+    getOffer,
+    updateOffer,
+    deleteOffer,
+} from "../controllers/offerController.js";
 
-// Create Offer
 const router = express.Router();
 
+// Create Offer
 router.post("/create", createOffer);
+
+// Get Offer by ID
+router.get("/getoffer", getOffer);
+
+// Update Offer by ID
+router.put("/updateoffer/:_id", updateOffer);
+
+// Delete Offer by ID
+router.delete("/deleteoffer/:_id", deleteOffer);
 
 export default router;
