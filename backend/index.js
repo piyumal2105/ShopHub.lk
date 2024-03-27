@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dbConnect from "./configs/dbConfig.js";
 import AdminAuthRoutes from "./routes/admin.auth.routes.js";
+import customerRoute from "./routes/customerRoute.js";
 
 //initialized express
 const app = express();
@@ -31,6 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/admin", AdminAuthRoutes);
+app.use("/customer", customerRoute);
 
 app.use((req, res, next) => {
   console.log(`${req.method} =====> URL: ${req.url}`);
