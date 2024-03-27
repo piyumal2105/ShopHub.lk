@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import dbConnect from "./configs/dbConfig.js";
 import AdminAuthRoutes from "./routes/admin.auth.routes.js";
 import customerRoute from "./routes/customerRoute.js";
+import offerRoute from "./routes/offerRoutes.js";
 
 //initialized express
 const app = express();
@@ -16,7 +17,7 @@ const PORT = process.env.PORT || 6001;
 
 // root end point
 app.get("/", (req, res) => {
-  res.send("Welcome to ShopHub.lk");
+    res.send("Welcome to ShopHub.lk");
 });
 
 // CORS [allow the pass the cookies to orin localhost]
@@ -33,13 +34,14 @@ app.use(cookieParser());
 
 app.use("/admin", AdminAuthRoutes);
 app.use("/customer", customerRoute);
+app.use("/offers", offerRoute);
 
 app.use((req, res, next) => {
-  console.log(`${req.method} =====> URL: ${req.url}`);
-  next();
+    console.log(`${req.method} =====> URL: ${req.url}`);
+    next();
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀💀 Server is started on port ${PORT}!`);
-  dbConnect();
+    console.log(`🚀💀 Server is started on port ${PORT}!`);
+    dbConnect();
 });
