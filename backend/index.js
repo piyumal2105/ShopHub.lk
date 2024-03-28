@@ -6,6 +6,7 @@ import dbConnect from "./configs/dbConfig.js";
 import AdminAuthRoutes from "./routes/admin.auth.routes.js";
 import customerRoute from "./routes/customerRoute.js";
 import offerRoute from "./routes/offerRoutes.js";
+import prizeRoute from "./routes/prizeRoutes.js";
 
 //initialized express
 const app = express();
@@ -35,6 +36,7 @@ app.use(cookieParser());
 app.use("/admin", AdminAuthRoutes);
 app.use("/customer", customerRoute);
 app.use("/offers", offerRoute);
+app.use("/prize", prizeRoute);
 
 app.use((req, res, next) => {
     console.log(`${req.method} =====> URL: ${req.url}`);

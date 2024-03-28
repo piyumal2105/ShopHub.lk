@@ -1,8 +1,10 @@
+// Prize.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import axios from "axios"; // Import axios for making HTTP requests
 
 const overlay = {
     hide: {
@@ -40,6 +42,19 @@ export default function Prize({ back, prize }) {
     useEffect(() => {
         if (prize) {
             setShowPopup(true);
+            // Send prize information to backend when prize is won
+            const sendPrizeInfo = async () => {
+                try {
+                    const customerId = "6603c22cbacfd0b8a0403a4e"; // Replace with actual customer ID
+                    await axios.post("http://localhost:3001/prize/add", {
+                        customerId,
+                        prizeWon: prize,
+                    });
+                } catch (error) {
+                    console.error("Error sending prize information:", error);
+                }
+            };
+            sendPrizeInfo();
         }
     }, [prize]); // Trigger when prize value changes
 

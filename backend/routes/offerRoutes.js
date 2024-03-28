@@ -16,7 +16,7 @@ router.post("/create", createOffer);
 router.get("/getoffer", getOffer);
 
 // Update Offer by ID
-router.put("/updateoffer/:_id", updateOffer);
+router.put("/updateoffer/:offerId", updateOffer);
 
 // Delete Offer by ID
 router.delete("/deleteoffer/:_id", deleteOffer);

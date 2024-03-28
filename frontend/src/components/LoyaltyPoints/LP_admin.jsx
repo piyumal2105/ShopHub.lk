@@ -31,6 +31,19 @@ const LP_admin = () => {
         setShowOfferForm(!showOfferForm);
     };
 
+    const handleDeactivateOffer = async (offerId) => {
+        try {
+            await axios.put(
+                `http://localhost:3001/offers/updateoffer/${offerId}`,
+                { status: "Inactive" }
+            );
+            // Refetch active offers after deactivation
+            fetchActiveOffers();
+        } catch (error) {
+            console.error("Error deactivating offer:", error);
+        }
+    };
+
     return (
         <div className="container mt-4">
             <h1 className="mb-4">Admin Page</h1>
@@ -54,6 +67,8 @@ const LP_admin = () => {
                         <th>Note</th>
                         <th>Loyalty Point Price</th>
                         <th>Offer Created Date</th>
+                        <th>Action</th>{" "}
+                        {/* New column for the deactivate button */}
                     </tr>
                 </thead>
                 <tbody>
@@ -72,6 +87,16 @@ const LP_admin = () => {
                             <td>{offer.priceInPoints}</td>
                             <td>
                                 {new Date(offer.createdAt).toLocaleDateString()}
+                            </td>
+                            <td>
+                                <button
+                                    className="btn btn-danger"
+                                    onClick={() =>
+                                        handleDeactivateOffer(offer._id)
+                                    }
+                                >
+                                    Deactivate
+                                </button>
                             </td>
                         </tr>
                     ))}
