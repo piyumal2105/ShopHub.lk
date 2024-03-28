@@ -1,0 +1,21 @@
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  /* background-color: #e6f4fd; */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.filter-input,
+.filter-select,
+.filter-datepicker {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.filter-datepicker {
+  width: 150px;
+}
