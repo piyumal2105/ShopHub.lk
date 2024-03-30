@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {useCart} from "../Cart/CartContext";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -18,12 +19,32 @@ const AllProducts = () => {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [memberData, setMemberData] = useState([]);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const {addToCart} = useCart();
   //   const params = useParams();
   //   const memberId = params.id;
 
+
   const handleNameClick = (member) => {
     setMemberData(member);
+    setSelectedProductId(member.cusProductID);
     setShowModal(true);
+  };
+
+  const handleAddToCart = async () => {
+    try {
+      // Send a POST request to the backend API to add the product to the cart
+      const response = await axios.post("http://localhost:3001/cart/add", {
+        productId: selectedProductId // Use the selected product ID
+      });
+      addToCart(memberData);
+
+      // Handle success/failure as needed
+      console.log("Item added to cart:", response.data);
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+      // Handle error
+    }
   };
 
   // use react query and fetch member data
@@ -174,7 +195,7 @@ const AllProducts = () => {
                 <center>
                   <Row>
                     <Col>
-                      <Button
+                      <Button 
                         style={{
                           backgroundColor: "black",
                           borderColor: "black",
@@ -184,7 +205,8 @@ const AllProducts = () => {
                       </Button>
                     </Col>
                     <Col>
-                      <Button
+                      <Button 
+                         onClick={handleAddToCart}
                         style={{
                           backgroundColor: "black",
                           borderColor: "black",

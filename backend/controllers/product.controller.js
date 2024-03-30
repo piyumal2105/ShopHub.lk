@@ -134,3 +134,27 @@ export const deleteProduct = async (req, res) => {
     res.status(500).json({ message: "Failed to delete Product", error });
   }
 };
+
+// Add to cart
+export const addToCart = async (req, res) => {
+  try {
+    // Extract the necessary data from the request body
+    const { productId } = req.body;
+
+    // For simplicity, assuming quantity is 1 when adding to cart
+
+    // Create a new cart item
+    const cartItem = new CartItem({
+      productId,
+      // Add any other relevant fields
+    });
+
+    // Save the cart item to the database
+    const savedCartItem = await cartItem.save();
+
+    res.status(201).json(savedCartItem);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: "Failed to add item to cart", details: error.message });
+  }
+};

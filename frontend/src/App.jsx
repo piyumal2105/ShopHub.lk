@@ -11,11 +11,19 @@ import ShopMemberProfile from "./components/ShopMemberProfile/ShopMemberProfile"
 import ShopMemberNavbar from "./components/ShopMemberNavbar/ShopMemberNavBar";
 import Inventory from "./components/Inventory/Inventory";
 import AllProducts from "./components/AllProducts/AllProducts";
+import Cart from "./components/Cart/Cart";
+import {CartProvider} from "./components/Cart/CartContext.jsx";
+
+
 
 function App() {
   const queryClient = new QueryClient();
+
+
+
   return (
     <QueryClientProvider client={queryClient}>
+      <CartProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -29,8 +37,10 @@ function App() {
           <Route path="/shopMemberNavbar" element={<ShopMemberNavbar />} />
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/allProducts" element={<AllProducts />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
+      </CartProvider >
     </QueryClientProvider>
   );
 }
