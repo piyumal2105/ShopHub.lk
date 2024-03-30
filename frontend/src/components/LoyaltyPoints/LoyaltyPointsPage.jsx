@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LuckyWheel from "./LuckyWheel";
+import "./LuckyPointsStyles.css";
 
 const LoyaltyPointPage = () => {
     const [showPopup, setShowPopup] = useState(false);
@@ -52,6 +53,14 @@ const LoyaltyPointPage = () => {
     return (
         <div className="container mt-5">
             <h1 className="mb-4">Loyalty Point Page</h1>
+            <div className="button-container">
+                {!showPopup && !wheelActive && (
+                    <button className="btn-primary" onClick={handleShowPopup}>
+                        Open Lucky Wheel
+                    </button>
+                )}
+            </div>
+
             {!wheelActive && (
                 <div>
                     <h2>Active Offers</h2>
@@ -59,10 +68,15 @@ const LoyaltyPointPage = () => {
                         {activeOffers.map((offer, index) => (
                             <div className="col-md-4 mb-3" key={index}>
                                 <button
-                                    className="btn btn-primary btn-lg btn-block"
+                                    className="offer-btn"
                                     onClick={() => handleOfferClick(offer._id)}
                                 >
-                                    {offer.name} - {offer.priceInPoints}
+                                    {offer.type === "Discount" && (
+                                        <div>Rs. {offer.discountAmount}</div>
+                                    )}
+                                    <div>{offer.type}</div>{" "}
+                                    {/* Display offer type */}
+                                    <div>{offer.priceInPoints} points</div>
                                 </button>
                             </div>
                         ))}
@@ -70,21 +84,17 @@ const LoyaltyPointPage = () => {
                 </div>
             )}
 
-            {!showPopup && !wheelActive && (
-                <button className="btn btn-primary" onClick={handleShowPopup}>
-                    Open Lucky Wheel
-                </button>
-            )}
-
             {showPopup && (
                 <div className="popup-overlay" onClick={handleClosePopup}>
                     <div className="popup" onClick={handlePopupClick}>
-                        <button
-                            onClick={handleClosePopup}
-                            className="btn-close btn btn-danger"
-                        ></button>
                         <LuckyWheel onWheelActivation={handleWheelActivation} />
                     </div>
+                    <button
+                        onClick={handleClosePopup}
+                        className="btn-close btn-danger"
+                    >
+                        close
+                    </button>
                 </div>
             )}
         </div>

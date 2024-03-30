@@ -7,8 +7,11 @@
     height: fit-content;
     position: relative;
     overflow: hidden;
-    background-color: #72ec01;
+    background-color: #4f4f4f;
     border: 5px solid black;
+    border-radius: 20px; /* Rounded corners */
+    padding: 20px; /* Padding for content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
 }
 
 .game_content {
@@ -16,7 +19,7 @@
     justify-items: center;
     align-items: center;
     flex-direction: column;
-    padding-block: 1rem;
+    padding: 1rem;
     overflow: hidden;
 }
 
@@ -24,9 +27,16 @@
     padding: 1rem 4rem;
     margin-top: 1rem;
     font-size: 1.6rem;
-    background: transparent;
+
     border-radius: 20rem;
     border: 0.1rem solid #fff;
-    color: #ec0101;
+    color: #000000;
     z-index: 1;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.game_content_spin:hover {
+    background-color: #fff;
+    color: #72ec01;
 }

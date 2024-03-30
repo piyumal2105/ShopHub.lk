@@ -106,9 +106,9 @@ const LuckyWheel = () => {
                     onStopSpinning={handleSpinStop}
                     outerBorderColor="#4E5452"
                     outerBorderWidth={3}
-                    innerBorderColor="#4E5452"
+                    innerBorderColor="#fff"
                     innerBorderWidth={3}
-                    radiusLineColor="#4E5452"
+                    radiusLineColor="black"
                 />
                 <motion.button
                     variants={buttonMotion}
