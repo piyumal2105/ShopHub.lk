@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import OfferForm from "./OfferForm"; // Assuming OfferForm component is imported correctly
+import OfferForm from "./OfferForm";
 
 const LP_admin = () => {
     const [showOfferForm, setShowOfferForm] = useState(false);

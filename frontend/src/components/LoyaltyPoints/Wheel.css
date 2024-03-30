@@ -9,9 +9,9 @@
     overflow: hidden;
     background-color: #4f4f4f;
     border: 5px solid black;
-    border-radius: 20px; /* Rounded corners */
-    padding: 20px; /* Padding for content */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .game_content {

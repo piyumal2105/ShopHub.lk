@@ -1,4 +1,3 @@
-// controllers/prizeController.js
 import Prize from "../models/Prize.js";
 
 export const addPrize = async (req, res) => {

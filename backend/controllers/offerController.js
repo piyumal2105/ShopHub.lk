@@ -36,7 +36,7 @@ export const getOffer = async (req, res) => {
 
 export const updateOffer = async (req, res) => {
     try {
-        const offerId = req.params.offerId; // Use req.params.offerId to access the offerId parameter
+        const offerId = req.params.offerId;
         const updatedOffer = await Offer.findByIdAndUpdate(offerId, req.body, {
             new: true,
         });
@@ -55,7 +55,7 @@ export const updateOffer = async (req, res) => {
 
 export const deleteOffer = async (req, res) => {
     try {
-        const offerId = req.params.offerId; // Use req.params.offerId to access the offerId parameter
+        const offerId = req.params.offerId;
         const deletedOffer = await Offer.findByIdAndDelete(offerId);
         if (!deletedOffer) {
             return res.status(404).json({ message: "Offer not found" });

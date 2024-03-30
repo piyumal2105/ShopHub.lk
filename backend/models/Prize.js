@@ -1,4 +1,3 @@
-// models/Prize.js
 import mongoose from "mongoose";
 
 const prizeSchema = new mongoose.Schema({

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import toastify styles
+import "react-toastify/dist/ReactToastify.css";
 
 const OfferForm = () => {
     const [offerData, setOfferData] = useState({
@@ -28,9 +28,8 @@ const OfferForm = () => {
                 position: "top-center", // Specify position directly as a string
                 autoClose: 3000, // Close the toast after 3 seconds
                 hideProgressBar: true, // Hide progress bar
-                className: "toast-success", // Custom CSS class for styling
+                className: "toast-success",
             });
-            // Optionally, you can redirect or show a success message here
         } catch (error) {
             console.error("Error creating offer:", error);
             // Handle error state

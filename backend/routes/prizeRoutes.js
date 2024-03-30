@@ -1,4 +1,3 @@
-// routes/prizeRoutes.js
 import express from "express";
 import { addPrize } from "../controllers/prizeController.js";
 
