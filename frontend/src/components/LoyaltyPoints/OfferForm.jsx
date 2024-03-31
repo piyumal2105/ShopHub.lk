@@ -10,9 +10,23 @@ const OfferForm = () => {
         discountAmount: 0,
         priceInPoints: 0,
     });
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleChange = (e) => {
-        setOfferData({ ...offerData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+
+        // Check if the value is negative or zero and if it's discountAmount or priceInPoints
+        if (
+            (name === "discountAmount" || name === "priceInPoints") &&
+            (parseFloat(value) <= 0 || isNaN(parseFloat(value)))
+        ) {
+            setErrorMessage("Value must be a positive number.");
+            return;
+        } else {
+            setErrorMessage(""); // Reset error message if value is valid
+        }
+
+        setOfferData({ ...offerData, [name]: value });
     };
 
     const handleSubmit = async (e) => {
@@ -23,9 +37,9 @@ const OfferForm = () => {
                 offerData
             );
             console.log("Offer created:", response.data);
-            // Show toast message upon successful offer creation
+
             toast.success("Offer created successfully", {
-                position: "top-center", // Specify position directly as a string
+                position: "top-center",
                 autoClose: 3000, // Close the toast after 3 seconds
                 hideProgressBar: true, // Hide progress bar
                 className: "toast-success",
@@ -98,6 +112,7 @@ const OfferForm = () => {
                         required
                     />
                 </div>
+                {errorMessage && <p className="text-danger">{errorMessage}</p>}
                 <button type="submit" className="btn btn-primary">
                     Create Offer
                 </button>

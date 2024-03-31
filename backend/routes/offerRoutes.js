@@ -18,6 +18,6 @@ router.get("/getoffer", getOffer);
 router.put("/updateoffer/:offerId", updateOffer);
 
 // Delete Offer by ID
-router.delete("/deleteoffer/:_id", deleteOffer);
+router.delete("/deleteoffer/offerId", deleteOffer);
 
 export default router;

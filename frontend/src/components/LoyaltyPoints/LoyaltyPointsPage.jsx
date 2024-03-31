@@ -7,9 +7,11 @@ const LoyaltyPointPage = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [wheelActive, setWheelActive] = useState(false); // State to track wheel activation
     const [activeOffers, setActiveOffers] = useState([]);
+    const [balance, setBalance] = useState(0); // State to hold balance
 
     useEffect(() => {
         fetchActiveOffers();
+        fetchBalance(); // Fetch balance when component mounts
     }, []);
 
     const fetchActiveOffers = async () => {
@@ -27,6 +29,18 @@ const LoyaltyPointPage = () => {
         }
     };
 
+    const fetchBalance = async () => {
+        try {
+            const customerId = "6603c22cbacfd0b8a0403a4e";
+            const response = await axios.get(
+                `http://localhost:3001/prize/getBalance/${customerId}`
+            );
+            setBalance(response.data.balance);
+        } catch (error) {
+            console.error("Error fetching balance:", error);
+        }
+    };
+
     const handleShowPopup = () => {
         setShowPopup(true);
         setWheelActive(true);
@@ -35,6 +49,7 @@ const LoyaltyPointPage = () => {
     const handleClosePopup = () => {
         setShowPopup(false);
         setWheelActive(false);
+        fetchBalance();
     };
 
     const handlePopupClick = (e) => {
@@ -53,6 +68,7 @@ const LoyaltyPointPage = () => {
     return (
         <div className="container mt-5">
             <h1 className="mb-4">Loyalty Point Page</h1>
+            <h2>Balance: {balance} points</h2> {/* Display balance */}
             <div className="button-container">
                 {!showPopup && !wheelActive && (
                     <button className="btn-primary" onClick={handleShowPopup}>
@@ -60,7 +76,6 @@ const LoyaltyPointPage = () => {
                     </button>
                 )}
             </div>
-
             {!wheelActive && (
                 <div>
                     <h2>Active Offers</h2>
@@ -83,7 +98,6 @@ const LoyaltyPointPage = () => {
                     </div>
                 </div>
             )}
-
             {showPopup && (
                 <div className="popup-overlay" onClick={handleClosePopup}>
                     <div className="popup" onClick={handlePopupClick}>
