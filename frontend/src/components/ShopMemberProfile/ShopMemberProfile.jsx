@@ -175,7 +175,11 @@ function ShopMemberProfile() {
                 <Button
                   variant="primary"
                   onClick={handleShow}
-                  style={{ float: "right" }}
+                  style={{
+                    float: "right",
+                    backgroundColor: "black",
+                    borderColor: "black",
+                  }}
                 >
                   Change Password
                 </Button>
@@ -252,7 +256,12 @@ function ShopMemberProfile() {
                   }}
                   variant="primary"
                   href=""
-                  style={{ float: "left", margin: "5px" }}
+                  style={{
+                    float: "left",
+                    margin: "5px",
+                    backgroundColor: "black",
+                    borderColor: "black",
+                  }}
                 >
                   Update Profile
                 </Button>

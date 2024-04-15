@@ -1,5 +1,4 @@
-import { useState } from "react";
-import Table from "react-bootstrap/Table";
+import { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
@@ -12,14 +11,35 @@ import Modal from "react-bootstrap/Modal";
 // import { useParams } from "react-router-dom";
 import "./style.css";
 import { Button } from "react-bootstrap";
+// import Container from "react-bootstrap/Container";
+// import img01 from "../../assets/img01.png";
 
 const AllProducts = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [memberData, setMemberData] = useState([]);
-  //   const params = useParams();
-  //   const memberId = params.id;
+  const [customers, setCustomers] = useState(0);
+  const [products, setProducts] = useState(0);
+  const [sellers, setSellers] = useState(0);
+
+  useEffect(() => {
+    const incrementValues = () => {
+      if (customers < 20000) {
+        setCustomers((prevCustomers) => prevCustomers + 100);
+      }
+      if (products < 2000) {
+        setProducts((prevProducts) => prevProducts + 10);
+      }
+      if (sellers < 200) {
+        setSellers((prevSellers) => prevSellers + 1);
+      }
+    };
+
+    const interval = setInterval(incrementValues, 30);
+
+    return () => clearInterval(interval);
+  }, [customers, products, sellers]);
 
   const handleNameClick = (member) => {
     setMemberData(member);
@@ -46,7 +66,7 @@ const AllProducts = () => {
   //Extract unique country for dropdown options
   const uniqueCategory = [
     "Fashion and Apparel",
-    "Entertainment and Leisure",
+    "Electronics and Technology",
     "Home and Furniture",
     "Health and Beauty",
     "Food and Dining",
@@ -81,6 +101,8 @@ const AllProducts = () => {
         <center>
           <div>
             <center>
+              <h2>Products</h2>
+              <br />
               <div className="filter-container">
                 <input
                   className="filter-input"
@@ -152,9 +174,9 @@ const AllProducts = () => {
                 </div>
                 <hr />
                 <div>
-                  <p>
+                  {/* <p>
                     <strong>Product ID: </strong> {memberData.cusProductID}
-                  </p>
+                  </p> */}
                   <p>
                     <strong>Product Description: </strong>{" "}
                     {memberData.description}
@@ -163,7 +185,7 @@ const AllProducts = () => {
                     <strong>Category: </strong> {memberData.category}
                   </p>
                   <p>
-                    <strong>Price: </strong> {memberData.sellingPrice}
+                    <strong>Price: </strong> Rs. {memberData.sellingPrice}.00
                   </p>
                   <p>
                     <strong>Available Stokes: </strong> {memberData.quantity}{" "}

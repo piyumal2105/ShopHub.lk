@@ -28,8 +28,8 @@ function Header() {
             </Form>
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/allProducts">Products</Nav.Link>
-            <Nav.Link href="#">About Us</Nav.Link>
-            <Nav.Link href="#">Contact Us</Nav.Link>
+            <Nav.Link href="/aboutus">About Us</Nav.Link>
+            <Nav.Link href="/contactus">Contact Us</Nav.Link>
             <Nav.Link href="#">Events and Promotions</Nav.Link>
             <Nav.Link href="#">Drive and Pickup</Nav.Link>
           </Nav>

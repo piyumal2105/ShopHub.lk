@@ -104,7 +104,6 @@ const MemberRegistration = () => {
                     {...register("shop", { required: true })}
                   />
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>
                     Email Address<span className="text-danger">*</span>
@@ -126,7 +125,6 @@ const MemberRegistration = () => {
                     </span>
                   )}
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicPhoneNumber">
                   <Form.Label>
                     Mobile Number<span className="text-danger">*</span>
@@ -173,7 +171,6 @@ const MemberRegistration = () => {
                     <option value="Jewelry and Watches">
                       Jewelry and Watches
                     </option>
-
                     <option value="Other">Other</option>
                   </Form.Control>
                   {errors.country && (

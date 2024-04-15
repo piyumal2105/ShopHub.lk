@@ -11,6 +11,9 @@ import ShopMemberProfile from "./components/ShopMemberProfile/ShopMemberProfile"
 import ShopMemberNavbar from "./components/ShopMemberNavbar/ShopMemberNavBar";
 import Inventory from "./components/Inventory/Inventory";
 import AllProducts from "./components/AllProducts/AllProducts";
+import ContactUs from "./components/ContsctUs/ContsctUs";
+import Aboutus from "./components/AboutUs/Aboutus";
+import AdminShopLogin from "./components/AdminShopLogin/AdminShopLogin";
 
 function App() {
   const queryClient = new QueryClient();
@@ -29,6 +32,9 @@ function App() {
           <Route path="/shopMemberNavbar" element={<ShopMemberNavbar />} />
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/allProducts" element={<AllProducts />} />
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/aboutus" element={<Aboutus />} />
+          <Route path="/adminshoplogin" element={<AdminShopLogin />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

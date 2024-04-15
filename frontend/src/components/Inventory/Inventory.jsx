@@ -14,7 +14,6 @@ import "react-phone-number-input/style.css";
 import ShopMemberNavbar from "../ShopMemberNavbar/ShopMemberNavBar";
 import { Col, Container, Row } from "react-bootstrap";
 import { Calendar } from "primereact/calendar";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -24,8 +23,8 @@ function Inventory() {
   const [deleteID, setDeleteID] = useState("");
   const [showEdit, setShowEdit] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedAddedDate, setSelectedAddedDate] = useState(null);
-  const [selectedExpireDate, setSelectedExpireDate] = useState(null);
+  const [selectedAddedDate, setSelectedAddedDate] = useState();
+  const [selectedExpireDate, setSelectedExpireDate] = useState();
 
   const {
     register,
@@ -71,7 +70,7 @@ function Inventory() {
     return `${year}-${month}-${day}`;
   };
 
-  //use react query and fetch member data
+  //use react query and fetch product data
   const { data, isLoading, isError, refetch } = useQuery(
     "acceptedMemberData",
     async () => {
@@ -92,7 +91,7 @@ function Inventory() {
     try {
       const editProductDetails = editProductForm.getValues();
       await axios.put(
-        `http://localhost:3001/updateProduct/${editProductDetails._id}`,
+        `http://localhost:3001/product/updateProduct/${editProductDetails._id}`,
         editProductDetails
       );
       editProductForm.reset();
@@ -135,7 +134,7 @@ function Inventory() {
     }
   };
 
-  const deleteMember = async (_id) => {
+  const deleteProduct = async (_id) => {
     try {
       await axios.delete(`http://localhost:3001/product/delete/${_id}`, {
         withCredentials: true,
@@ -200,11 +199,8 @@ function Inventory() {
                   </Form.Label>
                   <Form.Control
                     type="name"
-                    // placeholder="Vinnath Pathirana"
-                    // autoFocus
                     {...register("name", {
                       required: true,
-                      //   pattern: /^[A-Za-z]+ [A-Za-z]+$/,
                     })}
                   />
                 </Form.Group>
@@ -237,7 +233,7 @@ function Inventory() {
                     <option value="Fashion and Apparel">
                       Fashion and Apparel
                     </option>
-                    <option value="Entertainment and Leisure">
+                    <option value="Electronics and Technology">
                       Electronics and Technology
                     </option>
                     <option value="Home and Furniture">
@@ -266,11 +262,8 @@ function Inventory() {
                   </Form.Label>
                   <Form.Control
                     type="number"
-                    // placeholder="vidura@gmail.com"
-                    // autoFocus
                     {...register("actualPrice", {
                       required: true,
-                      //   pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                     })}
                   />
                 </Form.Group>
@@ -288,6 +281,7 @@ function Inventory() {
                     })}
                   />
                 </Form.Group>
+
                 <Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
@@ -297,72 +291,55 @@ function Inventory() {
                   </Form.Label>
                   <Form.Control
                     type="number"
-                    // placeholder="vidura@gmail.com"
-                    // autoFocus
                     {...register("quantity", {
                       required: true,
-                      //   pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                     })}
                   />
                 </Form.Group>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput2"
-                >
-                  <Form.Label>
-                    Added Date <span className="text-danger">*</span>
-                  </Form.Label>
-                  <br />
-                  {/* <DatePicker
-                    // selected={selectedAddedDate}
-                    // onChange={(date) => setSelectedAddedDate(date)}
-                    value={selectedAddedDate}
-                    onChange={(e) => setSelectedAddedDate(e.value.date)}
-                    dateFormat="yyyy-MM-dd"
-                    className="form-control"
-                    {...register("added_date", {
-                      required: true,
-                    })}
-                  /> */}
-                  <DatePicker
-                    selected={selectedAddedDate}
-                    onChange={(date) => setSelectedAddedDate(date)} // Use 'date' directly
-                    dateFormat="yyyy-MM-dd"
-                    className="form-control"
-                    {...register("added_date", {
-                      //   required: true,
-                    })}
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput2"
-                >
-                  <Form.Label>
-                    Expire Date <span className="text-danger">*</span>
-                  </Form.Label>
-                  <br />
-                  {/* <DatePicker
-                    selected={selectedExpireDate}
-                    // onChange={(date) => setSelectedExpireDate(date)}
-                    value={selectedExpireDate}
-                    onChange={(e) => setSelectedExpireDate(e.value.date)}
-                    dateFormat="yyyy-MM-dd"
-                    className="form-control"
-                    {...register("expire_date", {
-                      required: true,
-                    })}
-                  /> */}
-                  <DatePicker
-                    selected={selectedExpireDate}
-                    onChange={(date) => setSelectedExpireDate(date)} // Use 'date' directly
-                    dateFormat="yyyy-MM-dd"
-                    className="form-control"
-                    {...register("expire_date", {
-                      //   required: true,
-                    })}
-                  />
-                </Form.Group>
+                <Row>
+                  <Col>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label>
+                        Added Date <span className="text-danger">*</span>
+                      </Form.Label>
+                      <br />
+                      <DatePicker
+                        placeholderText="Select Added Date"
+                        selected={selectedAddedDate}
+                        onChange={(date) => setValue("added_date", date)} // Use 'date' directly
+                        onSelect={(date) => setSelectedAddedDate(date)}
+                        dateFormat="yyyy-MM-dd"
+                        className="form-control"
+                        name="selectedAddedDate"
+                        value={watch("selectedAddedDate")}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label>
+                        Expire Date <span className="text-danger">*</span>
+                      </Form.Label>
+                      <br />
+                      <DatePicker
+                        placeholderText="Select Expire Date"
+                        selected={selectedExpireDate}
+                        onChange={(date) => setValue("expire_date", date)} // Use 'date' directly
+                        onSelect={(date) => setSelectedExpireDate(date)}
+                        dateFormat="yyyy-MM-dd"
+                        className="form-control"
+                        name="selectedExpireDate"
+                        value={watch("setSelectedExpireDate")}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
               </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -388,7 +365,7 @@ function Inventory() {
                   <Form className="d-flex">
                     <Form.Control
                       type="search"
-                      placeholder="Search by Member ID"
+                      placeholder="Search..."
                       className="me-2"
                       aria-label="Search"
                       style={{ width: "400px", marginLeft: "400px" }}
@@ -410,7 +387,8 @@ function Inventory() {
                 </Col>
               </Row>
             </center>
-
+            <br />
+            <br />
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -437,7 +415,7 @@ function Inventory() {
                     )
                   )
                   .map((member) => (
-                    <tr key={member.cusMemberID}>
+                    <tr key={member.cusProductID}>
                       <td>{member.cusProductID}</td>
                       <td>{member.name}</td>
                       <td>{member.description}</td>
@@ -445,19 +423,25 @@ function Inventory() {
                       <td>Rs. {member.actualPrice}</td>
                       <td>Rs. {member.sellingPrice}</td>
                       <td>{member.quantity}</td>
-                      <td>{member.added_date}</td>
-                      <td>{member.expire_date}</td>
+                      <td>
+                        {new Date(member.added_date).toLocaleDateString()}
+                      </td>
+                      <td>
+                        {new Date(member.expire_date).toLocaleDateString()}
+                      </td>
                       <td>
                         <EditLineIcon
                           onClick={() => {
                             editProductForm.reset({
                               _id: member._id,
                               name: member.name,
-                              email: member.email,
+                              description: member.description,
                               category: member.category,
-                              otherCategory: member.otherCategory,
-                              mobile: member.mobile,
-                              shop: member.shop,
+                              actualPrice: member.actualPrice,
+                              sellingPrice: member.sellingPrice,
+                              quantity: member.quantity,
+                              added_date: member.added_date,
+                              expire_date: member.expire_date,
                             });
                             setShowEdit(true);
                           }}
@@ -475,7 +459,7 @@ function Inventory() {
           </div>
           <Modal show={showDelete} onHide={handleCloseDelete}>
             <Modal.Header closeButton>
-              <Modal.Title>Delete Member</Modal.Title>
+              <Modal.Title>Delete Product</Modal.Title>
             </Modal.Header>
             <Modal.Body>Are you sure!</Modal.Body>
             <Modal.Footer>
@@ -485,7 +469,7 @@ function Inventory() {
               <Button
                 variant="primary"
                 onClick={() => {
-                  deleteMember(deleteID);
+                  deleteProduct(deleteID);
                 }}
               >
                 Yes
@@ -537,7 +521,7 @@ function Inventory() {
                     <option value="Fashion and Apparel">
                       Fashion and Apparel
                     </option>
-                    <option value="Entertainment and Leisure">
+                    <option value="Electronics and Technology">
                       Electronics and Technology
                     </option>
                     <option value="Home and Furniture">
@@ -566,11 +550,8 @@ function Inventory() {
                   <Form.Label>Actual Price</Form.Label>
                   <Form.Control
                     type="number"
-                    // placeholder="vidura@gmail.com"
-                    // autoFocus
                     {...editProductForm.register("actualPrice", {
                       required: true,
-                      //   pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                     })}
                   />
                 </Form.Group>
@@ -593,14 +574,54 @@ function Inventory() {
                   <Form.Label>Quantity</Form.Label>
                   <Form.Control
                     type="number"
-                    // placeholder="vidura@gmail.com"
-                    // autoFocus
                     {...editProductForm.register("quantity", {
                       required: true,
-                      //   pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                     })}
                   />
                 </Form.Group>
+                <Row>
+                  <Col>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label>
+                        Added Date <span className="text-danger">*</span>
+                      </Form.Label>
+                      <br />
+                      <DatePicker
+                        selected={editProductForm.watch("added_date")} // Use watch to get the current value
+                        onChange={(date) =>
+                          editProductForm.setValue("added_date", date)
+                        } // Manually update the form value
+                        onSelect={(date) => setSelectedAddedDate(date)} // Update selectedAddedDate state if needed
+                        dateFormat="yyyy-MM-dd"
+                        className="form-control"
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col>
+                    {" "}
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput2"
+                    >
+                      <Form.Label>
+                        Expire Date <span className="text-danger">*</span>
+                      </Form.Label>
+                      <br />
+                      <DatePicker
+                        selected={editProductForm.watch("expire_date")} // Use watch to get the current value
+                        onChange={(date) =>
+                          editProductForm.setValue("expire_date", date)
+                        } // Manually update the form value
+                        onSelect={(date) => setSelectedExpireDate(date)} // Update selectedAddedDate state if needed
+                        dateFormat="yyyy-MM-dd"
+                        className="form-control"
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
               </Form>
             </Modal.Body>
             <Modal.Footer>
