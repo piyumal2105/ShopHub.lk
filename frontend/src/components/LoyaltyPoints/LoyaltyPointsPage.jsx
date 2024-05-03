@@ -8,10 +8,12 @@ const LoyaltyPointPage = () => {
     const [wheelActive, setWheelActive] = useState(false); // State to track wheel activation
     const [activeOffers, setActiveOffers] = useState([]);
     const [balance, setBalance] = useState(0); // State to hold balance
+    const [loyaltyPointHistory, setLoyaltyPointHistory] = useState([]);
 
     useEffect(() => {
         fetchActiveOffers();
         fetchBalance(); // Fetch balance when component mounts
+        fetchLoyaltyPointHistory();
     }, []);
 
     const fetchActiveOffers = async () => {
@@ -38,6 +40,17 @@ const LoyaltyPointPage = () => {
             setBalance(response.data.balance);
         } catch (error) {
             console.error("Error fetching balance:", error);
+        }
+    };
+    const fetchLoyaltyPointHistory = async () => {
+        try {
+            const customerId = "6603c22cbacfd0b8a0403a4e";
+            const response = await axios.get(
+                `http://localhost:3001/prize/getLpHistory/${customerId}`
+            );
+            setLoyaltyPointHistory(response.data);
+        } catch (error) {
+            console.error("Error fetching loyalty point history:", error);
         }
     };
 
@@ -102,6 +115,35 @@ const LoyaltyPointPage = () => {
                             </div>
                         ))}
                     </div>
+                </div>
+            )}
+            {!wheelActive && (
+                <div>
+                    <h2>Loyalty Point History</h2>
+                    <table className="loyalty-point-history-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Points</th>
+                                <th>Type</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {loyaltyPointHistory.map((historyItem, index) => (
+                                <tr key={index}>
+                                    <td>{historyItem.description}</td>
+                                    <td>{historyItem.points}</td>
+                                    <td>{historyItem.type}</td>
+                                    <td>
+                                        {new Date(
+                                            historyItem.date
+                                        ).toLocaleString()}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             )}
             {showPopup && (
