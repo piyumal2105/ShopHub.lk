@@ -4,6 +4,9 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dbConnect from "./configs/dbConfig.js";
 import AdminAuthRoutes from "./routes/admin.auth.routes.js";
+import faqRoute from "./routes/faq.routes.js";
+import rvwRoute from "./routes/rvw.routes.js";
+
 
 //initialized express
 const app = express();
@@ -31,6 +34,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/admin", AdminAuthRoutes);
+app.use("/faq", faqRoute);
+app.use("/rvw", rvwRoute);
 
 app.use((req, res, next) => {
   console.log(`${req.method} =====> URL: ${req.url}`);

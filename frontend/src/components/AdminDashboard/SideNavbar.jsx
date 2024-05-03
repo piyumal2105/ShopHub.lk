@@ -102,6 +102,22 @@ const Sidenavbar = ({ activeIndex }) => {
         to="#"
         style={{ display: "flex", alignItems: "center" }}
       >
+
+        <span style={{ marginLeft: "10px", fontSize: "18px" }}>
+          {" "}
+          FAQ
+        </span>
+      </Nav.Link>
+      <Nav.Link
+        onClick={handleLogout}
+        className={`my-2 ${
+          activeIndex === 3
+            ? "container-color-super-active"
+            : "container-color-super"
+        } p-3`}
+        to="/faqs/create"
+        style={{ display: "flex", alignItems: "center" }}
+      >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}> Logout</span>
       </Nav.Link>
     </Nav>
