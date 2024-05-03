@@ -65,3 +65,24 @@
     font-size: 20px;
     color: #ff0000; /* red */
 }
+.balance-container {
+    display: flex;
+    align-items: center;
+}
+
+.balance-heading {
+    margin-right: 10px;
+
+    font-size: 50px;
+}
+
+.balance-box {
+    background-color: orange;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    width: 400px;
+
+    font-weight: bold;
+}

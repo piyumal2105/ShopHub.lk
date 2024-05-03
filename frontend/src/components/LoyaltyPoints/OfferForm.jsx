@@ -15,12 +15,12 @@ const OfferForm = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        // Check if the value is negative or zero and if it's discountAmount or priceInPoints
+        // Check if the value is negative and if it's discountAmount or priceInPoints
         if (
             (name === "discountAmount" || name === "priceInPoints") &&
-            (parseFloat(value) <= 0 || isNaN(parseFloat(value)))
+            parseFloat(value) < 0
         ) {
-            setErrorMessage("Value must be a positive number.");
+            setErrorMessage("Value cannot be negative.");
             return;
         } else {
             setErrorMessage(""); // Reset error message if value is valid
@@ -37,9 +37,9 @@ const OfferForm = () => {
                 offerData
             );
             console.log("Offer created:", response.data);
-
+            // Show toast message upon successful offer creation
             toast.success("Offer created successfully", {
-                position: "top-center",
+                position: "top-center", // Specify position directly as a string
                 autoClose: 3000, // Close the toast after 3 seconds
                 hideProgressBar: true, // Hide progress bar
                 className: "toast-success",

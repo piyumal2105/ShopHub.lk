@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LuckyWheel from "./LuckyWheel";
-import "./LuckyPointsStyles.css";
+import "./LuckyPointsStyles.css"; // Import your CSS file for styling
 
 const LoyaltyPointPage = () => {
     const [showPopup, setShowPopup] = useState(false);
@@ -68,7 +68,13 @@ const LoyaltyPointPage = () => {
     return (
         <div className="container mt-5">
             <h1 className="mb-4">Loyalty Point Page</h1>
-            <h2>Balance: {balance} points</h2> {/* Display balance */}
+            <div className="balance-container">
+                {" "}
+                <div className="balance-box">
+                    <h2 className="balance-heading">Balance</h2>
+                    {balance} points
+                </div>{" "}
+            </div>
             <div className="button-container">
                 {!showPopup && !wheelActive && (
                     <button className="btn-primary" onClick={handleShowPopup}>

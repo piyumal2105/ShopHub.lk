@@ -47,7 +47,7 @@ export default function Prize({ back, prize }) {
             const sendPrizeInfo = async () => {
                 try {
                     const customerId = "6603c22cbacfd0b8a0403a4e"; //temp
-                    await axios.post("http://localhost:3001/prize/add", {
+                    await axios.post("http://localhost:3001/prize/addPrize", {
                         customerId,
                         prizeWon: prize,
                     });
@@ -69,9 +69,19 @@ export default function Prize({ back, prize }) {
                     try {
                         // Update balance with the prize amount
                         const customerId = "6603c22cbacfd0b8a0403a4e";
+                        await axios.post(
+                            "http://localhost:3001/prize/addLpHistory",
+                            {
+                                customerId: customerId,
+                                points: prize,
+                                description: "Lucky Wheel",
+                                type: "earn",
+                            }
+                        );
                         const balanceResponse = await axios.get(
                             `http://localhost:3001/prize/getBalance/${customerId}`
                         );
+
                         const currentBalance = balanceResponse.data.balance;
 
                         // Update balance with the prize amount
