@@ -12,6 +12,8 @@ const LoyaltyPointPage = () => {
     const [activeOffers, setActiveOffers] = useState([]);
     const [balance, setBalance] = useState(0); // State to hold balance
     const [loyaltyPointHistory, setLoyaltyPointHistory] = useState([]);
+    const [selectOffer, setselectOffer] = useState([]);
+    const [selectprize, setselectPrize] = useState(0);
 
     useEffect(() => {
         fetchActiveOffers();
@@ -84,18 +86,59 @@ const LoyaltyPointPage = () => {
         setWheelActive(true);
     };
 
-    const handleOfferClick = (offerId) => {
+    const handleOfferClick = (offerId, priceInPoints) => {
         // Handle clicking on active offer buttons
         console.log("Clicked on offer with ID:", offerId);
+        setselectOffer(offerId);
+        setselectPrize(priceInPoints);
         // Show confirmation popup
         handleShowConfirmationPopup();
     };
 
-    const handleConfirmPurchase = () => {
-        // Handle confirmation of offer purchase
-        console.log("Offer purchase confirmed");
-        // Hide confirmation popup
-        handleCloseConfirmationPopup();
+    const handleConfirmPurchase = async () => {
+        try {
+            const customerId = "6603c22cbacfd0b8a0403a4e";
+
+            // Ensure selectprize is converted to a number
+            const prizeAmount = parseFloat(selectprize);
+
+            // Send request to backend to update balance and record offer purchase
+            const response = await axios.post(
+                `http://localhost:3001/prize/offerpurchase`,
+                {
+                    customerId,
+                    offerId: selectOffer,
+                }
+            );
+
+            // Fetch updated balance
+            const balanceResponse = await axios.get(
+                `http://localhost:3001/prize/getBalance/${customerId}`
+            );
+            const currentBalance = balanceResponse.data.balance;
+
+            // Ensure currentBalance and prizeAmount are valid numbers
+            if (!isNaN(currentBalance) && !isNaN(prizeAmount)) {
+                // Update balance with the prize amount
+                const updatedBalance = currentBalance - prizeAmount;
+
+                // Send request to update balance
+                await axios.put(
+                    `http://localhost:3001/prize/updateLP/${customerId}`,
+                    {
+                        balance: updatedBalance,
+                    }
+                );
+            } else {
+                console.error("Invalid balance or prize amount");
+                // Handle error
+            }
+
+            handleCloseConfirmationPopup();
+        } catch (error) {
+            console.error("Error confirming purchase:", error);
+            // Handle error
+        }
     };
 
     const handleCancelPurchase = () => {
@@ -191,10 +234,7 @@ const LoyaltyPointPage = () => {
                     >
                         <div className="popup" onClick={handlePopupClick}>
                             <h2>Confirm Purchase</h2>
-                            <p>
-                                Would you like to purchase this offer for
-                                points?
-                            </p>
+                            <p>Would you like to purchase this offer ?</p>
                             <button
                                 onClick={handleConfirmPurchase}
                                 className="btn-confirm"
