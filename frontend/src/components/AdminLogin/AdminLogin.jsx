@@ -91,7 +91,15 @@ function AdminLogin() {
               />
             </Form.Group>
             <br />
-            <Button type="submit" style={{ width: "100%" }} className="mt-3">
+            <Button
+              type="submit"
+              style={{
+                width: "100%",
+                backgroundColor: "black",
+                borderColor: "black",
+              }}
+              className="mt-3"
+            >
               Login
             </Button>
           </Form>

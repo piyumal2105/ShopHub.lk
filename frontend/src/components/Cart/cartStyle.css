@@ -1,0 +1,134 @@
+.cart_shop{
+    margin-left: 45%;
+    margin-top: 30px;
+    padding: 10px 30px;
+    border: 1px solid #fe4a55;
+    color: #fe4a55;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+
+.btn-outline-danger{
+    margin-left: 350px;
+    margin-bottom: -53px;
+}
+
+.btn-outline-primary{
+    margin-left: 250px;
+    margin-bottom: 15px;
+}
+
+
+
+.empty_cart{
+    margin-left: 35%;
+}
+
+.cart_container
+{
+    padding: 20px 30px;
+    width: 100%;
+}
+
+.cart_box {
+    /* Set width for each card */
+    width: calc(33% - 20px); /* Adjust for number of cards per row */
+    margin: 20px;
+    background-color: #eeebeb;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex; /* Allow for content to stack vertically */
+    flex-direction: column; /* Stack content top to bottom */
+    overflow: hidden; /* Hide overflowing content */
+}
+
+.total_container{
+    width: calc(33% - 20px); /* Adjust for number of cards per row */
+    /*margin-bottom: 800px !important;*/
+    position: fixed;
+    top: 500px;
+    right: 80px;
+    background-color: #eeebeb;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    padding: 20px;
+}
+
+.total_card .checkout{
+    margin-left: 70%;
+    padding: 10px 30px;
+    border: 1px solid #0a0a0a;
+    color: #fffbfb;
+    background: #0a0a0a;
+    border-radius: 25px;
+}
+
+.cart_box .card-body {
+    /* Add padding for content within the card */
+    padding: 15px;
+}
+
+.cart_box .card-title {
+    /* Style the card title */
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.cart_box .card-text,
+.cart_box .card-dis {
+    /* Style the price and description text */
+    margin-bottom: 5px;
+}
+
+/* Add a hover effect to the cards */
+.cart_box:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px); /* Add slight movement on hover */
+}
+
+.cart_container .cart_product
+{
+    max-width: 100%;
+    display: block;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.cart_container .cart_product .cart_box .cart_product_container
+{
+    display: block;
+}
+
+.cart_container .cart_product .cart_box .cart_product_container .card-body .quantity_dec
+{
+    padding: 5px 5px;
+    /*border: 1px solid #0a0a0a;*/
+    border: transparent;
+    background: transparent;
+    color: #0a0a0a;
+    margin-right: 5px;
+    margin-top: 10px ;
+}
+
+.cart_container .cart_product .cart_box .cart_product_container .card-body .quantity_inc
+{
+    padding: 5px 5px;
+    /*border: 1px solid #0a0a0a;*/
+    border: transparent;
+    background: transparent;
+    color: #0a0a0a;
+    margin-left: -2px;
+    margin-top: -2px !important;
+}
+
+.cart_container .cart_product .cart_box .cart_product_container .card-body input
+{
+    width: 40px;
+    height: 20px;
+    /*border: 1px solid #000;*/
+    border: transparent;
+    background: transparent;
+    outline: none;
+}

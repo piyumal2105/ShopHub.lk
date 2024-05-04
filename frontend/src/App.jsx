@@ -1,30 +1,56 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
 import LandingPage from "./pages/LandingPage";
 import Customers from "./components/Customers/Customers";
 import AdminLogin from "./components/AdminLogin/AdminLogin";
-// import OnlinePaymentForm from "./components/OnlinePaymentForm"; // Import the OnlinePaymentForm component
-// import OrderForm from "./components/OrderForm"; // Import the OrderForm component
+
+import MemberRegistration from "./pages/MemberRegistration";
+import ManageMember from "./components/ManageMember/ManageMember";
+import RequstedMember from "./components/ManageMember/RequstedMember";
+import ShopMemberLogin from "./components/ShopMemberLogin/ShopMemberLogin";
+import ShopMemberProfile from "./components/ShopMemberProfile/ShopMemberProfile";
+import ShopMemberNavbar from "./components/ShopMemberNavbar/ShopMemberNavBar";
+import Inventory from "./components/Inventory/Inventory";
+import AllProducts from "./components/AllProducts/AllProducts";
+import Cart from "./components/Cart/Cart";
+import {CartProvider} from "./components/Cart/CartContext.jsx";
 import OnPickupRegistrationForm from "./components/OnPickupRegistration/OnPickupRegistrationForm";
 import OnpickUpLandingPage from "./components/OnPickupLandingPage/OnpickUpLandingPage";
 import OnPickupCart from "./components/OnPickupCart/OnPickupCart";
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/customers" element={<Customers />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/onpickup/registration" element={<OnPickupRegistrationForm />} />
-        {/* <Route path="/online-payment" element={<OnlinePaymentForm />} />  */}
-        <Route path="/onpickuplandingpage" element={<OnpickUpLandingPage />} />
-        {/* Add a route for the OrderForm */}
-        {/* <Route path="/place-order" element={<OrderForm />} /> */}
-        <Route path="/onpickupcart" element={<OnPickupCart/>} />
 
-      </Routes>
-    </BrowserRouter>
+function App() {
+  const queryClient = new QueryClient();
+
+
+
+  return (
+
+    <QueryClientProvider client={queryClient}>
+      <CartProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/memberRegistration" element={<MemberRegistration />} />
+          <Route path="/manageMember" element={<ManageMember />} />
+          <Route path="/requestedMember" element={<RequstedMember />} />
+          <Route path="/shopMember/login" element={<ShopMemberLogin />} />
+          <Route path="/shopProfile/:id" element={<ShopMemberProfile />} />
+          <Route path="/shopMemberNavbar" element={<ShopMemberNavbar />} />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/allProducts" element={<AllProducts />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/onpickupcart" element={<OnPickupCart/>} />
+          <Route path="/onpickuplandingpage" element={<OnpickUpLandingPage />} />
+          <Route path="/onpickup/registration" element={<OnPickupRegistrationForm />} />
+        </Routes>
+      </BrowserRouter>
+      </CartProvider >
+    </QueryClientProvider>
+
   );
 }
 

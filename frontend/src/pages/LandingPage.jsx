@@ -200,6 +200,20 @@ function LandingPage() {
         <br />
         <br />
       </div>
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ backgroundColor: "black", color: "white", height: "50px" }}
+      >
+        Register as a shop member and sell your items.
+        <Button
+          // target="_blank"
+          rel="noopener noreferrer"
+          href="/memberRegistration"
+          style={{ backgroundColor: "black", borderColor: "black" }}
+        >
+          Sign Up
+        </Button>
+      </div>
       <Footer />
     </>
   );
