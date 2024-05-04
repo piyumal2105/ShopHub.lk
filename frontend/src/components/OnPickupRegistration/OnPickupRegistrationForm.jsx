@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "react-phone-number-input/style.css";
+import { useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-number-input";
 import Swal from "sweetalert2";
 import Header from "../Header/Header";
@@ -14,6 +15,7 @@ import Footer from "../Footer/Footer";
 
 const OnPickupRegistrationForm = () => {
   const [phoneNo, setPhoneNo] = useState('');
+  const navigate = useNavigate();
 
 
   const handleNICInputChange = (e) => {
@@ -45,6 +47,7 @@ const OnPickupRegistrationForm = () => {
         icon: "success",
       });
       reset();
+      navigate("/onpickupcart");
     } catch (err) {
       console.error("Add form error:", err);
       if (err.response && err.response.status === 500) {
