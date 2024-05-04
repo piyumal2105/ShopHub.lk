@@ -116,11 +116,11 @@ const LoyaltyPointPage = () => {
                 `http://localhost:3001/prize/getBalance/${customerId}`
             );
             const currentBalance = balanceResponse.data.balance;
-
-            // Ensure currentBalance and prizeAmount are valid numbers
+            console.log(prizeAmount);
+            const updatedBalance = currentBalance - prizeAmount;
+            console.log(updatedBalance); // Ensure currentBalance and prizeAmount are valid numbers
             if (!isNaN(currentBalance) && !isNaN(prizeAmount)) {
                 // Update balance with the prize amount
-                const updatedBalance = currentBalance - prizeAmount;
 
                 // Send request to update balance
                 await axios.put(
@@ -129,6 +129,12 @@ const LoyaltyPointPage = () => {
                         balance: updatedBalance,
                     }
                 );
+                await axios.post("http://localhost:3001/prize/addLpHistory", {
+                    customerId: customerId,
+                    points: prizeAmount,
+                    description: "Offer Purchase",
+                    type: "redeem",
+                });
             } else {
                 console.error("Invalid balance or prize amount");
                 // Handle error
@@ -179,7 +185,10 @@ const LoyaltyPointPage = () => {
                                     <button
                                         className="offer-btn"
                                         onClick={() =>
-                                            handleOfferClick(offer._id)
+                                            handleOfferClick(
+                                                offer._id,
+                                                offer.priceInPoints
+                                            )
                                         }
                                     >
                                         {offer.type === "Discount" && (
