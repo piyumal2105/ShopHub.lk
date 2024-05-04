@@ -4,9 +4,9 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dbConnect from "./configs/dbConfig.js";
 import AdminAuthRoutes from "./routes/admin.auth.routes.js";
-import OnPickupRoutes from "./routes/onpickupRoutes.js"; // Import the OnPickup routes
-import paymentRoutes from "./routes/paymentRoutes.js";
-import orderRoutes from "./routes/orderRoutes.js";
+import OnPickupRoutes from "./routes/onp.routes.js"; // Import the OnPickup routes
+// import paymentRoutes from "./routes/paymentRoutes.js";
+// import orderRoutes from "./routes/orderRoutes.js";
 
 // Initialize express
 const app = express();
@@ -36,18 +36,19 @@ app.use(cookieParser());
 // Use admin routes
 app.use("/admin", AdminAuthRoutes);
 
-// Use on-pickup routes
-app.use("/onpickup", OnPickupRoutes); // Assuming you prefix on-pickup routes with /api/onpickup
+// // Use on-pickup routes
+// app.use("/onpickup", OnPickupRoutes); // Assuming you prefix on-pickup routes with /api/onpickup
 
-
+// Use admin routes
+app.use("/pick",OnPickupRoutes);
 
 // Use payment routes
-app.use("/api/payment", paymentRoutes);
+// app.use("/api/payment", paymentRoutes);
 
 
 // Other middleware and configurations...
 
-app.use("/api/orders", orderRoutes);
+// app.use("/api/orders", orderRoutes);
 
 
 app.use((req, res, next) => {

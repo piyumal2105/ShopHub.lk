@@ -1,4 +1,7 @@
+// Frontend: OnPickupRegistrationForm.jsx
+
 import { useState } from "react";
+// import { useHistory } from 'react-router-dom';
 import { Container, Form, Button, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -10,31 +13,31 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 
 const OnPickupRegistrationForm = () => {
-  const [phoneNo, setPhoneNo] = useState();
+  const [phoneNo, setPhoneNo] = useState('');
+
 
   const handleNICInputChange = (e) => {
     const { value } = e.target;
     // Remove non-digit characters and convert to upper case
     const formattedValue = value.replace(/[^0-9Vv]/g, "").toUpperCase();
     // Update the input field value
-    e.target.value = formattedValue;
+    setFormData({ ...formData, nic: formattedValue });
   };
 
   const { register, formState: { errors }, handleSubmit, reset } = useForm({
-    validateInputChanges: true,
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      username: "",
+    defaultValues: {
+      first_name: "",
+      last_name: "",
       email: "",
-      nic: "",
+      phone: "",
       address: "",
     },
   });
 
   const addMember = async (formData) => {
+    // const history = useHistory(); 
     try {
-      await axios.post("http://localhost:3001/onpickup/register", formData);
+      await axios.post("http://localhost:3001/pick/create", formData);
 
       Swal.fire({
         title: "Registration Successful!",
@@ -50,6 +53,7 @@ const OnPickupRegistrationForm = () => {
           text: "Internal Server Error occurred. Please try again later.",
           icon: "error",
         });
+        
       } else {
         Swal.fire({
           title: "Registration Failed",
@@ -90,17 +94,15 @@ const OnPickupRegistrationForm = () => {
             }}
           >
             <Container>
-              <Form>
+              <Form onSubmit={handleSubmit(addMember)}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>
                     First Name<span className="text-danger">*</span>
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    {...register("firstName", { required: true })}
+                    {...register("first_name", { required: true })}
                   />
-
-
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>
@@ -108,7 +110,7 @@ const OnPickupRegistrationForm = () => {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    {...register("lastName", { required: true })}
+                    {...register("last_name", { required: true })}
                   />
                 </Form.Group>
 
@@ -142,7 +144,7 @@ const OnPickupRegistrationForm = () => {
                     value={phoneNo}
                     onChange={setPhoneNo}
                     defaultCountry="LK"
-                    {...register("mobile", { required: true })}
+                    {...register("phone", { required: true })}
                   />
                   {errors.mobile && errors.mobile.type === "required" && (
                     <span className="text-danger">This is required</span>
@@ -150,18 +152,6 @@ const OnPickupRegistrationForm = () => {
                   <Form.Control.Feedback type="invalid">
                     Please enter a valid phone number.
                   </Form.Control.Feedback>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicNIC">
-                  <Form.Label>
-                    NIC Number<span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter NIC Number"
-                    {...register("nic", { required: true })}
-                    onChange={handleNICInputChange} // Add event listener
-                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicAddress">
@@ -172,15 +162,15 @@ const OnPickupRegistrationForm = () => {
                     type="text"
                     {...register("address", { required: true })}
                   />
+                  {errors.address && errors.address.type === "required" && (
+                    <span className="text-danger">This is required</span>
+                  )}
                 </Form.Group>
 
                 <br />
                 <center>
                   <Button
                     type="submit"
-                    onClick={handleSubmit((data) => {
-                      addMember(data);
-                    })}
                     style={{
                       width: "150px",
                       backgroundColor: "black",

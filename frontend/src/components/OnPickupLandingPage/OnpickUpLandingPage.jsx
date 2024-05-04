@@ -20,23 +20,23 @@ function OnpickUpLandingPage() {
             </div>
             <Header />
             <br /><br /><br />
-            <div style={{padding:"30px"}}><Card style={{borderRadius:"20px", backgroundColor:"#ccc", padding:"20px"}}><center> <Carousel>
+            <div style={{ padding: "30px" }}><Card style={{ borderRadius: "20px", backgroundColor: "#ccc", padding: "20px" }}><center> <Carousel>
                 <Carousel.Item interval={2000}>
-                    <img src={img01} alt="" width="80%"/>
+                    <img src={img01} alt="" width="80%" />
                     <Carousel.Caption>
                         {/* <h3>First slide label</h3>
                         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item interval={2000}>
-                    <img src={img02} alt=""  width="40%" />
+                    <img src={img02} alt="" width="40%" />
                     <Carousel.Caption>
                         {/* <h3>Second slide label</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item interval={2000}>
-                    <img src={img03} alt=""width="60%"  />
+                    <img src={img03} alt="" width="60%" />
                     <Carousel.Caption>
                         {/* <h3>Third slide label</h3>
                         <p>
@@ -45,7 +45,7 @@ function OnpickUpLandingPage() {
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item interval={2000}>
-                    <img src={img05} alt=""width="50%"  />
+                    <img src={img05} alt="" width="50%" />
                     <Carousel.Caption>
                         {/* <h3>Third slide label</h3>
                         <p>
@@ -54,9 +54,9 @@ function OnpickUpLandingPage() {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel></center></Card></div>
-           <center> <Button href='/onpickup/registration' variant="primary" size="lg" block> Register Now </Button></center>
-            
-            
+            <center> <Button href='/onpickup/registration' variant="primary" size="lg" block> Register Now </Button></center>
+
+
             <br /><br /><br />
             <Footer />
         </>
