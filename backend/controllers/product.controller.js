@@ -34,6 +34,7 @@ export const addProduct = async (req, res) => {
       quantity: req.body.quantity,
       added_date: req.body.added_date,
       expire_date: req.body.expire_date,
+      productImage: req.body.productImage,
     });
 
     const savedProduct = await newProduct.save();
@@ -97,6 +98,7 @@ export const updateProduct = async (req, res) => {
     quantity: req.body.quantity,
     added_date: req.body.added_date,
     expire_date: req.body.expire_date,
+    productImage: req.body.productImage,
   };
 
   try {

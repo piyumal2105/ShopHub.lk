@@ -12,20 +12,28 @@ import Swal from "sweetalert2";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "react-phone-number-input/style.css";
 import ShopMemberNavbar from "../ShopMemberNavbar/ShopMemberNavBar";
-import { Col, Container, Row } from "react-bootstrap";
-import { Calendar } from "primereact/calendar";
+import { Col, Row } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 function Inventory() {
   const [show, setShow] = useState(false);
+  const [showDetail, setShowDetail] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
   const [showDelete, setShowDelete] = useState(false);
   const [deleteID, setDeleteID] = useState("");
   const [showEdit, setShowEdit] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedAddedDate, setSelectedAddedDate] = useState();
   const [selectedExpireDate, setSelectedExpireDate] = useState();
-
+  const handleRowClick = (product) => {
+    setSelectedProduct(product);
+    setShowDetail(true);
+  };
   const {
     register,
     formState: { errors },
@@ -44,6 +52,7 @@ function Inventory() {
       quantity: "",
       added_date: "",
       expire_date: "",
+      productImage: "",
     },
   });
 
@@ -59,6 +68,7 @@ function Inventory() {
       quantity: "",
       added_date: "",
       expire_date: "",
+      productImage: "",
     },
   });
 
@@ -179,17 +189,92 @@ function Inventory() {
     )
   );
 
+  // Image upload
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      // `reader.result` contains the base64 encoded image data
+      setValue("productImage", reader.result); // Store base64 data in form state
+      editProductForm.setValue("productImage", reader.result);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+      const imageUrl = URL.createObjectURL(file);
+      setImagePreviewUrl(imageUrl); // Convert image to base64 string
+    }
+  };
+
+  // Generate report
+  const downloadPdfReport = () => {
+    const doc = new jsPDF();
+    autoTable(doc, {
+      theme: "striped",
+      head: [
+        [
+          "Product ID",
+          "Product Name",
+          "Description",
+          "Category",
+          "Actual Price",
+          "Selling Price",
+          "Quantity",
+          "Added Date",
+          "Expire Date",
+        ],
+      ],
+      body: data.map((item) => [
+        item.cusProductID,
+        item.name,
+        item.description,
+        item.category,
+        item.actualPrice,
+        item.sellingPrice,
+        item.quantity,
+        new Date(item.added_date).toLocaleDateString(),
+        new Date(item.expire_date).toLocaleDateString(),
+      ]),
+      columnStyles: { 0: { cellWidth: "auto" } },
+    });
+    doc.save("products_report.pdf");
+  };
+
   return (
     <>
       <center>
         <div>
           <ShopMemberNavbar />
+          {/* add product model  */}
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Add Products</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlInput1"
+                >
+                  <Form.Label>Product Image</Form.Label>
+                  <Form.Control
+                    type="file"
+                    onChange={(e) => handleImageUpload(e)}
+                    accept="image/*"
+                  />
+                  {imagePreviewUrl && (
+                    <img
+                      src={imagePreviewUrl}
+                      alt="Preview"
+                      style={{
+                        width: "150px",
+                        height: "100px",
+                        marginTop: "10px",
+                      }}
+                    />
+                  )}
+                </Form.Group>
                 <Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
@@ -212,12 +297,10 @@ function Inventory() {
                     Product Description<span className="text-danger">*</span>
                   </Form.Label>
                   <Form.Control
-                    type="text"
-                    // placeholder="vidura@gmail.com"
-                    // autoFocus
+                    as="textarea"
+                    rows={3}
                     {...register("description", {
                       required: true,
-                      //   pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                     })}
                   />
                 </Form.Group>
@@ -281,7 +364,6 @@ function Inventory() {
                     })}
                   />
                 </Form.Group>
-
                 <Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
@@ -378,11 +460,22 @@ function Inventory() {
                   <Button
                     style={{
                       backgroundColor: "black",
-                      borderBlockColor: "black",
+                      borderColor: "black",
                     }}
                     onClick={handleShow}
                   >
                     Add Product
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    style={{
+                      backgroundColor: "black",
+                      borderColor: "black",
+                    }}
+                    onClick={downloadPdfReport}
+                  >
+                    Generate Report
                   </Button>
                 </Col>
               </Row>
@@ -393,6 +486,7 @@ function Inventory() {
               <thead>
                 <tr>
                   <th>Product ID</th>
+                  <th>Image</th>
                   <th>Product Name</th>
                   <th>Product Description</th>
                   <th>Category</th>
@@ -416,7 +510,19 @@ function Inventory() {
                   )
                   .map((member) => (
                     <tr key={member.cusProductID}>
-                      <td>{member.cusProductID}</td>
+                      <td onClick={() => handleRowClick(member)}>
+                        {member.cusProductID}
+                      </td>
+                      <td onClick={() => handleRowClick(member)}>
+                        <div
+                          style={{
+                            width: "100px",
+                            height: "50px",
+                            backgroundSize: "cover",
+                            backgroundImage: `url(${member.productImage})`,
+                          }}
+                        />
+                      </td>
                       <td>{member.name}</td>
                       <td>{member.description}</td>
                       <td>{member.category}</td>
@@ -457,6 +563,48 @@ function Inventory() {
               </tbody>
             </Table>
           </div>
+          {selectedProduct && (
+            <Modal
+              size="lg"
+              show={showDetail}
+              onHide={() => setShowDetail(false)}
+              centered
+            >
+              <center>
+                <Modal.Header closeButton>
+                  <Modal.Title>Product Details</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Card.Img
+                    variant="top"
+                    src={selectedProduct.productImage}
+                    style={{
+                      width: "80%",
+                      height: "280px",
+                      borderRadius: "10px",
+                    }}
+                  />
+                  <br />
+                  <br />
+                  <p>
+                    <strong>Product ID:</strong> {selectedProduct.cusProductID}
+                  </p>
+                  <p>
+                    <strong>Product Name:</strong> {selectedProduct.name}
+                  </p>
+                  <p>
+                    <strong>Actual Price:</strong> Rs.{" "}
+                    {selectedProduct.actualPrice}
+                  </p>
+                  <p>
+                    <strong>Selling Price:</strong> Rs.{" "}
+                    {selectedProduct.sellingPrice}
+                  </p>
+                </Modal.Body>
+              </center>
+            </Modal>
+          )}
+          {/* delete product model */}
           <Modal show={showDelete} onHide={handleCloseDelete}>
             <Modal.Header closeButton>
               <Modal.Title>Delete Product</Modal.Title>
@@ -476,12 +624,21 @@ function Inventory() {
               </Button>
             </Modal.Footer>
           </Modal>
+          {/* edit product model */}
           <Modal show={showEdit} onHide={handleCloseEdit}>
             <Modal.Header closeButton>
               <Modal.Title>Edit Product</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form>
+                <Form.Group controlId="exampleForm.ControlInput1">
+                  <Form.Label>Product Image</Form.Label>
+                  <Form.Control
+                    type="file"
+                    onChange={(e) => handleImageUpload(e)}
+                    accept="image/*"
+                  />
+                </Form.Group>
                 <Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
@@ -489,12 +646,7 @@ function Inventory() {
                   <Form.Label>Product Name</Form.Label>
                   <Form.Control
                     type="name"
-                    // placeholder="Vinnath Pathirana"
-                    // autoFocus
-                    {...editProductForm.register("name", {
-                      // required: true,
-                      // pattern: /^[A-Za-z]+ [A-Za-z]+$/,
-                    })}
+                    {...editProductForm.register("name")}
                   />
                 </Form.Group>
                 <Form.Group
@@ -504,8 +656,6 @@ function Inventory() {
                   <Form.Label>Product Description</Form.Label>
                   <Form.Control
                     type="text"
-                    // placeholder="vidura@gmail.com"
-                    // autoFocus
                     {...editProductForm.register("description")}
                   />
                 </Form.Group>

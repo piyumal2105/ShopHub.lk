@@ -508,7 +508,7 @@ function ManageMember() {
                   <option value="Fashion and Apparel">
                     Fashion and Apparel
                   </option>
-                  <option value="Entertainment and Leisure">
+                  <option value="Electronics and Technology">
                     Electronics and Technology
                   </option>
                   <option value="Home and Furniture">Home and Furniture</option>

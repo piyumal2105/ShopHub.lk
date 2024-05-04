@@ -8,7 +8,7 @@ function ShopMemberNavbar() {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/shopMember/login");
+    navigate("/logins");
   };
   const handleProfile = () => {
     // Get the user ID from local storage
@@ -46,8 +46,8 @@ function ShopMemberNavbar() {
               {/* <Nav.Link href="#">Accepts Stokes</Nav.Link>
               <Nav.Link href="#">Pending Stokes </Nav.Link> */}
               <Nav.Link href="/inventory">Products</Nav.Link>
+              <Nav.Link href="/inventorycharts">Charts</Nav.Link>
               <Nav.Link href="#">Invoices</Nav.Link>
-              <Nav.Link href="#">Profit And Revenue</Nav.Link>
               <Nav.Link href="#">On Pickup Orders</Nav.Link>
               <Nav.Link href="#" onClick={handleProfile}>
                 Profile

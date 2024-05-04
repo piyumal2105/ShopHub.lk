@@ -11,10 +11,13 @@ import Modal from "react-bootstrap/Modal";
 // import { useParams } from "react-router-dom";
 import "./style.css";
 import { Button } from "react-bootstrap";
+import Carousel from "react-bootstrap/Carousel";
+import img01 from "../../assets/productimg01.png";
+import img02 from "../../assets/productimg02.png";
 // import Container from "react-bootstrap/Container";
 // import img01 from "../../assets/img01.png";
 
-const AllProducts = () => {
+function AllProducts() {
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -50,7 +53,7 @@ const AllProducts = () => {
   const { data, isLoading, isError } = useQuery(
     "acceptedMemberData",
     async () => {
-      const response = await axios.get("http://localhost:3001/product");
+      const response = await axios.get(`http://localhost:3001/product`);
       return response.data;
     }
   );
@@ -103,6 +106,37 @@ const AllProducts = () => {
             <center>
               <h2>Products</h2>
               <br />
+
+              <div>
+                <Carousel>
+                  <Carousel.Item interval={3000}>
+                    <img
+                      src={img01}
+                      style={{ width: "80%", borderRadius: "10px" }}
+                    />
+                    <Carousel.Caption></Carousel.Caption>
+                  </Carousel.Item>
+                  <Carousel.Item interval={3000}>
+                    <img
+                      src={img02}
+                      style={{ width: "80%", borderRadius: "10px" }}
+                    />
+                    <Carousel.Caption></Carousel.Caption>
+                  </Carousel.Item>
+                  {/* <Carousel.Item interval={3000}>
+                    <img
+                      src={img01}
+                      style={{ width: "80%", borderRadius: "10px" }}
+                    />
+                    <Carousel.Caption></Carousel.Caption>
+                  </Carousel.Item> */}
+                </Carousel>
+              </div>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
               <div className="filter-container">
                 <input
                   className="filter-input"
@@ -130,9 +164,25 @@ const AllProducts = () => {
               <Row xs={1} md={3} className="g-4" style={{ padding: "20px" }}>
                 {filteredData.map((member) => (
                   <Col key={member.cusMemberID}>
-                    <Card style={{ marginBottom: "20px", padding: "15px" }}>
+                    <Card
+                      style={{
+                        padding: "15px",
+                      }}
+                    >
                       <Card.Body>
+                        <Card.Img
+                          variant="top"
+                          src={member.productImage}
+                          style={{
+                            width: "300px",
+                            height: "230px",
+                            borderRadius: "10px",
+                          }}
+                        />
+                        <br />
+                        <br />
                         <Card.Title>{member.name}</Card.Title>
+                        <br />
                         <Card.Subtitle className="mb-2 text-muted">
                           {member.category}
                         </Card.Subtitle>
@@ -155,28 +205,38 @@ const AllProducts = () => {
             </div>
 
             {/* Modal */}
-            <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+            <Modal
+              size="lg"
+              show={showModal}
+              onHide={() => setShowModal(false)}
+              centered
+            >
               <Modal.Header closeButton>
                 <Modal.Title>Product Details</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <div className="text-center">
-                  {memberData.profilePicture && (
+                  <br />
+                  {memberData.productImage && (
                     <img
-                      src={memberData.profilePicture}
+                      src={memberData.productImage}
                       alt="Profile"
-                      className="img-fluid rounded-circle mb-3"
-                      style={{ maxWidth: "150px" }}
+                      style={{
+                        width: "500px",
+                        height: "250px",
+                        borderRadius: "10px",
+                      }}
                     />
                   )}
+                  <br />
+                  <br />
                   <h4>{memberData.name}</h4>
+                  <br />
                   <p className="text-muted">{memberData.description}</p>
                 </div>
-                <hr />
-                <div>
-                  {/* <p>
-                    <strong>Product ID: </strong> {memberData.cusProductID}
-                  </p> */}
+                {/* <hr /> */}
+                <br />
+                <div style={{ marginLeft: "230px" }}>
                   <p>
                     <strong>Product Description: </strong>{" "}
                     {memberData.description}
@@ -192,6 +252,7 @@ const AllProducts = () => {
                     Items Available
                   </p>
                 </div>
+
                 <br />
                 <center>
                   <Row>
@@ -228,6 +289,6 @@ const AllProducts = () => {
       <Footer />
     </>
   );
-};
+}
 
 export default AllProducts;

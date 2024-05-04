@@ -14,6 +14,8 @@ import AllProducts from "./components/AllProducts/AllProducts";
 import ContactUs from "./components/ContsctUs/ContsctUs";
 import Aboutus from "./components/AboutUs/Aboutus";
 import AdminShopLogin from "./components/AdminShopLogin/AdminShopLogin";
+import InventoryCharts from "./components/InventoryCharts/InventoryCharts";
+import Logins from "./components/Logins/logins";
 
 function App() {
   const queryClient = new QueryClient();
@@ -35,6 +37,8 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/adminshoplogin" element={<AdminShopLogin />} />
+          <Route path="/inventorycharts" element={<InventoryCharts />} />
+          <Route path="/logins" element={<Logins />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

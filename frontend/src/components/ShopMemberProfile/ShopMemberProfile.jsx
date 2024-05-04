@@ -171,19 +171,7 @@ function ShopMemberProfile() {
               <Col>
                 <h2>Shop Profile</h2>
               </Col>
-              <Col>
-                <Button
-                  variant="primary"
-                  onClick={handleShow}
-                  style={{
-                    float: "right",
-                    backgroundColor: "black",
-                    borderColor: "black",
-                  }}
-                >
-                  Change Password
-                </Button>
-              </Col>
+              <Col></Col>
             </Row>
             <hr />
             <Row>
@@ -258,12 +246,26 @@ function ShopMemberProfile() {
                   href=""
                   style={{
                     float: "left",
-                    margin: "5px",
+                    margin: "10px",
                     backgroundColor: "black",
                     borderColor: "black",
                   }}
                 >
                   Update Profile
+                </Button>
+              </Col>
+              <Col>
+                <Button
+                  variant="primary"
+                  onClick={handleShow}
+                  style={{
+                    float: "right",
+                    margin: "10px",
+                    backgroundColor: "black",
+                    borderColor: "black",
+                  }}
+                >
+                  Change Password
                 </Button>
               </Col>
             </Row>

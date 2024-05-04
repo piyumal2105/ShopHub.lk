@@ -9,7 +9,7 @@ const Sidenavbar = ({ activeIndex }) => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/admin/login");
+    navigate("/logins");
   };
   return (
     <Nav
