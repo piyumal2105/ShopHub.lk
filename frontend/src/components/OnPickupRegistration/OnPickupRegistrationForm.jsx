@@ -18,13 +18,13 @@ const OnPickupRegistrationForm = () => {
   const navigate = useNavigate();
 
 
-  const handleNICInputChange = (e) => {
-    const { value } = e.target;
-    // Remove non-digit characters and convert to upper case
-    const formattedValue = value.replace(/[^0-9Vv]/g, "").toUpperCase();
-    // Update the input field value
-    setFormData({ ...formData, nic: formattedValue });
-  };
+  // const handleNICInputChange = (e) => {
+  //   const { value } = e.target;
+  //   // Remove non-digit characters and convert to upper case
+  //   const formattedValue = value.replace(/[^0-9Vv]/g, "").toUpperCase();
+  //   // Update the input field value
+  //   setFormData({ ...formData, nic: formattedValue });
+  // };
 
   const { register, formState: { errors }, handleSubmit, reset } = useForm({
     defaultValues: {

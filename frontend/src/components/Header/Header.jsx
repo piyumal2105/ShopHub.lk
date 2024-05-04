@@ -3,7 +3,6 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 
@@ -36,9 +35,8 @@ function Header() {
             <Nav.Link href="#">About Us</Nav.Link>
             <Nav.Link href="#">Contact Us</Nav.Link>
             <Nav.Link href="#">Events and Promotions</Nav.Link>
-            <Nav.Link href="#">Drive and Pickup</Nav.Link>
-            <Nav.Link href="/cart">Cart</Nav.Link>
             <Nav.Link as={Link} to="/onpickuplandingpage">Drive And Pickup</Nav.Link>
+            <Nav.Link href="/cart">Cart</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

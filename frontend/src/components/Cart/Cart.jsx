@@ -158,7 +158,7 @@ import NavBar from '../Header/Header.jsx';
 import './cartStyle.css';
 import Modal from 'react-bootstrap/Modal';
 import Table from "react-bootstrap/Table";
-import {PDFDownloadLink} from '@react-pdf/renderer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import PDFDocument from "./PDFDocument.jsx";
 
 
@@ -276,7 +276,7 @@ const Cart = () => {
                     </>
                 ) : (
                     <div>
-                        <h2 style={{margin: "center"}}>My Cart</h2>
+                        <h2 style={{ margin: "center" }}>My Cart</h2>
                         <div className='cart_container'>
                             <div className="cart_product">
                                 {cartItems.map((item) => (
@@ -293,10 +293,10 @@ const Cart = () => {
                                                 <h6>Sub Total: {item.quantity * item.sellingPrice} LKR</h6>
                                             </div>
                                             <button type="button" className="btn btn-outline-danger"
-                                                    onClick={() => deleteItem(item._id)}>Delete
+                                                onClick={() => deleteItem(item._id)}>Delete
                                             </button>
                                             <button type="button" className="btn btn-outline-primary"
-                                                    onClick={() => updateQuantity(item._id, item.quantity)}>Update
+                                                onClick={() => updateQuantity(item._id, item.quantity)}>Update
                                             </button>
 
                                         </div>
@@ -319,37 +319,37 @@ const Cart = () => {
 
                     <Table striped bordered hover>
                         <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Sub Total</th>
-                        </tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Sub Total</th>
+                            </tr>
                         </thead>
                         <tbody>
 
-                        {cartItems.map((item) => (
-                            <tr key={item._id}>
-                                <td>{item.name}</td>
-                                <td>{item.quantity}</td>
-                                <td>{item.sellingPrice}</td>
-                                <td>{item.quantity * item.sellingPrice}</td>
-                            </tr>
+                            {cartItems.map((item) => (
+                                <tr key={item._id}>
+                                    <td>{item.name}</td>
+                                    <td>{item.quantity}</td>
+                                    <td>{item.sellingPrice}</td>
+                                    <td>{item.quantity * item.sellingPrice}</td>
+                                </tr>
 
-                        ))}
+                            ))}
 
                         </tbody>
 
                     </Table>
                     <div>Total Price: {TotalPrice} LKR</div>
-                    <PDFDownloadLink document={<PDFDocument data={cartItems} TotalPrice={TotalPrice}/> } fileName="order_details.pdf">
-                        {({blob, url, loading, error}) =>
+                    <PDFDownloadLink document={<PDFDocument data={cartItems} TotalPrice={TotalPrice} />} fileName="order_details.pdf">
+                        {({ blob, url, loading, error }) =>
                             loading ? 'Loading document...' : 'Download PDF'
                         }
                     </PDFDownloadLink>
                 </Modal.Body>
                 <Modal.Footer>
-                <button className='order_btn'>Place Order</button>
+                    <button className='order_btn'>Place Order</button>
                 </Modal.Footer>
             </Modal>
             <Footer />

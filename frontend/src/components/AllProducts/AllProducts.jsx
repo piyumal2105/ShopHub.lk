@@ -41,6 +41,24 @@ const AllProducts = () => {
 
       // Handle success/failure as needed
       console.log("Item added to cart:", response.data);
+  
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+      // Handle error
+    }
+  };
+
+  const handleAddToOnPickups = async () => {
+    try {
+      // Send a POST request to the backend API to add the product to the cart
+      const response = await axios.post("http://localhost:3001/onpickup/add", {
+        productId: selectedProductId // Use the selected product ID
+      });
+      addToCart(memberData);
+
+      // Handle success/failure as needed
+      console.log("Item added to cart:", response.data);
+  
     } catch (error) {
       console.error("Error adding item to cart:", error);
       // Handle error
@@ -213,6 +231,17 @@ const AllProducts = () => {
                         }}
                       >
                         Add to cart
+                      </Button>
+                    </Col>
+                    <Col>
+                      <Button 
+                         onClick={handleAddToOnPickups}
+                        style={{
+                          backgroundColor: "black",
+                          borderColor: "black",
+                        }}
+                      >
+                        On Pick-Up
                       </Button>
                     </Col>
                   </Row>
