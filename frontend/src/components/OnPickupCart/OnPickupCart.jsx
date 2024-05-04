@@ -87,7 +87,7 @@ function OnPickupCart() {
                             {/* <Card.Header>Featured</Card.Header> */}
                             <br /><br />
                             <br />
-                            <Card.Body>Your Onpickups are empty</Card.Body>
+                            <Card.Body>Your Onpickups are is empty</Card.Body>
 
                         </Card>
                     </Container>
