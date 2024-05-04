@@ -9,14 +9,17 @@
     cursor: pointer;
 }
 
-.remove_cart{
-    margin-left: 75%;
-    padding: 10px 30px;
-    border: 1px solid #0a0a0a;
-    color: #fffbfb;
-    background: #0a0a0a;
-    border-radius: 25px;
+.btn-outline-danger{
+    margin-left: 350px;
+    margin-bottom: -53px;
 }
+
+.btn-outline-primary{
+    margin-left: 250px;
+    margin-bottom: 15px;
+}
+
+
 
 .empty_cart{
     margin-left: 35%;
@@ -40,7 +43,7 @@
     overflow: hidden; /* Hide overflowing content */
 }
 
-.total_card{
+.total_container{
     width: calc(33% - 20px); /* Adjust for number of cards per row */
     /*margin-bottom: 800px !important;*/
     position: fixed;

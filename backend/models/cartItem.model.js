@@ -7,6 +7,12 @@ const cartItemSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId, // Assuming productId is of type ObjectId
     required: true,
   },
+  quantity: {
+    type: Number,
+    required: true,
+    default: 1
+  }
+
   // Add any other fields you need for the cart item
 });
 

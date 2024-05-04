@@ -34,6 +34,56 @@ export const addToCart = async (req, res) => {
   }
 };
 
+// Controller function to update quantity of an item in the cart
+// export const updateCartItemQuantity = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { quantity } = req.body;
+//
+//     // Find the cart item by ID and update its quantity
+//     const updatedCartItem = await CartItem.findByIdAndUpdate(id, { quantity }, { new: true });
+//     console.log('Quantity updated successfully:', updatedCartItem);
+//
+//     if (!updatedCartItem) {
+//       return res.status(404).json({ message: "Cart item not found" });
+//     }
+//
+//     res.status(200).json(updatedCartItem);
+//   } catch (error) {
+//     console.error(error.message);
+//     res.status(500).json({ error: "Failed to update cart item quantity", details: error.message });
+//   }
+// };
+
+export const updateProduct = async (req, res) => {
+  const product_id = req.params.id;
+
+  console.log(req.body);
+  const updateFields = {
+
+
+    quantity: req.body.quantity,
+
+  };
+
+  try {
+    const updateProduct = await Product.findByIdAndUpdate(
+        product_id,
+        updateFields,
+        { new: true }
+    );
+
+    if (!updateProduct) {
+      // If the product is not found, send a 404 status code with a message
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json(updateProduct); // Send the updated Product as the response
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update Product", error });
+  }
+};
+
 
 export const getProductListFromCart = async (req, res) => {
   try {

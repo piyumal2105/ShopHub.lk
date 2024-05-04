@@ -32,7 +32,7 @@ function Header() {
             <Nav.Link href="#">Contact Us</Nav.Link>
             <Nav.Link href="#">Events and Promotions</Nav.Link>
             <Nav.Link href="#">Drive and Pickup</Nav.Link>
-            <Nav.Link href="/cart"><b>Cart</b></Nav.Link>
+            <Nav.Link href="/cart">Cart</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
