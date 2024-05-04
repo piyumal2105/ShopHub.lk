@@ -6,6 +6,7 @@ import Faq from "./components/Faq/Faq";
 import Rvw from "./components/Rvw/Rvw";
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+
 function App() {
   
   const queryClient = new QueryClient();

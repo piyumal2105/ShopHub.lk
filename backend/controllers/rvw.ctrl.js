@@ -67,8 +67,8 @@ import RVW from '../models/rvw.model.js'; // Importing the RVW model
 // Controller for creating a new RVW
 export const createRVW = async (req, res) => {
   try {
-    const { rating, review } = req.body;
-    const newRVW = new RVW({ rating, review });
+    const { code, rating, review } = req.body;
+    const newRVW = new RVW({ code, rating, review });
     await newRVW.save();
     res.status(201).json(newRVW);
   } catch (error) {
@@ -101,9 +101,9 @@ export const getRVWById = async (req, res) => {
 // Controller for updating a RVW
 export const updateRVW = async (req, res) => {
   const { id } = req.params;
-  const { rating, review } = req.body;
+  const { code, rating, review } = req.body;
   try {
-    const updatedRVW = await RVW.findByIdAndUpdate(id, { rating, review }, { new: true });
+    const updatedRVW = await RVW.findByIdAndUpdate(id, { code, rating, review }, { new: true });
     if (!updatedRVW) return res.status(404).json({ message: 'RVW not found' });
     res.status(200).json(updatedRVW);
   } catch (error) {

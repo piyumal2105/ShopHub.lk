@@ -67,8 +67,8 @@ import FAQ from '../models/faq.model.js'; // Importing the FAQ model
 // Controller for creating a new FAQ
 export const createFAQ = async (req, res) => {
   try {
-    const { question, answer } = req.body;
-    const newFAQ = new FAQ({ question, answer });
+    const { question_no, question, answer } = req.body;
+    const newFAQ = new FAQ({ question_no, question, answer });
     await newFAQ.save();
     res.status(201).json(newFAQ);
   } catch (error) {
@@ -101,9 +101,9 @@ export const getFAQById = async (req, res) => {
 // Controller for updating a FAQ
 export const updateFAQ = async (req, res) => {
   const { id } = req.params;
-  const { question, answer } = req.body;
+  const { question_no, question, answer } = req.body;
   try {
-    const updatedFAQ = await FAQ.findByIdAndUpdate(id, { question, answer }, { new: true });
+    const updatedFAQ = await FAQ.findByIdAndUpdate(id, { question_no, question, answer }, { new: true });
     if (!updatedFAQ) return res.status(404).json({ message: 'FAQ not found' });
     res.status(200).json(updatedFAQ);
   } catch (error) {

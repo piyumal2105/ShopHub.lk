@@ -12,6 +12,8 @@ import Swal from "sweetalert2";
 import SideNavbar from "../AdminDashboard/SideNavbar";
 //import "primereact/resources/themes/saga-blue/theme.css";
 import { Col, Container, Row } from "react-bootstrap";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 
 
@@ -34,6 +36,7 @@ function Rvw() {
   } = useForm({
     validateInputChanges: true,
     initialValues: {
+      code:   "",
       rating: "",
       review: "",
       
@@ -44,6 +47,7 @@ function Rvw() {
     validateInputChanges: true,
     initialValues: {
       _id: "",
+      code:   "",
       rating: "",
       review: "",
       
@@ -53,7 +57,7 @@ function Rvw() {
 
   //use react query and fetch rvw data
   const { data, isLoading, isError, refetch } = useQuery(
-    "acceptedMemberData",
+    "acceptedReviewData",
     async () => {
       const response = await axios.get("http://localhost:3001/rvw/rvws/getall");
       return response.data;
@@ -154,11 +158,27 @@ function Rvw() {
 
   const handleShowEdit = () => setShowEdit(true);
 
-  const filteredData = data.filter((member) =>
-    Object.values(member).some((value) =>
+  const filteredData = data.filter((review) =>
+    Object.values(review).some((value) =>
       value.toString().toLowerCase().includes(searchQuery.toLowerCase())
     )
   );
+
+
+    const downloadPdfReport = () => {
+      const doc = new jsPDF();
+      autoTable(doc, {
+        theme: "striped",
+        head: [["code", "rating", "review"]],
+        body: data.map((item) => [
+          item.code,
+          item.rating,
+          item.review,
+        ]),
+        columnStyles: { 0: { cellWidth: "auto" } },
+      });
+      doc.save("Review Report.pdf");
+    };
 
   return (
     <>
@@ -166,13 +186,11 @@ function Rvw() {
         <div>
           <SideNavbar />
           <br></br>
-          <h2>RVWs</h2>
-            <br></br>
-             
-         
-          <Modal show={show} onHide={handleClose }size="lg">
+          <h2>Shop Reviews</h2>
+          <br></br>
+
+          <Modal show={show} onHide={handleClose} size="lg">
             <Modal.Header closeButton>
-              
               <Modal.Title>Add Rvws</Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -182,7 +200,22 @@ function Rvw() {
                   controlId="exampleForm.ControlInput1"
                 >
                   <Form.Label>
-                    Rating <span className="text-danger">*</span>
+                    Shop Code <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="number"
+                    {...register("code", {
+                      required: true,
+                    })}
+                  />
+                </Form.Group>
+
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlInput1"
+                >
+                  <Form.Label>
+                    Shop Name <span className="text-danger">*</span>
                   </Form.Label>
                   <Form.Control
                     type="text"
@@ -200,15 +233,11 @@ function Rvw() {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                   
                     {...register("review", {
                       required: true,
-                      
                     })}
                   />
                 </Form.Group>
-                
-                
               </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -234,7 +263,7 @@ function Rvw() {
                   <Form className="d-flex">
                     <Form.Control
                       type="search"
-                      placeholder="Search by RVW ID"
+                      placeholder="Search by Shop Name"
                       className="me-2"
                       aria-label="Search"
                       style={{ width: "400px", marginLeft: "400px" }}
@@ -253,53 +282,65 @@ function Rvw() {
                   >
                     Add Rvw
                   </Button>
-                </Col>
+                  </Col>
+                  <Col>
+                    <Button
+                      style={{
+                        backgroundColor: "black",
+                        borderBlockColor: "black",
+                      }}
+                      onClick={downloadPdfReport}
+                    >
+                      Download Report
+                    </Button>
+                  </Col>
               </Row>
             </center>
 
             <Container>
-  <Row className="justify-content-md-center">
-    <Col md={10} style={{ maxWidth: "1800px" }}>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Rating</th>
-            <th>Review</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((member) => (
-            <tr key={member._id}>
-              <td>{member.rating}</td>
-              <td>{member.review}</td>
-              <td>
-               <EditLineIcon
-  onClick={() => {
-    editRvwForm.reset({
-      _id: member._id,
-      rating: member.rating,
-      review: member.review,
-    });
-    setShowEdit(true);
-  }}
-  style={{ color: 'blue', cursor: 'pointer' }} // Adjust color and other styles as needed
-/>
-<DeleteBinLineIcon
-  onClick={() => {
-    handleDelete(member._id);
-  }}
-  style={{ color: 'red', cursor: 'pointer' }} // Adjust color and other styles as needed
-/>
-
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Col>
-  </Row>
-</Container>
-
+              <Row className="justify-content-md-center">
+                <Col md={10} style={{ maxWidth: "1800px" }}>
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>Shop Code</th>
+                        <th>Shop Name</th>
+                        <th>Review</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredData.map((review) => (
+                        <tr key={review._id}>
+                          <td>{review.code}</td>
+                          <td>{review.rating}</td>
+                          <td>{review.review}</td>
+                          <td>
+                            <EditLineIcon
+                              onClick={() => {
+                                editRvwForm.reset({
+                                  _id: review._id,
+                                  code: review.code,
+                                  rating: review.rating,
+                                  review: review.review,
+                                });
+                                setShowEdit(true);
+                              }}
+                              style={{ color: "blue", cursor: "pointer" }} // Adjust color and other styles as needed
+                            />
+                            <DeleteBinLineIcon
+                              onClick={() => {
+                                handleDelete(review._id);
+                              }}
+                              style={{ color: "red", cursor: "pointer" }} // Adjust color and other styles as needed
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </Col>
+              </Row>
+            </Container>
           </div>
           <Modal show={showDelete} onHide={handleCloseDelete}>
             <Modal.Header closeButton>
@@ -330,13 +371,21 @@ function Rvw() {
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
                 >
-                  <Form.Label>Rvw Rating</Form.Label>
+                  <Form.Label>Shop Code</Form.Label>
                   <Form.Control
                     type="name"
-                  
-                    {...editRvwForm.register("rating", {
-                     
-                    })}
+                    {...editRvwForm.register("code", {})}
+                  />
+                </Form.Group>
+
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlInput1"
+                >
+                  <Form.Label>Shop Name</Form.Label>
+                  <Form.Control
+                    type="name"
+                    {...editRvwForm.register("rating", {})}
                   />
                 </Form.Group>
                 <Form.Group
@@ -346,20 +395,14 @@ function Rvw() {
                   <Form.Label>Rvw Review</Form.Label>
                   <Form.Control
                     type="text"
-                    
                     {...editRvwForm.register("review")}
                   />
                 </Form.Group>
-                
-                  {errors.country && (
-                    <span className="text-danger">This is required.</span>
-                  )}
-                  <br />
-                
-                
-               
-               
-                
+
+                {errors.country && (
+                  <span className="text-danger">This is required.</span>
+                )}
+                <br />
               </Form>
             </Modal.Body>
             <Modal.Footer>

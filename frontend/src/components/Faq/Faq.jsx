@@ -12,9 +12,8 @@ import Swal from "sweetalert2";
 import SideNavbar from "../AdminDashboard/SideNavbar";
 //import "primereact/resources/themes/saga-blue/theme.css";
 import { Col, Container, Row } from "react-bootstrap";
-
-
-
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 function Faq() {
   const [show, setShow] = useState(false);
@@ -22,7 +21,6 @@ function Faq() {
   const [deleteID, setDeleteID] = useState("");
   const [showEdit, setShowEdit] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
- 
 
   const {
     register,
@@ -34,9 +32,9 @@ function Faq() {
   } = useForm({
     validateInputChanges: true,
     initialValues: {
+      question_no: "",
       question: "",
       answer: "",
-      
     },
   });
 
@@ -44,16 +42,15 @@ function Faq() {
     validateInputChanges: true,
     initialValues: {
       _id: "",
+      question_no: "",
       question: "",
       answer: "",
-      
     },
   });
 
-
   //use react query and fetch faq data
   const { data, isLoading, isError, refetch } = useQuery(
-    "acceptedMemberData",
+    "acceptedFaData",
     async () => {
       const response = await axios.get("http://localhost:3001/faq/faqs/getall");
       return response.data;
@@ -154,11 +151,22 @@ function Faq() {
 
   const handleShowEdit = () => setShowEdit(true);
 
-  const filteredData = data.filter((member) =>
-    Object.values(member).some((value) =>
+  const filteredData = data.filter((fa) =>
+    Object.values(fa).some((value) =>
       value.toString().toLowerCase().includes(searchQuery.toLowerCase())
     )
   );
+
+  const downloadPdfReport = () => {
+    const doc = new jsPDF();
+    autoTable(doc, {
+      theme: "striped",
+      head: [["Question No", "Question", "Answer"]],
+      body: data.map((item) => [item.question_no, item.question, item.answer]),
+      columnStyles: { 0: { cellWidth: "auto" } },
+    });
+    doc.save("FAQ Report.pdf");
+  };
 
   return (
     <>
@@ -167,16 +175,37 @@ function Faq() {
           <SideNavbar />
           <br></br>
           <h2>FAQs</h2>
-            <br></br>
-             
-         
-          <Modal show={show} onHide={handleClose }size="lg">
+          <br></br>
+
+          <Modal show={show} onHide={handleClose} size="lg">
             <Modal.Header closeButton>
-              
               <Modal.Title>Add Faqs</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlInput1"
+                >
+                  <Form.Label>
+                    Question_No <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text" // Change type to text
+                    pattern="[0-9]*" // Regular expression to allow only numbers
+                    {...register("question_no", {
+                      required: true,
+                      pattern: {
+                        value: /^[0-9]+$/,
+                        message: "Please enter only numbers.",
+                      },
+                    })}
+                  />
+                  <Form.Text className="text-muted">
+                    Please enter only numbers.
+                  </Form.Text>
+                </Form.Group>
+
                 <Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
@@ -200,15 +229,11 @@ function Faq() {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                   
                     {...register("answer", {
                       required: true,
-                      
                     })}
                   />
                 </Form.Group>
-                
-                
               </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -254,52 +279,64 @@ function Faq() {
                     Add Faq
                   </Button>
                 </Col>
+                <Col>
+                  <Button
+                    style={{
+                      backgroundColor: "black",
+                      borderBlockColor: "black",
+                    }}
+                    onClick={downloadPdfReport}
+                  >
+                    Download Report
+                  </Button>
+                </Col>
               </Row>
             </center>
 
             <Container>
-  <Row className="justify-content-md-center">
-    <Col md={10} style={{ maxWidth: "1800px" }}>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Question</th>
-            <th>Answer</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((member) => (
-            <tr key={member._id}>
-              <td>{member.question}</td>
-              <td>{member.answer}</td>
-              <td>
-               <EditLineIcon
-  onClick={() => {
-    editFaqForm.reset({
-      _id: member._id,
-      question: member.question,
-      answer: member.answer,
-    });
-    setShowEdit(true);
-  }}
-  style={{ color: 'blue', cursor: 'pointer' }} // Adjust color and other styles as needed
-/>
-<DeleteBinLineIcon
-  onClick={() => {
-    handleDelete(member._id);
-  }}
-  style={{ color: 'red', cursor: 'pointer' }} // Adjust color and other styles as needed
-/>
-
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </Col>
-  </Row>
-</Container>
-
+              <Row className="justify-content-md-center">
+                <Col md={10} style={{ maxWidth: "1800px" }}>
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>Question No</th>
+                        <th>Question</th>
+                        <th>Answer</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredData.map((fa) => (
+                        <tr key={fa._id}>
+                          <td>{fa.question_no}</td>
+                          <td>{fa.question}</td>
+                          <td>{fa.answer}</td>
+                          <td>
+                            <EditLineIcon
+                              onClick={() => {
+                                editFaqForm.reset({
+                                  _id: fa._id,
+                                  question_no: fa.question_no,
+                                  question: fa.question,
+                                  answer: fa.answer,
+                                });
+                                setShowEdit(true);
+                              }}
+                              style={{ color: "blue", cursor: "pointer" }} // Adjust color and other styles as needed
+                            />
+                            <DeleteBinLineIcon
+                              onClick={() => {
+                                handleDelete(fa._id);
+                              }}
+                              style={{ color: "red", cursor: "pointer" }} // Adjust color and other styles as needed
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </Col>
+              </Row>
+            </Container>
           </div>
           <Modal show={showDelete} onHide={handleCloseDelete}>
             <Modal.Header closeButton>
@@ -330,13 +367,20 @@ function Faq() {
                   className="mb-3"
                   controlId="exampleForm.ControlInput1"
                 >
+                  <Form.Label>Qustion No</Form.Label>
+                  <Form.Control
+                    type="number"
+                    {...editFaqForm.register("question_no")}
+                  />
+                </Form.Group>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlInput1"
+                >
                   <Form.Label>Faq Question</Form.Label>
                   <Form.Control
                     type="name"
-                  
-                    {...editFaqForm.register("question", {
-                     
-                    })}
+                    {...editFaqForm.register("question", {})}
                   />
                 </Form.Group>
                 <Form.Group
@@ -346,20 +390,14 @@ function Faq() {
                   <Form.Label>Faq Answer</Form.Label>
                   <Form.Control
                     type="text"
-                    
                     {...editFaqForm.register("answer")}
                   />
                 </Form.Group>
-                
-                  {errors.country && (
-                    <span className="text-danger">This is required.</span>
-                  )}
-                  <br />
-                
-                
-               
-               
-                
+
+                {errors.country && (
+                  <span className="text-danger">This is required.</span>
+                )}
+                <br />
               </Form>
             </Modal.Body>
             <Modal.Footer>

@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const faqSchema = new mongoose.Schema(
   {
+    question_no: {
+      type: Number,
+      required: true,
+    },
     question: {
       type: String,
       required: true,
