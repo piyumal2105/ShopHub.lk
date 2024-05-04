@@ -22,35 +22,80 @@ import FormControl from "@mui/material/FormControl";
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const [gender, setGender] = React.useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    number: "",
+    gender: "",
+    address: "",
+  });
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
-  const handleGenderChange = (event) => {
-    setGender(event.target.value);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const formData = new FormData(event.currentTarget);
-      const userData = {
-        firstName: formData.get("firstName"),
-        lastName: formData.get("lastName"),
-        email: formData.get("email"),
-        password: formData.get("password"),
-        number: formData.get("number"),
-        gender: gender,
-        address: formData.get("address"),
-      };
-      const response = await axios.post(
-        "http://localhost:3001/customer/register",
-        userData
-      );
-      console.log(response.data); // Handle success response
-      navigate("/customers/login"); // Navigate to login page
-    } catch (error) {
-      console.error(error); // Handle error response
+    if (validateForm()) {
+      try {
+        const response = await axios.post(
+          "http://localhost:3001/customer/register",
+          formData
+        );
+        console.log(response.data); // Handle success response
+        navigate("/customers/login"); // Navigate to login page
+      } catch (error) {
+        console.error(error); // Handle error response
+      }
     }
+  };
+
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
+
+    if (!formData.firstName.trim()) {
+      errors.firstName = "First Name is required";
+      isValid = false;
+    }
+
+    if (!formData.lastName.trim()) {
+      errors.lastName = "Last Name is required";
+      isValid = false;
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+      isValid = false;
+    }
+
+    if (!formData.password.trim()) {
+      errors.password = "Password is required";
+      isValid = false;
+    }
+
+    if (!formData.number.trim()) {
+      errors.number = "Number is required";
+      isValid = false;
+    }
+
+    if (!formData.gender) {
+      errors.gender = "Gender is required";
+      isValid = false;
+    }
+
+    if (!formData.address.trim()) {
+      errors.address = "Address is required";
+      isValid = false;
+    }
+
+    setErrors(errors);
+    return isValid;
   };
 
   return (
@@ -87,6 +132,10 @@ export default function SignUp() {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  error={!!errors.firstName}
+                  helperText={errors.firstName}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -97,6 +146,10 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  error={!!errors.lastName}
+                  helperText={errors.lastName}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -107,6 +160,10 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  error={!!errors.email}
+                  helperText={errors.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -118,6 +175,10 @@ export default function SignUp() {
                   name="password"
                   type="password"
                   autoComplete="new-password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  error={!!errors.password}
+                  helperText={errors.password}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -128,23 +189,31 @@ export default function SignUp() {
                   label="Number"
                   name="number"
                   autoComplete="tel"
+                  value={formData.number}
+                  onChange={handleChange}
+                  error={!!errors.number}
+                  helperText={errors.number}
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl required fullWidth>
+                <FormControl required fullWidth error={!!errors.gender}>
                   <InputLabel id="gender-label">Gender</InputLabel>
                   <Select
                     labelId="gender-label"
                     id="gender"
-                    value={gender}
+                    value={formData.gender}
                     label="Gender"
-                    onChange={handleGenderChange}
+                    onChange={handleChange}
+                    name="gender"
                   >
                     <MenuItem value={"male"}>Male</MenuItem>
                     <MenuItem value={"female"}>Female</MenuItem>
                     <MenuItem value={"other"}>Other</MenuItem>
                   </Select>
                 </FormControl>
+                {errors.gender && (
+                  <Typography color="error">{errors.gender}</Typography>
+                )}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -154,6 +223,10 @@ export default function SignUp() {
                   label="Address"
                   name="address"
                   autoComplete="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  error={!!errors.address}
+                  helperText={errors.address}
                 />
               </Grid>
             </Grid>
