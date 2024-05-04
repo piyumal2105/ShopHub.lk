@@ -1,8 +1,10 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import LandingPage from "./pages/LandingPage";
 import Customers from "./components/Customers/Customers";
 import AdminLogin from "./components/AdminLogin/AdminLogin";
+
 import MemberRegistration from "./pages/MemberRegistration";
 import ManageMember from "./components/ManageMember/ManageMember";
 import RequstedMember from "./components/ManageMember/RequstedMember";
@@ -13,7 +15,9 @@ import Inventory from "./components/Inventory/Inventory";
 import AllProducts from "./components/AllProducts/AllProducts";
 import Cart from "./components/Cart/Cart";
 import {CartProvider} from "./components/Cart/CartContext.jsx";
-
+import OnPickupRegistrationForm from "./components/OnPickupRegistration/OnPickupRegistrationForm";
+import OnpickUpLandingPage from "./components/OnPickupLandingPage/OnpickUpLandingPage";
+import OnPickupCart from "./components/OnPickupCart/OnPickupCart";
 
 
 function App() {
@@ -22,6 +26,7 @@ function App() {
 
 
   return (
+
     <QueryClientProvider client={queryClient}>
       <CartProvider>
       <BrowserRouter>
@@ -38,10 +43,14 @@ function App() {
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/allProducts" element={<AllProducts />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/onpickupcart" element={<OnPickupCart/>} />
+          <Route path="/onpickuplandingpage" element={<OnpickUpLandingPage />} />
+          <Route path="/onpickup/registration" element={<OnPickupRegistrationForm />} />
         </Routes>
       </BrowserRouter>
       </CartProvider >
     </QueryClientProvider>
+
   );
 }
 

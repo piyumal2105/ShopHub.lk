@@ -1,0 +1,50 @@
+/* frontend/src/components/OnlinePaymentForm.css */
+
+.payment-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .payment-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .payment-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .payment-container label {
+    margin-bottom: 8px;
+    color: #666;
+  }
+  
+  .payment-container input[type="number"],
+  .payment-container select {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .payment-container button[type="submit"] {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .payment-container button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  

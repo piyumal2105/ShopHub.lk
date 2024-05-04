@@ -35,6 +35,7 @@ function LandingPage() {
   }, [customers, products, sellers]);
   return (
     <>
+    
       <div
         className="d-flex justify-content-center align-items-center"
         style={{ backgroundColor: "black", color: "white", height: "60px" }}
