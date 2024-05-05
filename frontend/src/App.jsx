@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import { QueryClientProvider, QueryClient } from "react-query";
 import LandingPage from "./pages/LandingPage";
 import Customers from "./components/Customers/Customers";
@@ -66,11 +65,13 @@ function App() {
           <Route path="/logins" element={<Logins />} />
           <Route path="/LuckyWheel" element={<LuckyWheel />} />
           <Route path="/LoyaltyPointsPage" element={<LoyaltyPointPage />} />
-          <Route path="/LoyaltyRewordManagement" element={<LP_admin />} /><Route path="/faq" element={<Faq/>} />
-        <Route path="/rvw" element={<Rvw/>} />
-        <Route path="/faquser" element={<AllFaqs/>} />
+          <Route path="/LoyaltyRewordManagement" element={<LP_admin />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/rvw" element={<Rvw />} />
+          <Route path="/faquser" element={<AllFaqs />} />
         </Routes>
       </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 export default App;

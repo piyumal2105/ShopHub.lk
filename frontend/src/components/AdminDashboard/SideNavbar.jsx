@@ -1,15 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
-import { Button, Nav } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Sidenavbar = ({ activeIndex }) => {
   const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.clear();
     navigate("/logins");
   };
+
   return (
     <Nav
       className=" sidebar d-flex flex-column col-md-3 text-white"
@@ -115,8 +117,33 @@ const Sidenavbar = ({ activeIndex }) => {
       >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}>
           {" "}
-          Loyalty Rewords 
+          Loyalty Rewords
         </span>
+      </Nav.Link>
+
+      <Nav.Link
+        as={Link}
+        className={`my-2 ${
+          activeIndex === 2
+            ? "container-color-super-active"
+            : "container-color-super"
+        } p-3`}
+        to="/faq"
+        style={{ display: "flex" }}
+      >
+        <span style={{ marginLeft: "10px", fontSize: "18px" }}> FAQ</span>
+      </Nav.Link>
+      <Nav.Link
+        as={Link}
+        className={`my-2 ${
+          activeIndex === 2
+            ? "container-color-super-active"
+            : "container-color-super"
+        } p-3`}
+        to="/rvw"
+        style={{ display: "flex" }}
+      >
+        <span style={{ marginLeft: "10px", fontSize: "18px" }}> Reviews</span>
       </Nav.Link>
       <Nav.Link
         onClick={handleLogout}
@@ -129,40 +156,7 @@ const Sidenavbar = ({ activeIndex }) => {
         to="/logins"
         style={{ display: "flex", alignItems: "center" }}
       >
-
-
-
-        <span style={{ marginLeft: "10px", fontSize: "18px" }}>
-          {" "}
-          FAQ
-        </span>
-      </Nav.Link>
-      <Nav.Link
-        onClick={handleLogout}
-        className={`my-2 ${
-          activeIndex === 3
-            ? "container-color-super-active"
-            : "container-color-super"
-        } p-3`}
-        to="/faqs/create"
-        style={{ display: "flex", alignItems: "center" }}
-      >
-
-         <span style={{ marginLeft: "10px", fontSize: "18px" }}>
-          {" "}
-          Shop Reviews
-        </span>
-      </Nav.Link>
-      <Nav.Link
-        onClick={handleLogout}
-        className={`my-2 ${
-          activeIndex === 3
-            ? "container-color-super-active"
-            : "container-color-super"
-        } p-3`}
-        to="/rvws/create"
-        style={{ display: "flex", alignItems: "center" }}
-      >
+        <span style={{ marginLeft: "10px", fontSize: "18px" }}> Log Out</span>
       </Nav.Link>
     </Nav>
   );

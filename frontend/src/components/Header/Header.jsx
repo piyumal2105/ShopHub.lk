@@ -2,6 +2,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
+import { Button } from "react-bootstrap";
 
 function Header() {
   return (
@@ -26,7 +27,13 @@ function Header() {
             <Nav.Link href="/events"> Events</Nav.Link>
             <Nav.Link href="#">Drive and Pickup</Nav.Link>
             <Nav.Link href="/LoyaltyPointsPage">Loyalty Points</Nav.Link>
-            <Nav.Link href="/faq">FAQ</Nav.Link>
+            <Nav.Link href="/faquser">FAQ</Nav.Link>
+            <Button
+              style={{ backgroundColor: "black" }}
+              href="/customers/register"
+            >
+              Sign Up
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
