@@ -4,7 +4,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dbConnect from "./configs/dbConfig.js";
 import AdminAuthRoutes from "./routes/admin.auth.routes.js";
-
+import PromotionRoutes from "./routes/promotions.routes.js";
+import EventRoutes from "./routes/event.routes.js";
 //initialized express
 const app = express();
 
@@ -31,6 +32,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/admin", AdminAuthRoutes);
+app.use("/promotion", PromotionRoutes);
+app.use("/event",EventRoutes);
 
 app.use((req, res, next) => {
   console.log(`${req.method} =====> URL: ${req.url}`);
