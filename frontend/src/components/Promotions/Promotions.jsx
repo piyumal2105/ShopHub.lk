@@ -168,6 +168,7 @@ import "./Promotions.css";
 import 'react-multi-carousel/lib/styles.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Carousel from 'react-bootstrap/Carousel';
+import { Link } from 'react-router-dom';
 
 const AllPromotions = () => {
   const [show, setShow] = useState(false);
@@ -307,17 +308,20 @@ const AllPromotions = () => {
                       <Card.Title>{member.promotionTitle}</Card.Title>
                         
                         
-                        <Button
-                          onClick={() => handleNameClick(member)}
-                          style={{
-                            backgroundColor: "Transparent",
-                            borderColor: "black",
-                            color:"black",
-                            
-                          }}
-                        >
-                          <i>Shop Now</i>
-                        </Button>
+                      <div>
+      <Link to="/allProducts">
+        <button
+          style={{
+            backgroundColor: "Transparent",
+            borderColor: "black",
+            color: "black",
+            borderRadius: "10px",
+          }}
+        >
+          <i>Shop Now</i>
+        </button>
+      </Link>
+    </div>
                       </Card.Body>
                     </Card>
                     </center>
