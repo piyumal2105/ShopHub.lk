@@ -1,15 +1,12 @@
+import React, { useState, useEffect } from "react";
+import { Container, Button, Col, Row } from "react-bootstrap";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import { Button, Col, Row } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import Card from "react-bootstrap/Card";
+import Carousel from "react-bootstrap/Carousel";
 import img01 from "../assets/img01.png";
-import img03 from "../assets/denim.png";
-import img04 from "../assets/shirt01.png";
-import img05 from "../assets/shirt02.png";
+import Nav from "react-bootstrap/Nav";
+// import Navbar from 'react-bootstrap/Navbar';
+import { useHotkeys } from "react-hotkeys-hook";
 
 function LandingPage() {
   const [customers, setCustomers] = useState(0);
@@ -33,13 +30,22 @@ function LandingPage() {
 
     return () => clearInterval(interval);
   }, [customers, products, sellers]);
+
+  // Setup the hotkey
+  useHotkeys("ctrl+enter", () => {
+    window.location.href = "/logins";
+  });
+
   return (
     <>
       <div
         className="d-flex justify-content-center align-items-center"
         style={{ backgroundColor: "black", color: "white", height: "60px" }}
       >
-        <center>Sign Up and get 10% off. Sign Up</center>
+        <center>
+          Sign Up and get 10% off.
+          <Nav.Link href="/customers/register">Sign Up</Nav.Link>
+        </center>
       </div>
       <br />
       <Header />
@@ -50,12 +56,17 @@ function LandingPage() {
           <Row>
             <Col>
               <h1>FIND ANYTHING THAT MATCHES YOUR STYLE</h1>
-
               <br />
               <br />
               <Button
-                variant="dark"
-                style={{ borderRadius: "13px", width: "200px", height: "40px" }}
+                style={{
+                  borderRadius: "13px",
+                  width: "200px",
+                  height: "40px",
+                  backgroundColor: "black",
+                  borderColor: "black",
+                }}
+                href="/allProducts"
               >
                 Shop Now
               </Button>
@@ -79,62 +90,31 @@ function LandingPage() {
               </Row>
             </Col>
             <Col>
-              <img src={img01} />
+              <img src={img01} alt="Highlight Image" />
             </Col>
           </Row>
         </Container>
       </div>
       <br />
       <br />
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ backgroundColor: "black" }}
-      >
-        <Navbar expand="lg">
-          <Container>
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="ms-auto">
-                <Nav.Link
-                  href="#"
-                  style={{ color: "white", marginRight: "100px" }}
-                >
-                  Fashion
-                </Nav.Link>
-                <Nav.Link
-                  href="#"
-                  style={{ color: "white", marginRight: "100px" }}
-                >
-                  Electronics
-                </Nav.Link>
-                <Nav.Link
-                  href="#"
-                  style={{ color: "white", marginRight: "100px" }}
-                >
-                  Groceries
-                </Nav.Link>
-                <Nav.Link
-                  href="#"
-                  style={{ color: "white", marginRight: "100px" }}
-                >
-                  Beauty
-                </Nav.Link>
-                <Nav.Link
-                  href="#"
-                  style={{ color: "white", marginRight: "100px" }}
-                >
-                  Sports
-                </Nav.Link>
-                <Nav.Link
-                  href="#"
-                  style={{ color: "white", marginRight: "100px" }}
-                >
-                  Toys
-                </Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-      </div>
+      <center>
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{
+            color: "white",
+            backgroundColor: "black",
+            fontWeight: "600",
+            fontSize: "15px",
+            height: "50px",
+          }}
+        >
+          <marquee width="85%">
+            Welcome to ShopHub.lk. We're delighted to have you here. Explore a
+            world of shopping, dining, and entertainment with us.
+          </marquee>
+        </div>
+      </center>
+
       <div
         style={{
           minHeight: "65vh",
@@ -145,59 +125,60 @@ function LandingPage() {
         <br />
         <center>
           <div>
-            <Container>
-              <Row>
-                <Col>
-                  <Card
-                    style={{
-                      borderRadius: "10px",
-                      borderColor: "#232149",
-                      borderWidth: "2px",
-                    }}
-                  >
-                    <Card.Img variant="top" src={img05} height="350px" />
-                    <Card.Body>
-                      <Card.Title>Title</Card.Title>
-                      <Card.Text>Text</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                <Col>
-                  <Card
-                    style={{
-                      borderRadius: "10px",
-                      borderColor: "#232149",
-                      borderWidth: "2px",
-                    }}
-                  >
-                    <Card.Img src={img03} height="350px" />
-                    <Card.Body>
-                      <Card.Title>Title</Card.Title>
-                      <Card.Text>Text</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                <Col>
-                  <Card
-                    style={{
-                      borderRadius: "10px",
-                      borderColor: "#232149",
-                      borderWidth: "2px",
-                    }}
-                  >
-                    <Card.Img variant="top" src={img04} height="350px" />
-                    <Card.Body>
-                      <Card.Title>Title</Card.Title>
-                      <Card.Text>Text</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              </Row>
-            </Container>
+            <Carousel>
+              <Carousel.Item interval={1000}>
+                <img
+                  style={{ maxHeight: "450px", maxWidth: "1425px" }}
+                  src="https://i.ytimg.com/vi/LFlW4QhUUfE/maxresdefault.jpg"
+                />
+
+                <Carousel.Caption>
+                  <h3>Exclusive Card Offers for you</h3>
+                  <p>NDB cards only valid</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item interval={1000}>
+                <img
+                  style={{ maxHeight: "450px", maxWidth: "1425px" }}
+                  src="https://scontent.fcmb2-2.fna.fbcdn.net/v/t39.30808-6/299950081_5727174290647027_6316019789937536919_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEEraUhvQnnKFMlnKrJiEOzTiRYGTkf_XNOJFgZOR_9c0GmlN0bd8tsaFEo95BNqeT52wALBvIg94UnlMt7OPo0&_nc_ohc=KpXquOayQLIQ7kNvgEIoLPO&_nc_ht=scontent.fcmb2-2.fna&oh=00_AfASTJWVrCGX6El0fY-ocvzPPeH02hN3LRzU3THJJWdS-w&oe=663B0408"
+                />
+
+                <Carousel.Caption>
+                  <h3>New Arrivals......!</h3>
+                  <p>Latest desings & offers</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item interval={1000}>
+                <img
+                  style={{ maxHeight: "450px", maxWidth: "1425px" }}
+                  className="img-size"
+                  src="https://exclusivelines.lk/wp-content/uploads/2023/06/OFFER-BANNER.png"
+                />
+
+                <Carousel.Caption>
+                  <h3>Limited time Offers</h3>
+                  <p>Up to 50% on selected items.</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
           </div>
         </center>
         <br />
         <br />
+      </div>
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ backgroundColor: "black", color: "white", height: "50px" }}
+      >
+        Register as a shop member and sell your items.
+        <Button
+          // target="_blank"
+          rel="noopener noreferrer"
+          href="/memberRegistration"
+          style={{ backgroundColor: "black", borderColor: "black" }}
+        >
+          Sign Up
+        </Button>
       </div>
       <Footer />
     </>

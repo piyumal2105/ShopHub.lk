@@ -1,15 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
-import { Nav } from "react-bootstrap";
+import { Button, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Sidenavbar = ({ activeIndex }) => {
   const navigate = useNavigate();
-
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/admin/login");
+    navigate("/logins");
   };
   return (
     <Nav
@@ -41,7 +40,7 @@ const Sidenavbar = ({ activeIndex }) => {
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
-        to="#"
+        to="/customers"
         style={{ display: "flex", alignItems: "center" }}
       >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}> Customers</span>
@@ -54,12 +53,12 @@ const Sidenavbar = ({ activeIndex }) => {
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
-        to="#"
+        to="/requestedMember"
         style={{ display: "flex", alignItems: "center" }}
       >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}>
           {" "}
-          Requsted Shop Members
+          Requsted Shopes
         </span>
       </Nav.Link>
       <Nav.Link
@@ -69,12 +68,12 @@ const Sidenavbar = ({ activeIndex }) => {
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
-        to="#"
+        to="/manageMember"
         style={{ display: "flex", alignItems: "center" }}
       >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}>
           {" "}
-          Accepted Shop Members
+          Accepted Shopes
         </span>
       </Nav.Link>
       <Nav.Link
@@ -84,24 +83,54 @@ const Sidenavbar = ({ activeIndex }) => {
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
-        to="#"
+        to="/adminpromotions"
         style={{ display: "flex", alignItems: "center" }}
       >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}>
           {" "}
-          Events and Promotions
+          Promotions
         </span>
       </Nav.Link>
       <Nav.Link
-        onClick={handleLogout}
+        as={Link}
         className={`my-2 ${
           activeIndex === 3
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
-        to="#"
+        to="/adminEvents"
         style={{ display: "flex", alignItems: "center" }}
       >
+        <span style={{ marginLeft: "10px", fontSize: "18px" }}> Events</span>
+      </Nav.Link>
+      <Nav.Link
+        as={Link}
+        className={`my-2 ${
+          activeIndex === 2
+            ? "container-color-super-active"
+            : "container-color-super"
+        } p-3`}
+        to="/LoyaltyRewordManagement"
+        style={{ display: "flex" }}
+      >
+        <span style={{ marginLeft: "10px", fontSize: "18px" }}>
+          {" "}
+          Loyalty Rewords 
+        </span>
+      </Nav.Link>
+      <Nav.Link
+        onClick={handleLogout}
+        as={Link}
+        className={`my-2 ${
+          activeIndex === 2
+            ? "container-color-super-active"
+            : "container-color-super"
+        } p-3`}
+        to="/logins"
+        style={{ display: "flex", alignItems: "center" }}
+      >
+
+
 
         <span style={{ marginLeft: "10px", fontSize: "18px" }}>
           {" "}
@@ -134,8 +163,6 @@ const Sidenavbar = ({ activeIndex }) => {
         to="/rvws/create"
         style={{ display: "flex", alignItems: "center" }}
       >
-
-        <span style={{ marginLeft: "10px", fontSize: "18px" }}> Logout</span>
       </Nav.Link>
     </Nav>
   );
