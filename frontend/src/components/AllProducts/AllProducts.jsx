@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {useCart} from "../Cart/CartContext";
+import { useCart } from "../Cart/CartContext";
 import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -10,9 +10,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import NavBar from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Modal from "react-bootstrap/Modal";
-// import { useParams } from "react-router-dom";
 import "./style.css";
 import { Button } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 const AllProducts = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -20,10 +20,7 @@ const AllProducts = () => {
   const [showModal, setShowModal] = useState(false);
   const [memberData, setMemberData] = useState([]);
   const [selectedProductId, setSelectedProductId] = useState(null);
-  const {addToCart} = useCart();
-  //   const params = useParams();
-  //   const memberId = params.id;
-
+  const { addToCart } = useCart();
 
   const handleNameClick = (member) => {
     setMemberData(member);
@@ -33,39 +30,40 @@ const AllProducts = () => {
 
   const handleAddToCart = async () => {
     try {
-      // Send a POST request to the backend API to add the product to the cart
       const response = await axios.post("http://localhost:3001/cart/add", {
-        productId: selectedProductId // Use the selected product ID
+        productId: selectedProductId
       });
       addToCart(memberData);
-
-      // Handle success/failure as needed
       console.log("Item added to cart:", response.data);
-  
     } catch (error) {
       console.error("Error adding item to cart:", error);
-      // Handle error
     }
   };
 
   const handleAddToOnPickups = async () => {
     try {
-      // Send a POST request to the backend API to add the product to the cart
       const response = await axios.post("http://localhost:3001/onpickup/add", {
-        productId: selectedProductId // Use the selected product ID
+        productId: selectedProductId
       });
       addToCart(memberData);
-
-      // Handle success/failure as needed
-      console.log("Item added to cart:", response.data);
-  
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Product added to On-Pickup list successfully!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      console.log("Item added to On-Pickup list:", response.data);
     } catch (error) {
-      console.error("Error adding item to cart:", error);
-      // Handle error
+      console.error("Error adding item to On-Pickup list:", error);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Product added to On-Pickup successfully!',
+      });
     }
   };
 
-  // use react query and fetch member data
   const { data, isLoading, isError } = useQuery(
     "acceptedMemberData",
     async () => {
@@ -82,7 +80,6 @@ const AllProducts = () => {
     return <p>Error loading data</p>;
   }
 
-  //Extract unique country for dropdown options
   const uniqueCategory = [
     "Fashion and Apparel",
     "Entertainment and Leisure",
@@ -93,7 +90,6 @@ const AllProducts = () => {
     "Jewelry and Watches",
   ];
 
-  // Apply filters to the data
   const filteredData = data.filter(
     (member) =>
       Object.values(member).some((value) =>
@@ -171,7 +167,6 @@ const AllProducts = () => {
               </Row>
             </div>
 
-            {/* Modal */}
             <Modal show={showModal} onHide={() => setShowModal(false)} centered>
               <Modal.Header closeButton>
                 <Modal.Title>Product Details</Modal.Title>
