@@ -5,49 +5,38 @@ import Form from "react-bootstrap/Form";
 
 function Header() {
   return (
-    <>
-      <Navbar
-        expand="lg"
-        // style={{
-        //   position: "fixed",
-        //   width: "100%",
-        //   zIndex: 1000,
-        //   top: 0,
-        //   paddingTop: "80px",
-        //   backgroundColor: "white",
-        // }}
-      >
-        <Container>
-          <h3
-            style={{
-              fontSize: "35px",
-            }}
-          >
-            ShopHub.lk
-            <br />
-          </h3>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
-              <Form className="d-flex">
+    <Navbar expand="lg">
+      <Container>
+        <h3
+          style={{
+            fontSize: "35px",
+          }}
+        >
+          ShopHub.lk
+          <br />
+        </h3>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+             <Form className="d-flex">
                 <Form.Control
                   type="search"
                   placeholder="Search"
                   className="me-2"
                   aria-label="Search"
                 />
-              </Form>
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/allProducts">Products</Nav.Link>
-              <Nav.Link href="/aboutus">About Us</Nav.Link>
-              <Nav.Link href="/contactus">Contact Us</Nav.Link>
-              <Nav.Link href="#">Events and Promotions</Nav.Link>
-              <Nav.Link href="#">Drive and Pickup</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-    </>
+             </Form>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/allProducts">Products</Nav.Link>
+            <Nav.Link href="/aboutus">About Us</Nav.Link>
+            <Nav.Link href="/contactus">Contact Us</Nav.Link>
+            <Nav.Link href="/promotions"> Promotions</Nav.Link>
+            <Nav.Link href="/events"> Events</Nav.Link>
+            <Nav.Link href="#">Drive and Pickup</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
 
