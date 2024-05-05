@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 
 function Header() {
+
   return (
     <Navbar expand="lg">
       <Container>
@@ -33,6 +34,9 @@ function Header() {
             <Nav.Link href="/promotions"> Promotions</Nav.Link>
             <Nav.Link href="/events"> Events</Nav.Link>
             <Nav.Link href="#">Drive and Pickup</Nav.Link>
+<Nav.Link href="/LoyaltyPointsPage">
+                            Loyalty Points
+                        </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

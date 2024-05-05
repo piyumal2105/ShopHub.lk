@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
+
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.16",
@@ -22,11 +23,22 @@
     "jspdf-autotable": "^3.8.2",
     "primeicons": "^6.0.1",
     "primereact": "^10.5.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.14",
+    "@mui/material": "^5.15.14",
+    "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
+    "framer-motion": "^11.0.20",
+
     "react": "^18.2.0",
     "react-big-calendar": "^1.12.1",
     "react-bootstrap": "^2.10.2",
 
+
     "react-datepicker": "^6.6.0",
+
+    "react-custom-roulette": "^1.4.1",
+
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.2",
     "react-icons": "^5.2.0",
@@ -46,6 +58,7 @@
     "react-query": "^3.39.3",
 
     "react-router-dom": "^6.22.3",
+    "react-toastify": "^10.0.5",
     "react-transition-group": "^4.4.5",
     "remixicon-react": "^1.0.0",
     "sweetalert2": "^11.10.7"

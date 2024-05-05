@@ -25,6 +25,9 @@ import Aboutus from "./components/AboutUs/Aboutus";
 import AdminShopLogin from "./components/AdminShopLogin/AdminShopLogin";
 import InventoryCharts from "./components/InventoryCharts/InventoryCharts";
 import Logins from "./components/Logins/logins";
+import LuckyWheel from "./components/LoyaltyPoints/LuckyWheel";
+import LoyaltyPointPage from "./components/LoyaltyPoints/LoyaltyPointsPage";
+import LP_admin from "./components/LoyaltyPoints/LP_admin";
 
 function App() {
   const queryClient = new QueryClient();
@@ -58,10 +61,16 @@ function App() {
           <Route path="/adminshoplogin" element={<AdminShopLogin />} />
           <Route path="/inventorycharts" element={<InventoryCharts />} />
           <Route path="/logins" element={<Logins />} />
+           <Route path="/LuckyWheel" element={<LuckyWheel />} />
+                <Route
+                    path="/LoyaltyPointsPage"
+                    element={<LoyaltyPointPage />}
+                />
+
+                <Route path="/LoyaltyRewordManagement" element={<LP_admin />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
   );
-}
 
 export default App;
