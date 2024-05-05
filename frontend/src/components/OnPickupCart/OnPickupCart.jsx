@@ -160,10 +160,13 @@ const OnPickUpCart = () => {
                                                 <button className='quantity_inc' onClick={() => inc(item)}>+</button>
                                                 <h6>Sub Total: {item.quantity * item.sellingPrice} LKR</h6>
                                             </div>
+                                           
                                             <button type="button" className="btn btn-outline-danger" onClick={() => deleteFromCart(item._id)}>Delete</button>
-                                            <button type="button" className="btn btn-outline-primary"
-                                                onClick={() => updateQuantity(item._id, item.quantity)}>Update
-                                            </button>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+
+                                            {/* <button type="button" className="btn btn-outline-primary">Update</button> */}
 
                                         </div>
                                     </div>
@@ -173,8 +176,22 @@ const OnPickUpCart = () => {
                             <div className="total_container">
                                 <Row>
                                     <Col><h2>Total Price: {TotalPrice} LKR</h2>
-                                        <button className='btn btn-outline-secondary' onClick={handleCheckout}>Checkout</button></Col>
+                                    <br/>
+                                    <br/>
+
+                                    <br/>
+
+                                        <button className='btn btn-outline-secondary'onClick={handleCheckout}>Checkout</button></Col>
                                     <Col>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                   
+                            
+
                                         <button className='btn btn-outline-secondary'>Cash On</button></Col>
                                 </Row>
 
