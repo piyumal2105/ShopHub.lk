@@ -4,27 +4,29 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Carousel from "react-bootstrap/Carousel";
 import img01 from "../assets/img01.png";
+import Nav from "react-bootstrap/Nav";
+// import Navbar from 'react-bootstrap/Navbar';
 import { useHotkeys } from "react-hotkeys-hook";
 
 function LandingPage() {
-    const [customers, setCustomers] = useState(0);
-    const [products, setProducts] = useState(0);
-    const [sellers, setSellers] = useState(0);
+  const [customers, setCustomers] = useState(0);
+  const [products, setProducts] = useState(0);
+  const [sellers, setSellers] = useState(0);
 
-    useEffect(() => {
-        const incrementValues = () => {
-            if (customers < 20000) {
-                setCustomers((prevCustomers) => prevCustomers + 100);
-            }
-            if (products < 2000) {
-                setProducts((prevProducts) => prevProducts + 10);
-            }
-            if (sellers < 200) {
-                setSellers((prevSellers) => prevSellers + 1);
-            }
-        };
+  useEffect(() => {
+    const incrementValues = () => {
+      if (customers < 20000) {
+        setCustomers((prevCustomers) => prevCustomers + 100);
+      }
+      if (products < 2000) {
+        setProducts((prevProducts) => prevProducts + 10);
+      }
+      if (sellers < 200) {
+        setSellers((prevSellers) => prevSellers + 1);
+      }
+    };
 
-        const interval = setInterval(incrementValues, 30);
+    const interval = setInterval(incrementValues, 30);
 
     return () => clearInterval(interval);
   }, [customers, products, sellers]);
@@ -40,10 +42,10 @@ function LandingPage() {
         className="d-flex justify-content-center align-items-center"
         style={{ backgroundColor: "black", color: "white", height: "60px" }}
       >
-       <center>
-                    Sign Up and get 10% off.
-                    <Nav.Link href="/customers/register">Sign Up</Nav.Link>
-                </center>
+        <center>
+          Sign Up and get 10% off.
+          <Nav.Link href="/customers/register">Sign Up</Nav.Link>
+        </center>
       </div>
       <br />
       <Header />

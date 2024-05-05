@@ -61,16 +61,13 @@ function App() {
           <Route path="/adminshoplogin" element={<AdminShopLogin />} />
           <Route path="/inventorycharts" element={<InventoryCharts />} />
           <Route path="/logins" element={<Logins />} />
-           <Route path="/LuckyWheel" element={<LuckyWheel />} />
-                <Route
-                    path="/LoyaltyPointsPage"
-                    element={<LoyaltyPointPage />}
-                />
+          <Route path="/LuckyWheel" element={<LuckyWheel />} />
+          <Route path="/LoyaltyPointsPage" element={<LoyaltyPointPage />} />
 
-                <Route path="/LoyaltyRewordManagement" element={<LP_admin />} />
+          <Route path="/LoyaltyRewordManagement" element={<LP_admin />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
   );
-
+}
 export default App;
