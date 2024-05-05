@@ -41,7 +41,7 @@ const Sidenavbar = ({ activeIndex }) => {
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
-        to="#"
+        to="/customers"
         style={{ display: "flex", alignItems: "center" }}
       >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}> Customers</span>
@@ -84,12 +84,27 @@ const Sidenavbar = ({ activeIndex }) => {
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
-        to="#"
+        to="/adminpromotions"
         style={{ display: "flex", alignItems: "center" }}
       >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}>
           {" "}
-          Events and Promotions
+           Promotions
+        </span>
+      </Nav.Link>
+      <Nav.Link
+        as={Link}
+        className={`my-2 ${
+          activeIndex === 3
+            ? "container-color-super-active"
+            : "container-color-super"
+        } p-3`}
+        to="/adminEvents"
+        style={{ display: "flex", alignItems: "center" }}
+      >
+        <span style={{ marginLeft: "10px", fontSize: "18px" }}>
+          {" "}
+           Events
         </span>
       </Nav.Link>
       <Nav.Link

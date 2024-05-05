@@ -1,0 +1,90 @@
+/* Container styles */
+.admin-event-container {
+    padding: 20px;
+    background-color: #f0f0f0;
+  }
+  
+  /* Calendar styles */
+  .custom-calendar {
+    height: 500px;
+    font-family: Arial, sans-serif;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Event styles */
+  .custom-event {
+    background-color: #66c2ff;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Event title styles */
+  .custom-event strong {
+    font-weight: bold;
+  }
+  
+  /* Event description styles */
+  .custom-event p {
+    margin: 0;
+  }
+ /* Date name styles */
+.rbc-header {
+    background-color: #888888; /* Change background color of header cells */
+    color: #ffffff; /* Change color of date names */
+  }
+  /* Date cell styles */
+  .popup-content {
+    width: 300px; /* Set desired width */
+    height: 200px; /* Set desired height */
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    overflow: auto; /* Enable scrolling if content exceeds box size */
+  }
+  
+  .popup-content h2 {
+    margin-top: 0;
+  }
+  
+  .popup-content p {
+    margin-bottom: 0;
+  }
+  .popup-content {
+    width: 300px; /* Set desired width */
+    height: 200px; /* Set desired height */
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    overflow: auto; /* Enable scrolling if content exceeds box size */
+    border: 3px solid #8de8fe; /* Add border */
+  }
+  
+  .popup-content h2 {
+    margin-top: 0;
+  }
+  .rbc-toolbar {
+    display: none;
+  }
+  
+  .popup-content p {
+    margin-bottom: 0;
+  }
+  
+  

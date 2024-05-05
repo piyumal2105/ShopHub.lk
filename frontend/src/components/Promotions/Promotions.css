@@ -1,0 +1,21 @@
+.gradient-background {
+    background-image: linear-gradient(to right, #41fffc, #e6c42c);
+    /* Gradient colors: #ff416c to #ff4b2b */
+    border: none;
+    color: rgb(255, 255, 255); /* Text color */
+  }
+  .custom-modal {
+    top: '35%';
+    left: '50%';
+    right: 'auto';
+    bottom: 'auto';
+    background-color:darkgray;
+    width: '60%';
+    transform: 'translate(-40%, -10%)';
+  }
+  .img-size{
+    width:"1000px";
+    max-height:"200px" !important;
+
+
+  }
