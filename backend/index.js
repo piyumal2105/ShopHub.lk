@@ -4,9 +4,14 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import dbConnect from "./configs/dbConfig.js";
 import AdminAuthRoutes from "./routes/admin.auth.routes.js";
+import PromotionRoutes from "./routes/promotions.routes.js";
+import EventRoutes from "./routes/event.routes.js";
 import customerRoute from "./routes/customerRoute.js";
+import MemberRoutes from "./routes/member.routes.js";
+import ProductRoutes from "./routes/product.routes.js";
 import offerRoute from "./routes/offerRoutes.js";
 import prizeRoute from "./routes/prizeRoutes.js";
+
 
 //initialized express
 const app = express();
@@ -34,7 +39,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/admin", AdminAuthRoutes);
+app.use("/promotion", PromotionRoutes);
+app.use("/event",EventRoutes);
 app.use("/customer", customerRoute);
+app.use("/member", MemberRoutes);
+app.use("/product", ProductRoutes);
 app.use("/offers", offerRoute);
 app.use("/prize", prizeRoute);
 
