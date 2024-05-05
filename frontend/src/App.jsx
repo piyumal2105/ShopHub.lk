@@ -4,6 +4,7 @@ import Customers from "./components/Customers/Customers";
 import AdminLogin from "./components/AdminLogin/AdminLogin";
 import Faq from "./components/Faq/Faq";
 import Rvw from "./components/Rvw/Rvw";
+import AllFaqs from "./components/Faq/Faquser.jsx";
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 
@@ -20,6 +21,10 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/faq" element={<Faq/>} />
         <Route path="/rvw" element={<Rvw/>} />
+        <Route path="/faquser" element={<AllFaqs/>} />
+        
+        
+
         
 
 
