@@ -25,7 +25,7 @@ const customerSchema = new mongoose.Schema({
     required: true,
   },
   number: {
-    type: String,
+    type: Number,
     required: true,
   },
   gender: {
