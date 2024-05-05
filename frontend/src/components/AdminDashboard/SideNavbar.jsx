@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
-import { Nav } from "react-bootstrap";
+import { Button, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const Sidenavbar = ({ activeIndex }) => {
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/admin/login");
+    navigate("/logins");
   };
   return (
     <Nav
@@ -54,12 +54,12 @@ const Sidenavbar = ({ activeIndex }) => {
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
-        to="#"
+        to="/requestedMember"
         style={{ display: "flex", alignItems: "center" }}
       >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}>
           {" "}
-          Requsted Shop Members
+          Requsted Shopes
         </span>
       </Nav.Link>
       <Nav.Link
@@ -69,12 +69,12 @@ const Sidenavbar = ({ activeIndex }) => {
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
-        to="#"
+        to="/manageMember"
         style={{ display: "flex", alignItems: "center" }}
       >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}>
           {" "}
-          Accepted Shop Members
+          Accepted Shopes
         </span>
       </Nav.Link>
       <Nav.Link
@@ -107,18 +107,16 @@ const Sidenavbar = ({ activeIndex }) => {
            Events
         </span>
       </Nav.Link>
-      <Nav.Link
+      <Button
         onClick={handleLogout}
-        className={`my-2 ${
-          activeIndex === 3
-            ? "container-color-super-active"
-            : "container-color-super"
-        } p-3`}
-        to="#"
-        style={{ display: "flex", alignItems: "center" }}
+        style={{
+          margin: "20px",
+          backgroundColor: "black",
+          borderColor: "black",
+        }}
       >
-        <span style={{ marginLeft: "10px", fontSize: "18px" }}> Logout</span>
-      </Nav.Link>
+        Logout
+      </Button>
     </Nav>
   );
 };
