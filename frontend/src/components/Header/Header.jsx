@@ -26,6 +26,7 @@ function Header() {
             <Nav.Link href="/events"> Events</Nav.Link>
             <Nav.Link href="#">Drive and Pickup</Nav.Link>
             <Nav.Link href="/LoyaltyPointsPage">Loyalty Points</Nav.Link>
+            <Nav.Link href="/faq">FAQ</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

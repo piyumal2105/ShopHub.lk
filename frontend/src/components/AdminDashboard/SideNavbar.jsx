@@ -129,7 +129,40 @@ const Sidenavbar = ({ activeIndex }) => {
         to="/logins"
         style={{ display: "flex", alignItems: "center" }}
       >
-        <span style={{ marginLeft: "10px", fontSize: "18px" }}> Log Out</span>
+
+
+
+        <span style={{ marginLeft: "10px", fontSize: "18px" }}>
+          {" "}
+          FAQ
+        </span>
+      </Nav.Link>
+      <Nav.Link
+        onClick={handleLogout}
+        className={`my-2 ${
+          activeIndex === 3
+            ? "container-color-super-active"
+            : "container-color-super"
+        } p-3`}
+        to="/faqs/create"
+        style={{ display: "flex", alignItems: "center" }}
+      >
+
+         <span style={{ marginLeft: "10px", fontSize: "18px" }}>
+          {" "}
+          Shop Reviews
+        </span>
+      </Nav.Link>
+      <Nav.Link
+        onClick={handleLogout}
+        className={`my-2 ${
+          activeIndex === 3
+            ? "container-color-super-active"
+            : "container-color-super"
+        } p-3`}
+        to="/rvws/create"
+        style={{ display: "flex", alignItems: "center" }}
+      >
       </Nav.Link>
     </Nav>
   );

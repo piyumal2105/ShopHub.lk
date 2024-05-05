@@ -11,6 +11,9 @@ import MemberRoutes from "./routes/member.routes.js";
 import ProductRoutes from "./routes/product.routes.js";
 import offerRoute from "./routes/offerRoutes.js";
 import prizeRoute from "./routes/prizeRoutes.js";
+import faqRoute from "./routes/faq.routes.js";
+import rvwRoute from "./routes/rvw.routes.js";
+
 
 
 //initialized express
@@ -46,6 +49,9 @@ app.use("/member", MemberRoutes);
 app.use("/product", ProductRoutes);
 app.use("/offers", offerRoute);
 app.use("/prize", prizeRoute);
+app.use("/faq", faqRoute);
+app.use("/rvw", rvwRoute);
+
 
 app.use((req, res, next) => {
     console.log(`${req.method} =====> URL: ${req.url}`);

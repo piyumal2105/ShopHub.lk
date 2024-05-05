@@ -28,6 +28,9 @@ import Logins from "./components/Logins/logins";
 import LuckyWheel from "./components/LoyaltyPoints/LuckyWheel";
 import LoyaltyPointPage from "./components/LoyaltyPoints/LoyaltyPointsPage";
 import LP_admin from "./components/LoyaltyPoints/LP_admin";
+import Faq from "./components/Faq/Faq";
+import Rvw from "./components/Rvw/Rvw";
+import AllFaqs from "./components/Faq/Faquser.jsx";
 
 function App() {
   const queryClient = new QueryClient();
@@ -63,11 +66,11 @@ function App() {
           <Route path="/logins" element={<Logins />} />
           <Route path="/LuckyWheel" element={<LuckyWheel />} />
           <Route path="/LoyaltyPointsPage" element={<LoyaltyPointPage />} />
-
-          <Route path="/LoyaltyRewordManagement" element={<LP_admin />} />
+          <Route path="/LoyaltyRewordManagement" element={<LP_admin />} /><Route path="/faq" element={<Faq/>} />
+        <Route path="/rvw" element={<Rvw/>} />
+        <Route path="/faquser" element={<AllFaqs/>} />
         </Routes>
       </BrowserRouter>
-    </QueryClientProvider>
   );
 }
 export default App;
