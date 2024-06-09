@@ -70,7 +70,7 @@ function AdminEvent() {
     <>
     
       <div
-        style={{ backgroundColor: "#271066", height: "60px" }}
+        style={{ backgroundColor: "black", height: "60px" }}
         className="d-flex justify-content-center align-items-center"
       >
         <center>

@@ -1,0 +1,172 @@
+.offer-btn {
+    background-color: #363f32;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 400px;
+    height: 150px;
+    transition: background-color 0.3s ease;
+    font-size: 28px;
+}
+
+.offer-btn:hover {
+    background-color: #0056b3;
+}
+.button-container {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    z-index: 999;
+}
+
+.btn-primary {
+    background-color: #007bff; /* blue */
+    color: #fff; /* white */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Popup Styles */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-close {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #ff0000; /* red */
+}
+.balance-container {
+    display: flex;
+    align-items: center;
+}
+
+.balance-heading {
+    margin-right: 10px;
+
+    font-size: 50px;
+}
+
+.balance-box {
+    background-color: orange;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+    width: 400px;
+
+    font-weight: bold;
+}
+.loyalty-point-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.loyalty-point-history-table th,
+.loyalty-point-history-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+.loyalty-point-history-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.loyalty-point-history-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.loyalty-point-history-table tr:hover {
+    background-color: #ddd;
+}
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-confirm,
+.btn-cancel {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-confirm {
+    background-color: #28a745; /* green */
+    color: #fff;
+}
+
+.btn-confirm:hover {
+    background-color: #218838;
+}
+
+.btn-cancel {
+    background-color: #dc3545; /* red */
+    color: #fff;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+}
+
+.btn-close {
+    background-color: #dc3545; /* red */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-close:hover {
+    background-color: #c82333;
+}

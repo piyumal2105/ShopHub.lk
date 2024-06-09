@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
-import { Button, Nav } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,7 @@ const Sidenavbar = ({ activeIndex }) => {
     localStorage.clear();
     navigate("/logins");
   };
+
   return (
     <Nav
       className=" sidebar d-flex flex-column col-md-3 text-white"
@@ -89,7 +90,7 @@ const Sidenavbar = ({ activeIndex }) => {
       >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}>
           {" "}
-           Promotions
+          Promotions
         </span>
       </Nav.Link>
       <Nav.Link
@@ -102,21 +103,61 @@ const Sidenavbar = ({ activeIndex }) => {
         to="/adminEvents"
         style={{ display: "flex", alignItems: "center" }}
       >
+        <span style={{ marginLeft: "10px", fontSize: "18px" }}> Events</span>
+      </Nav.Link>
+      <Nav.Link
+        as={Link}
+        className={`my-2 ${
+          activeIndex === 2
+            ? "container-color-super-active"
+            : "container-color-super"
+        } p-3`}
+        to="/LoyaltyRewordManagement"
+        style={{ display: "flex" }}
+      >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}>
           {" "}
-           Events
+          Loyalty Rewords
         </span>
       </Nav.Link>
-      <Button
-        onClick={handleLogout}
-        style={{
-          margin: "20px",
-          backgroundColor: "black",
-          borderColor: "black",
-        }}
+
+      <Nav.Link
+        as={Link}
+        className={`my-2 ${
+          activeIndex === 2
+            ? "container-color-super-active"
+            : "container-color-super"
+        } p-3`}
+        to="/faq"
+        style={{ display: "flex" }}
       >
-        Logout
-      </Button>
+        <span style={{ marginLeft: "10px", fontSize: "18px" }}> FAQ</span>
+      </Nav.Link>
+      <Nav.Link
+        as={Link}
+        className={`my-2 ${
+          activeIndex === 2
+            ? "container-color-super-active"
+            : "container-color-super"
+        } p-3`}
+        to="/rvw"
+        style={{ display: "flex" }}
+      >
+        <span style={{ marginLeft: "10px", fontSize: "18px" }}> Reviews</span>
+      </Nav.Link>
+      <Nav.Link
+        onClick={handleLogout}
+        as={Link}
+        className={`my-2 ${
+          activeIndex === 2
+            ? "container-color-super-active"
+            : "container-color-super"
+        } p-3`}
+        to="/logins"
+        style={{ display: "flex", alignItems: "center" }}
+      >
+        <span style={{ marginLeft: "10px", fontSize: "18px" }}> Log Out</span>
+      </Nav.Link>
     </Nav>
   );
 };

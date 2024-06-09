@@ -2,6 +2,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
+import { Button } from "react-bootstrap";
 
 function Header() {
   return (
@@ -18,14 +19,6 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-             <Form className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-             </Form>
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/allProducts">Products</Nav.Link>
             <Nav.Link href="/aboutus">About Us</Nav.Link>
@@ -33,6 +26,14 @@ function Header() {
             <Nav.Link href="/promotions"> Promotions</Nav.Link>
             <Nav.Link href="/events"> Events</Nav.Link>
             <Nav.Link href="#">Drive and Pickup</Nav.Link>
+            <Nav.Link href="/LoyaltyPointsPage">Loyalty Points</Nav.Link>
+            <Nav.Link href="/faquser">FAQ</Nav.Link>
+            <Button
+              style={{ backgroundColor: "black" }}
+              href="/customers/register"
+            >
+              Sign Up
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>

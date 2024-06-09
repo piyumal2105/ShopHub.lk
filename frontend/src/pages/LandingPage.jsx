@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Container, Button, Col, Row } from "react-bootstrap";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Carousel from "react-bootstrap/Carousel";
 import img01 from "../assets/img01.png";
+import Nav from "react-bootstrap/Nav";
+// import Navbar from 'react-bootstrap/Navbar';
 import { useHotkeys } from "react-hotkeys-hook";
 
 function LandingPage() {
@@ -40,7 +42,10 @@ function LandingPage() {
         className="d-flex justify-content-center align-items-center"
         style={{ backgroundColor: "black", color: "white", height: "60px" }}
       >
-        <center>Sign Up and get 10% off. Sign Up</center>
+        <center>
+          Sign Up and get 10% off.
+          <Nav.Link href="/customers/register">Sign Up</Nav.Link>
+        </center>
       </div>
       <br />
       <Header />
@@ -121,7 +126,7 @@ function LandingPage() {
         <center>
           <div>
             <Carousel>
-              <Carousel.Item interval={1000}>
+              <Carousel.Item interval={1500}>
                 <img
                   style={{ maxHeight: "450px", maxWidth: "1425px" }}
                   src="https://i.ytimg.com/vi/LFlW4QhUUfE/maxresdefault.jpg"
@@ -132,7 +137,7 @@ function LandingPage() {
                   <p>NDB cards only valid</p>
                 </Carousel.Caption>
               </Carousel.Item>
-              <Carousel.Item interval={1000}>
+              {/* <Carousel.Item interval={1000}>
                 <img
                   style={{ maxHeight: "450px", maxWidth: "1425px" }}
                   src="https://scontent.fcmb2-2.fna.fbcdn.net/v/t39.30808-6/299950081_5727174290647027_6316019789937536919_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEEraUhvQnnKFMlnKrJiEOzTiRYGTkf_XNOJFgZOR_9c0GmlN0bd8tsaFEo95BNqeT52wALBvIg94UnlMt7OPo0&_nc_ohc=KpXquOayQLIQ7kNvgEIoLPO&_nc_ht=scontent.fcmb2-2.fna&oh=00_AfASTJWVrCGX6El0fY-ocvzPPeH02hN3LRzU3THJJWdS-w&oe=663B0408"
@@ -142,8 +147,8 @@ function LandingPage() {
                   <h3>New Arrivals......!</h3>
                   <p>Latest desings & offers</p>
                 </Carousel.Caption>
-              </Carousel.Item>
-              <Carousel.Item interval={1000}>
+              </Carousel.Item> */}
+              <Carousel.Item interval={1500}>
                 <img
                   style={{ maxHeight: "450px", maxWidth: "1425px" }}
                   className="img-size"
