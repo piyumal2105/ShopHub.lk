@@ -4,9 +4,12 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Carousel from "react-bootstrap/Carousel";
 import img01 from "../assets/img01.png";
-import Nav from "react-bootstrap/Nav";
-// import Navbar from 'react-bootstrap/Navbar';
+import img02 from "../assets/ofer.png";
 import { useHotkeys } from "react-hotkeys-hook";
+import Card from "react-bootstrap/Card";
+import { FaSackDollar } from "react-icons/fa6";
+import { FaCartPlus } from "react-icons/fa";
+import { FaUserFriends } from "react-icons/fa";
 
 function LandingPage() {
   const [customers, setCustomers] = useState(0);
@@ -38,31 +41,24 @@ function LandingPage() {
 
   return (
     <>
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ backgroundColor: "black", color: "white", height: "60px" }}
-      >
-        <center>
-          Sign Up and get 10% off.
-          <Nav.Link href="/customers/register">Sign Up</Nav.Link>
-        </center>
-      </div>
-      <br />
       <Header />
-      <br />
-      <br />
-      <div className="d-flex justify-content-center align-items-center">
+      <div className="d-flex justify-content-center align-items-center mt-5">
         <Container>
           <Row>
-            <Col>
+            <Col style={{ marginTop: "30px" }}>
               <h1>FIND ANYTHING THAT MATCHES YOUR STYLE</h1>
               <br />
+              <p style={{ textAlign: "justify" }}>
+                ShopHub.lk is the best place to find the best deals on all the
+                products you love. From clothing to electronics, we have it all.
+                We have a wide range of products from the best sellers in the
+                country.
+              </p>
               <br />
               <Button
                 style={{
                   borderRadius: "13px",
                   width: "200px",
-                  height: "40px",
                   backgroundColor: "black",
                   borderColor: "black",
                 }}
@@ -72,29 +68,102 @@ function LandingPage() {
               </Button>
               <br />
               <br />
-              <br />
-              <br />
-              <Row>
-                <Col>
-                  <h3>{customers.toLocaleString()} +</h3>
-                  <h5>Happy Customers</h5>
-                </Col>
-                <Col>
-                  <h3>{products.toLocaleString()} +</h3>
-                  <h5>Quality Products</h5>
-                </Col>
-                <Col>
-                  <h3>{sellers.toLocaleString()} +</h3>
-                  <h5>Sellers</h5>
-                </Col>
-              </Row>
             </Col>
-            <Col>
-              <img src={img01} alt="Highlight Image" />
+            <Col style={{ marginTop: "-50px" }}>
+              <img src={img02} alt="Landing Page Image" />
             </Col>
           </Row>
         </Container>
       </div>
+      <br />
+      <br />
+      <br />
+      <center>
+        <Row className="g-0">
+          <Col>
+            <Card
+              style={{
+                width: "23rem",
+                backgroundColor: "#F0F0F0",
+                textAlign: "left",
+              }}
+            >
+              <Card.Body>
+                <Row className="g-0">
+                  <Col>
+                    <FaUserFriends
+                      style={{ fontSize: "70px", marginLeft: "12px" }}
+                    />
+                  </Col>
+                  <Col>
+                    <Card.Title>
+                      <h3>{customers.toLocaleString()} +</h3>
+                    </Card.Title>
+                    <Card.Text>
+                      <h5>Happy Customers</h5>
+                    </Card.Text>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col>
+            <Card
+              style={{
+                width: "23rem",
+                backgroundColor: "#F0F0F0",
+                textAlign: "left",
+              }}
+            >
+              <Card.Body>
+                <Row className="g-0">
+                  <Col>
+                    <FaCartPlus
+                      style={{ fontSize: "70px", marginLeft: "12px" }}
+                    />
+                  </Col>
+                  <Col>
+                    <Card.Title>
+                      <h3>{products.toLocaleString()} +</h3>
+                    </Card.Title>
+                    <Card.Text>
+                      <h5>Quality Products</h5>
+                    </Card.Text>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col>
+            <Card
+              style={{
+                width: "23rem",
+                backgroundColor: "#F0F0F0",
+                textAlign: "left",
+              }}
+            >
+              <Card.Body>
+                <Row className="g-0">
+                  <Col>
+                    <FaSackDollar
+                      style={{ fontSize: "70px", marginLeft: "12px" }}
+                    />
+                  </Col>
+                  <Col>
+                    <Card.Title>
+                      <h3>{sellers.toLocaleString()} +</h3>
+                    </Card.Title>
+                    <Card.Text>
+                      <h5>Sellers</h5>
+                    </Card.Text>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </center>
+      <br />
       <br />
       <br />
       <center>

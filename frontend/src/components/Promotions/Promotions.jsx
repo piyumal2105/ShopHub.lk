@@ -96,7 +96,7 @@ const AllPromotions = () => {
                   <p>NDB cards only valid</p>
                 </Carousel.Caption>
               </Carousel.Item>
-              <Carousel.Item interval={1000}>
+              {/* <Carousel.Item interval={1000}>
                 <img
                   style={{ maxHeight: "450px", maxWidth: "1425px" }}
                   src="https://scontent.fcmb2-2.fna.fbcdn.net/v/t39.30808-6/299950081_5727174290647027_6316019789937536919_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEEraUhvQnnKFMlnKrJiEOzTiRYGTkf_XNOJFgZOR_9c0GmlN0bd8tsaFEo95BNqeT52wALBvIg94UnlMt7OPo0&_nc_ohc=KpXquOayQLIQ7kNvgEIoLPO&_nc_ht=scontent.fcmb2-2.fna&oh=00_AfASTJWVrCGX6El0fY-ocvzPPeH02hN3LRzU3THJJWdS-w&oe=663B0408"
@@ -106,7 +106,7 @@ const AllPromotions = () => {
                   <h3>New Arrivals......!</h3>
                   <p>Latest desings & offers</p>
                 </Carousel.Caption>
-              </Carousel.Item>
+              </Carousel.Item> */}
               <Carousel.Item interval={1000}>
                 <img
                   style={{ maxHeight: "450px", maxWidth: "1425px" }}

@@ -11,13 +11,6 @@ import img05 from "../../assets/commitment.jpg";
 function Aboutus() {
   return (
     <>
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ backgroundColor: "black", color: "white", height: "60px" }}
-      >
-        <center>Sign Up and get 10% off. Sign Up</center>
-      </div>
-      <br />
       <Header />
       <br />
       <br />
