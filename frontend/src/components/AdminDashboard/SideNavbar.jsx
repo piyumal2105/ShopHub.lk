@@ -1,8 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./NavBar.css";
-import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Col from "react-bootstrap/Col";
+import Nav from "react-bootstrap/Nav";
+import Row from "react-bootstrap/Row";
+import Tab from "react-bootstrap/Tab";
+import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 
 const Sidenavbar = ({ activeIndex }) => {
   const navigate = useNavigate();
@@ -14,13 +19,13 @@ const Sidenavbar = ({ activeIndex }) => {
 
   return (
     <Nav
-      className=" sidebar d-flex flex-column col-md-3 text-white"
+      className="sidebar d-flex flex-column col-md-3 text-white"
       style={{
         height: "100%",
         width: "250px",
-        position: "fixed",
-        top: 0,
-        left: 0,
+        position: "static",
+        // top: 0,
+        // left: 0,
         border: "1px solid #dee2e6",
       }}
     >
@@ -34,7 +39,7 @@ const Sidenavbar = ({ activeIndex }) => {
         ShopHub.lk
         <br />
       </h3>
-      <hr></hr>
+      {/* <hr></hr> */}
       <Nav.Link
         as={Link}
         className={`my-2 ${
@@ -96,7 +101,7 @@ const Sidenavbar = ({ activeIndex }) => {
       <Nav.Link
         as={Link}
         className={`my-2 ${
-          activeIndex === 3
+          activeIndex === 4
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
@@ -108,7 +113,7 @@ const Sidenavbar = ({ activeIndex }) => {
       <Nav.Link
         as={Link}
         className={`my-2 ${
-          activeIndex === 2
+          activeIndex === 5
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
@@ -124,7 +129,7 @@ const Sidenavbar = ({ activeIndex }) => {
       <Nav.Link
         as={Link}
         className={`my-2 ${
-          activeIndex === 2
+          activeIndex === 6
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
@@ -136,7 +141,7 @@ const Sidenavbar = ({ activeIndex }) => {
       <Nav.Link
         as={Link}
         className={`my-2 ${
-          activeIndex === 2
+          activeIndex === 7
             ? "container-color-super-active"
             : "container-color-super"
         } p-3`}
@@ -145,19 +150,14 @@ const Sidenavbar = ({ activeIndex }) => {
       >
         <span style={{ marginLeft: "10px", fontSize: "18px" }}> Reviews</span>
       </Nav.Link>
-      <Nav.Link
+
+      <Button
         onClick={handleLogout}
-        as={Link}
-        className={`my-2 ${
-          activeIndex === 2
-            ? "container-color-super-active"
-            : "container-color-super"
-        } p-3`}
-        to="/logins"
-        style={{ display: "flex", alignItems: "center" }}
+        href="/logins"
+        style={{ backgroundColor: "black" }}
       >
-        <span style={{ marginLeft: "10px", fontSize: "18px" }}> Log Out</span>
-      </Nav.Link>
+        Log Out
+      </Button>
     </Nav>
   );
 };

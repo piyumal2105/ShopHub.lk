@@ -34,7 +34,7 @@ function Customers() {
       <div>
         <Sidenavbar />
       </div>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", marginLeft: "1230px" }}>
         <div style={{ flex: 1, padding: "20px" }}>
           <center>
             <h2>Registered Customers</h2>

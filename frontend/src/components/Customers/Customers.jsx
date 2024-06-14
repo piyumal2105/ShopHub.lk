@@ -53,7 +53,7 @@ function Customers() {
         <Sidenavbar />
       </Grid>
       <Grid item xs={9}>
-        <div style={{ padding: "20px" }}>
+        <div style={{ padding: "20px", marginLeft: "-100px" }}>
           <h2>Registered Customers</h2>
           <Button sx={{ mr: "20%" }} variant="contained" onClick={generatePDF}>
             Generate PDF
