@@ -68,21 +68,12 @@ const AllPromotions = () => {
 
   return (
     <>
-      <div
-        style={{ backgroundColor: "black", height: "60px" }}
-        className="d-flex justify-content-center align-items-center"
-      >
-        <center>
-          <h5 style={{ color: "white" }}>Sign Up and get 10% off. Sign Up </h5>
-        </center>
-      </div>
-      <br />
-      <br />
       <NavBar />
-      <br />
       <div>
         <br />
         <center>
+          <h2>Promotions</h2>
+          <br />
           <div>
             <Carousel activeIndex={index} onSelect={handleSelect}>
               <Carousel.Item interval={1000}>
@@ -174,7 +165,7 @@ const AllPromotions = () => {
             {/* Modal */}
 
             <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-              <Modal.Header closeButton className="custom-modal">
+              <Modal.Header className="custom-modal">
                 <Modal.Title>{memberData.promotionTitle}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
@@ -192,7 +183,7 @@ const AllPromotions = () => {
                   <p>
                     <strong>Valid for: </strong>{" "}
                     {new Date(memberData.startDate).toLocaleDateString()}
-                    <strong> -</strong>
+                    <strong> - </strong>
                     {new Date(memberData.endDate).toLocaleDateString()}
                   </p>
                   <p></p>

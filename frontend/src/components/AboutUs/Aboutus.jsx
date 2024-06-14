@@ -13,7 +13,7 @@ function Aboutus() {
     <>
       <Header />
       <br />
-      <br />
+      {/* <br /> */}
       <h2
         style={{
           display: "flex",
@@ -23,6 +23,7 @@ function Aboutus() {
       >
         About Us
       </h2>
+      <br />
       <div>
         <p
           style={{

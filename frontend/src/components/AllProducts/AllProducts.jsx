@@ -90,15 +90,7 @@ function AllProducts() {
 
   return (
     <>
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ backgroundColor: "black", color: "white", height: "60px" }}
-      >
-        <center>Sign Up and get 10% off. Sign Up</center>
-      </div>
-      <br />
       <NavBar />
-      <br />
       <div>
         <br />
         <center>
@@ -106,20 +98,25 @@ function AllProducts() {
             <center>
               <h2>Products</h2>
               <br />
-
               <div>
                 <Carousel>
                   <Carousel.Item interval={3000}>
                     <img
                       src={img01}
-                      style={{ width: "80%", borderRadius: "10px" }}
+                      style={{
+                        maxWidth: "1425px",
+                        maxHeight: "450px",
+                      }}
                     />
                     <Carousel.Caption></Carousel.Caption>
                   </Carousel.Item>
                   <Carousel.Item interval={3000}>
                     <img
                       src={img02}
-                      style={{ width: "80%", borderRadius: "10px" }}
+                      style={{
+                        maxWidth: "1425px",
+                        maxHeight: "450px",
+                      }}
                     />
                     <Carousel.Caption></Carousel.Caption>
                   </Carousel.Item>
@@ -134,9 +131,7 @@ function AllProducts() {
               </div>
               <br />
               <br />
-              <br />
-              <br />
-              <br />
+
               <div className="filter-container">
                 <input
                   className="filter-input"
@@ -161,7 +156,7 @@ function AllProducts() {
               </div>
             </center>
             <div style={{ margin: "20px", padding: "20px" }}>
-              <Row xs={1} md={3} className="g-4" style={{ padding: "20px" }}>
+              <Row xs={1} md={3} className="g-5" style={{ padding: "20px" }}>
                 {filteredData.map((member) => (
                   <Col key={member.cusMemberID}>
                     <Card
@@ -181,14 +176,17 @@ function AllProducts() {
                         />
                         <br />
                         <br />
-                        <Card.Title>{member.name}</Card.Title>
-                        <br />
-                        <Card.Subtitle className="mb-2 text-muted">
+                        <Card.Title style={{ textAlign: "left" }}>
+                          {member.name}
+                        </Card.Title>
+                        <Card.Subtitle
+                          className="mb-2 "
+                          style={{ textAlign: "left" }}
+                        >
                           {member.category}
                         </Card.Subtitle>
-                        <br />
-                        <br />
                         <Button
+                          className="mt-3"
                           onClick={() => handleNameClick(member)}
                           style={{
                             backgroundColor: "black",
@@ -231,10 +229,9 @@ function AllProducts() {
                   <br />
                   <br />
                   <h4>{memberData.name}</h4>
-                  <br />
                   <p className="text-muted">{memberData.description}</p>
                 </div>
-                {/* <hr /> */}
+                <hr />
                 <br />
                 <div style={{ marginLeft: "230px" }}>
                   <p>

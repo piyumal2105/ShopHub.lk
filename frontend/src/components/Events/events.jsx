@@ -26,7 +26,7 @@ function AdminEvent() {
         id: event._id,
         title: event.eventTitle,
         start: new Date(event.startDate),
-        end: new Date(event.endDate = event.startDate), // Use startDate as end date if endDate is not provided
+        end: new Date((event.endDate = event.startDate)), // Use startDate as end date if endDate is not provided
         description: event.description,
       }));
       setEvents(eventData);
@@ -66,82 +66,70 @@ function AdminEvent() {
   };
 
   return (
-    
     <>
-    
-      <div
-        style={{ backgroundColor: "black", height: "60px" }}
-        className="d-flex justify-content-center align-items-center"
-      >
-        <center>
-          <h5 style={{ color: "white" }}>Sign Up and get 10% off. Sign Up </h5>
-        </center>
-      </div>
-      <br />
-      <br />
       <NavBar />
-      <br />
-      {/* <style>
-        {`
-          body {
-            background-image: url(${backgroundImage});
-            background-size: cover;
-            background-repeat: no-repeat;
-          }
-        `}
-      </style> */}
-      <br/>
-      <div>
-      <h1 style={{ color: "black", fontSize: "30px", fontWeight: "bold", textAlign: "center" }}>Events that are Happening </h1>
-      </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <center>
-    <div className="admin-event-container" style={{ width: "1300px", height: "600px" }}>
-      <div className="month-navigation">
-        <FcPrevious onClick={moveToPreviousMonth} style={{ fontSize: "30px" }} />
-        <span style={{ fontSize: '20px', padding: '20px', fontWeight:"bold", color:"#66c2ff"}}>{currentDate.format("MMMM YYYY")}</span>
-        <FcNext onClick={moveToNextMonth} style={{ fontSize: "30px" }} />
-      </div>
-      
-      <br />
-      <Calendar
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        className="custom-calendar"
-        eventPropGetter={() => ({ className: "custom-event" })}
-        components={{
-          event: EventComponent,
-        }}
-        onSelectEvent={handleEventSelect} // Handle event selection
-        onView={() => { }} // Disable view change
-        onNavigate={() => { }} // Disable navigation
-        date={currentDate.toDate()} // Set current date
-      />
-      {selectedEvent && (
-        <div className="popup">
-          <div className="popup-content">
-            <span className="close" onClick={handleClosePopup}>
-              &times;
+      <center>
+        <br />
+        <h2>Events that are Happening</h2>
+        <br />
+        <div
+          className="admin-event-container"
+          style={{ width: "1300px", height: "600px" }}
+        >
+          <div className="month-navigation">
+            <FcPrevious
+              onClick={moveToPreviousMonth}
+              style={{ fontSize: "30px" }}
+            />
+            <span
+              style={{
+                fontSize: "20px",
+                padding: "20px",
+                fontWeight: "bold",
+                color: "#66c2ff",
+              }}
+            >
+              {currentDate.format("MMMM YYYY")}
             </span>
-            <h2>{selectedEvent.title}</h2>
-            <p>{selectedEvent.description}</p>
+            <FcNext onClick={moveToNextMonth} style={{ fontSize: "30px" }} />
           </div>
+
+          <br />
+          <Calendar
+            localizer={localizer}
+            events={events}
+            startAccessor="start"
+            endAccessor="end"
+            className="custom-calendar"
+            eventPropGetter={() => ({ className: "custom-event" })}
+            components={{
+              event: EventComponent,
+            }}
+            onSelectEvent={handleEventSelect} // Handle event selection
+            onView={() => {}} // Disable view change
+            onNavigate={() => {}} // Disable navigation
+            date={currentDate.toDate()} // Set current date
+          />
+          {selectedEvent && (
+            <div className="popup">
+              <div className="popup-content">
+                <span className="close" onClick={handleClosePopup}>
+                  &times;
+                </span>
+                <h2>{selectedEvent.title}</h2>
+                <p>{selectedEvent.description}</p>
+              </div>
+            </div>
+          )}
         </div>
-      )}
-    </div>
-    </center>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <Footer />
+      </center>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <Footer />
     </>
   );
 }

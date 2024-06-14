@@ -63,23 +63,14 @@ const AllFaqs = () => {
 
   return (
     <>
-      <div
-        style={{ backgroundColor: "#000", height: "60px" }}
-        className="d-flex justify-content-center align-items-center"
-      >
-        <center>
-          {/* <h5 style={{ color: "white" }}>Sign Up and get 10% off. Sign Up </h5> */}
-        </center>
-      </div>
-      <br />
-      <br />
       <NavBar />
+      <br />
       <center>
         <h3 style={{ color: "black" }}>FAQs </h3>
       </center>
-      <br />
+      {/* <br /> */}
       <div>
-        <br />
+        {/* <br /> */}
         <center>
           <div>
             <div style={{ margin: "20px", padding: "20px" }}>
