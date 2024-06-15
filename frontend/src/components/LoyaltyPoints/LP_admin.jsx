@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import OfferForm from "./OfferForm";
 import Sidenavbar from "../AdminDashboard/SideNavbar";
+import { Grid } from "@mui/material";
 
 const LP_admin = () => {
   const [showOfferForm, setShowOfferForm] = useState(false);
@@ -55,62 +56,26 @@ const LP_admin = () => {
 
   return (
     <>
-      <Sidenavbar />
-      <div className="container mt-4" style={{ width: "800px" }}>
-        <center>
-          <button
-            className={`btn ${showOfferForm ? "btn-secondary" : "btn-primary"}`}
-            onClick={toggleOfferForm}
-          >
-            {showOfferForm ? "Back" : "Create Loyalty Offer"}
-          </button>
-        </center>
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
+          <Sidenavbar />
+        </Grid>
+        <Grid item xs={9}>
+          {" "}
+          <div className="container mt-4" style={{ marginLeft: "-40px" }}>
+            <center>
+              <button
+                className={`btn ${
+                  showOfferForm ? "btn-secondary" : "btn-primary"
+                }`}
+                onClick={toggleOfferForm}
+              >
+                {showOfferForm ? "Back" : "Create Loyalty Offer"}
+              </button>
+            </center>
 
-        {showOfferForm && <OfferForm onClose={toggleOfferForm} />}
-        <h2 className="mt-4">Active Offers</h2>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Offer Name</th>
-              <th>Offer Type</th>
-              <th>Discount Amount</th>
-
-              <th>Loyalty Point Price</th>
-              <th>Offer Created Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {activeOffers.map((offer) => (
-              <tr key={offer._id}>
-                <td>{offer.name}</td>
-                <td>{offer.type}</td>
-                <td>
-                  {offer.type === "Discount" ? offer.discountAmount : "-"}
-                </td>
-
-                <td>{offer.priceInPoints}</td>
-                <td>{new Date(offer.createdAt).toLocaleDateString()}</td>
-                <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => handleDeactivateOffer(offer._id)}
-                  >
-                    Deactivate
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {/* Button for Offer History */}
-        <button className="btn btn-secondary" onClick={toggleOfferHistory}>
-          {showOfferHistory ? "Close Offer History" : "Offer History"}
-        </button>
-        {/* Offer History Table */}
-        {showOfferHistory && (
-          <>
-            <h2 className="mt-4">Offer History</h2>
+            {showOfferForm && <OfferForm onClose={toggleOfferForm} />}
+            <h2 className="mt-4">Active Offers</h2>
             <table className="table">
               <thead>
                 <tr>
@@ -120,11 +85,11 @@ const LP_admin = () => {
 
                   <th>Loyalty Point Price</th>
                   <th>Offer Created Date</th>
-                  <th>Status</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {inactiveOffers.map((offer) => (
+                {activeOffers.map((offer) => (
                   <tr key={offer._id}>
                     <td>{offer.name}</td>
                     <td>{offer.type}</td>
@@ -134,14 +99,63 @@ const LP_admin = () => {
 
                     <td>{offer.priceInPoints}</td>
                     <td>{new Date(offer.createdAt).toLocaleDateString()}</td>
-                    <td>{offer.status}</td>
+                    <td>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => handleDeactivateOffer(offer._id)}
+                      >
+                        Deactivate
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </>
-        )}
-      </div>
+            {/* Button for Offer History */}
+            <button className="btn btn-secondary" onClick={toggleOfferHistory}>
+              {showOfferHistory ? "Close Offer History" : "Offer History"}
+            </button>
+            {/* Offer History Table */}
+            {showOfferHistory && (
+              <>
+                <h2 className="mt-4">Offer History</h2>
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>Offer Name</th>
+                      <th>Offer Type</th>
+                      <th>Discount Amount</th>
+
+                      <th>Loyalty Point Price</th>
+                      <th>Offer Created Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {inactiveOffers.map((offer) => (
+                      <tr key={offer._id}>
+                        <td>{offer.name}</td>
+                        <td>{offer.type}</td>
+                        <td>
+                          {offer.type === "Discount"
+                            ? offer.discountAmount
+                            : "-"}
+                        </td>
+
+                        <td>{offer.priceInPoints}</td>
+                        <td>
+                          {new Date(offer.createdAt).toLocaleDateString()}
+                        </td>
+                        <td>{offer.status}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </>
+            )}
+          </div>
+        </Grid>
+      </Grid>
     </>
   );
 };

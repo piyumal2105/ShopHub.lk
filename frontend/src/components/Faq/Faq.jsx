@@ -14,6 +14,7 @@ import SideNavbar from "../AdminDashboard/SideNavbar";
 import { Col, Container, Row } from "react-bootstrap";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { Grid } from "@mui/material";
 
 function Faq() {
   const [show, setShow] = useState(false);
@@ -170,247 +171,256 @@ function Faq() {
 
   return (
     <>
-      <center>
-        <div>
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
           <SideNavbar />
-          <br></br>
-          <h2>FAQs</h2>
-          <br></br>
+        </Grid>
+        <Grid item xs={9}>
+          <center>
+            <div>
+              <br></br>
+              <h2>FAQs</h2>
+              <br></br>
 
-          <Modal show={show} onHide={handleClose} size="lg">
-            <Modal.Header closeButton>
-              <Modal.Title>Add Faqs</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>
-                    Question_No <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text" // Change type to text
-                    pattern="[0-9]*" // Regular expression to allow only numbers
-                    {...register("question_no", {
-                      required: true,
-                      pattern: {
-                        value: /^[0-9]+$/,
-                        message: "Please enter only numbers.",
-                      },
-                    })}
-                  />
-                  <Form.Text className="text-muted">
-                    Please enter only numbers.
-                  </Form.Text>
-                </Form.Group>
+              <Modal show={show} onHide={handleClose} size="lg">
+                <Modal.Header closeButton>
+                  <Modal.Title>Add Faqs</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>
+                        Question_No <span className="text-danger">*</span>
+                      </Form.Label>
+                      <Form.Control
+                        type="text" // Change type to text
+                        pattern="[0-9]*" // Regular expression to allow only numbers
+                        {...register("question_no", {
+                          required: true,
+                          pattern: {
+                            value: /^[0-9]+$/,
+                            message: "Please enter only numbers.",
+                          },
+                        })}
+                      />
+                      <Form.Text className="text-muted">
+                        Please enter only numbers.
+                      </Form.Text>
+                    </Form.Group>
 
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>
-                    Question <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    {...register("question", {
-                      required: true,
-                    })}
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>
-                    Answer <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    {...register("answer", {
-                      required: true,
-                    })}
-                  />
-                </Form.Group>
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-              <Button
-                variant="primary"
-                onClick={handleSubmit((data) => {
-                  console.log(data);
-                  addFaq(data);
-                  handleClose(); // Move handleClose to onSubmit handler
-                })}
-              >
-                Add Faq
-              </Button>
-            </Modal.Footer>
-          </Modal>
-          <div style={{ padding: "30px" }}>
-            <center>
-              <Row style={{ padding: "20px" }}>
-                <Col>
-                  <Form className="d-flex">
-                    <Form.Control
-                      type="search"
-                      placeholder="Search by FAQ ID"
-                      className="me-2"
-                      aria-label="Search"
-                      style={{ width: "400px", marginLeft: "400px" }}
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                    />
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>
+                        Question <span className="text-danger">*</span>
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        {...register("question", {
+                          required: true,
+                        })}
+                      />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>
+                        Answer <span className="text-danger">*</span>
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        {...register("answer", {
+                          required: true,
+                        })}
+                      />
+                    </Form.Group>
                   </Form>
-                </Col>
-                <Col>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
                   <Button
-                    style={{
-                      backgroundColor: "black",
-                      borderBlockColor: "black",
-                    }}
-                    onClick={handleShow}
+                    variant="primary"
+                    onClick={handleSubmit((data) => {
+                      console.log(data);
+                      addFaq(data);
+                      handleClose(); // Move handleClose to onSubmit handler
+                    })}
                   >
                     Add Faq
                   </Button>
-                </Col>
-                <Col>
-                  <Button
-                    style={{
-                      backgroundColor: "black",
-                      borderBlockColor: "black",
-                    }}
-                    onClick={downloadPdfReport}
-                  >
-                    Download Report
-                  </Button>
-                </Col>
-              </Row>
-            </center>
-
-            <Container>
-              <Row className="justify-content-md-center">
-                <Col md={10} style={{ maxWidth: "1800px" }}>
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>Question No</th>
-                        <th>Question</th>
-                        <th>Answer</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {filteredData.map((fa) => (
-                        <tr key={fa._id}>
-                          <td>{fa.question_no}</td>
-                          <td>{fa.question}</td>
-                          <td>{fa.answer}</td>
-                          <td>
-                            <EditLineIcon
-                              onClick={() => {
-                                editFaqForm.reset({
-                                  _id: fa._id,
-                                  question_no: fa.question_no,
-                                  question: fa.question,
-                                  answer: fa.answer,
-                                });
-                                setShowEdit(true);
-                              }}
-                              style={{ color: "blue", cursor: "pointer" }} // Adjust color and other styles as needed
-                            />
-                            <DeleteBinLineIcon
-                              onClick={() => {
-                                handleDelete(fa._id);
-                              }}
-                              style={{ color: "red", cursor: "pointer" }} // Adjust color and other styles as needed
-                            />
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                </Col>
-              </Row>
-            </Container>
-          </div>
-          <Modal show={showDelete} onHide={handleCloseDelete}>
-            <Modal.Header closeButton>
-              <Modal.Title>Delete Faq</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Are you sure!</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleCloseDelete}>
-                Close
-              </Button>
-              <Button
-                variant="primary"
-                onClick={() => {
-                  deleteFaq(deleteID);
-                }}
-              >
-                Yes
-              </Button>
-            </Modal.Footer>
-          </Modal>
-          <Modal show={showEdit} onHide={handleCloseEdit}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Faq</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>Qustion No</Form.Label>
-                  <Form.Control
-                    type="number"
-                    {...editFaqForm.register("question_no")}
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>Faq Question</Form.Label>
-                  <Form.Control
-                    type="name"
-                    {...editFaqForm.register("question", {})}
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>Faq Answer</Form.Label>
-                  <Form.Control
-                    type="text"
-                    {...editFaqForm.register("answer")}
-                  />
-                </Form.Group>
-
-                {errors.country && (
-                  <span className="text-danger">This is required.</span>
-                )}
+                </Modal.Footer>
+              </Modal>
+              <div style={{ padding: "30px" }}>
+                <center>
+                  <Row style={{ padding: "20px", marginLeft: "-400px" }}>
+                    <Col>
+                      <Form className="d-flex">
+                        <Form.Control
+                          type="search"
+                          placeholder="Search by FAQ ID"
+                          className="me-2"
+                          aria-label="Search"
+                          style={{ width: "400px", marginLeft: "400px" }}
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                      </Form>
+                    </Col>
+                    <Col>
+                      <Button
+                        style={{
+                          backgroundColor: "black",
+                          borderBlockColor: "black",
+                        }}
+                        onClick={handleShow}
+                      >
+                        Add Faq
+                      </Button>
+                    </Col>
+                    <Col>
+                      <Button
+                        style={{
+                          backgroundColor: "black",
+                          borderBlockColor: "black",
+                        }}
+                        onClick={downloadPdfReport}
+                      >
+                        Download Report
+                      </Button>
+                    </Col>
+                  </Row>
+                </center>
                 <br />
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleCloseEdit}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={() => editFaq()}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-      </center>
+                <br />
+
+                <Container style={{ marginLeft: "-100px" }}>
+                  <Row className="justify-content-md-center">
+                    <Col md={10} style={{ width: "80rem" }}>
+                      <Table striped bordered hover>
+                        <thead>
+                          <tr>
+                            <th>Question No</th>
+                            <th>Question</th>
+                            <th>Answer</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {filteredData.map((fa) => (
+                            <tr key={fa._id}>
+                              <td>{fa.question_no}</td>
+                              <td>{fa.question}</td>
+                              <td>{fa.answer}</td>
+                              <td>
+                                <EditLineIcon
+                                  onClick={() => {
+                                    editFaqForm.reset({
+                                      _id: fa._id,
+                                      question_no: fa.question_no,
+                                      question: fa.question,
+                                      answer: fa.answer,
+                                    });
+                                    setShowEdit(true);
+                                  }}
+                                  style={{ color: "blue", cursor: "pointer" }} // Adjust color and other styles as needed
+                                />
+                                <DeleteBinLineIcon
+                                  onClick={() => {
+                                    handleDelete(fa._id);
+                                  }}
+                                  style={{ color: "red", cursor: "pointer" }} // Adjust color and other styles as needed
+                                />
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </Table>
+                    </Col>
+                  </Row>
+                </Container>
+              </div>
+              <Modal show={showDelete} onHide={handleCloseDelete}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Delete Faq</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure!</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleCloseDelete}>
+                    Close
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      deleteFaq(deleteID);
+                    }}
+                  >
+                    Yes
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+              <Modal show={showEdit} onHide={handleCloseEdit}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Edit Faq</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>Qustion No</Form.Label>
+                      <Form.Control
+                        type="number"
+                        {...editFaqForm.register("question_no")}
+                      />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>Faq Question</Form.Label>
+                      <Form.Control
+                        type="name"
+                        {...editFaqForm.register("question", {})}
+                      />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>Faq Answer</Form.Label>
+                      <Form.Control
+                        type="text"
+                        {...editFaqForm.register("answer")}
+                      />
+                    </Form.Group>
+
+                    {errors.country && (
+                      <span className="text-danger">This is required.</span>
+                    )}
+                    <br />
+                  </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleCloseEdit}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={() => editFaq()}>
+                    Save Changes
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </div>
+          </center>
+        </Grid>
+      </Grid>
     </>
   );
 }

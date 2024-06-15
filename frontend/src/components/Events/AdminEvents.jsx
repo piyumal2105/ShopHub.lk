@@ -20,6 +20,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Controller } from "react-hook-form";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { Grid } from "@mui/material";
 
 function AdminEvent() {
   const [show, setShow] = useState(false);
@@ -191,35 +192,43 @@ function AdminEvent() {
     doc.save("Events_report.pdf");
   };
   return (
-    <center>
-      <div>
-        <SideNavbar />
-        <Modal show={show} onHide={handleClose} size="lg">
-          {/* <Modal.Header closeButton>
+    <>
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
+          <SideNavbar />
+        </Grid>
+        <Grid item xs={9}>
+          <center>
+            <br />
+            <br />
+            <h3 style={{ marginLeft: "-200px" }}>Events</h3>
+            <div style={{ marginLeft: "-140px" }}>
+              <Modal show={show} onHide={handleClose} size="lg">
+                {/* <Modal.Header closeButton>
   
             </Modal.Header> */}
-          <Modal.Body>
-            <div className="p-3 max-w-3xl mx-auto min-h-screen">
-              <h2 className="text-center text3-xl my-7 font semibold">
-                Create an Event
-              </h2>
-              <form className=" flex flex-col gap-4">
-                <div className="flex flex-col gap-4 sm:flex-row justify-between ">
-                  <Row style={{ paddingBottom: "10px" }}>
-                    <Col>
-                      <TextInput
-                        type="text"
-                        placeholder="Event Title"
-                        id="eventTitle"
-                        className="flex-1"
-                        style={{ width: "500px" }}
-                        {...register("eventTitle", { required: true })}
-                      />
-                    </Col>
-                  </Row>
-                </div>
-                <Row style={{ paddingBottom: "10px" }}>
-                  {/* <div
+                <Modal.Body>
+                  <div className="p-3 max-w-3xl mx-auto min-h-screen">
+                    <h2 className="text-center text3-xl my-7 font semibold">
+                      Create an Event
+                    </h2>
+                    <form className=" flex flex-col gap-4">
+                      <div className="flex flex-col gap-4 sm:flex-row justify-between ">
+                        <Row style={{ paddingBottom: "10px" }}>
+                          <Col>
+                            <TextInput
+                              type="text"
+                              placeholder="Event Title"
+                              id="eventTitle"
+                              className="flex-1"
+                              style={{ width: "500px" }}
+                              {...register("eventTitle", { required: true })}
+                            />
+                          </Col>
+                        </Row>
+                      </div>
+                      <Row style={{ paddingBottom: "10px" }}>
+                        {/* <div
                       style={{ border: "3px dotted #0E86D4", padding: "10px" }}
                     >
                       <div className="mb-3">
@@ -235,7 +244,7 @@ function AdminEvent() {
                       </div>
                     </div> */}
 
-                  {/* <Textarea
+                        {/* <Textarea
                     type="text"
                     placeholder="Description"
                     id="descriptione"
@@ -244,7 +253,7 @@ function AdminEvent() {
                     {...register("description", { required: true })}
                   /> */}
 
-                  {/* <Controller
+                        {/* <Controller
                       name="description"
                       control={editPromotionForm.control}
                       render={({ field }) => (
@@ -256,8 +265,8 @@ function AdminEvent() {
                           onChange={field.onChange}
                         />
                       )} */}
-                  {/* /> */}
-                  {/* <ReactQuill
+                        {/* /> */}
+                        {/* <ReactQuill
                       theme="snow"
                       placeholder="Add Description.."
                       className="h-72 mb-12"
@@ -265,215 +274,212 @@ function AdminEvent() {
                       onChange={handleChange }
                        {...register("description", { required: true })}
                     /> */}
-                  <Col>
-                    <label>Description</label>
-                    <TextInput
-                      type="text"
-                      required
-                      id="description"
-                      className="flex-1"
-                      style={{ width: "650px", height: "120px" }}
-                      {...register("description", { required: true })}
-                    />
-                  </Col>
-                </Row>
+                        <Col>
+                          <label>Description</label>
+                          <TextInput
+                            type="text"
+                            required
+                            id="description"
+                            className="flex-1"
+                            style={{ width: "650px", height: "120px" }}
+                            {...register("description", { required: true })}
+                          />
+                        </Col>
+                      </Row>
 
+                      <br />
+                      <br />
+                      <br />
+                      <Row>
+                        <Form.Label column sm="2">
+                          Date <span className="text-danger">*</span>
+                        </Form.Label>
+                        <Col>
+                          <DatePicker
+                            placeholderText="Select"
+                            selected={selectedAddedDate}
+                            onChange={(date) => setValue("startDate", date)} // Use 'date' directly
+                            onSelect={(date) => setSelectedAddedDate(date)}
+                            dateFormat="yyyy-MM-dd"
+                            className="form-control"
+                            name="selectedAddedDate"
+                            value={watch("selectedAddedDate")}
+                            // {...register("selectedAddedDate", {
+                            //   required: true,
+                            // })}
+                          />
+                        </Col>
+                      </Row>
+                      <br />
+                    </form>
+                  </div>
+                </Modal.Body>
                 <br />
-                <br />
-                <br />
-                <Row>
-                  <Form.Label column sm="2">
-                    Date <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Col>
-                    <DatePicker
-                      placeholderText="Select"
-                      selected={selectedAddedDate}
-                      onChange={(date) => setValue("startDate", date)} // Use 'date' directly
-                      onSelect={(date) => setSelectedAddedDate(date)}
-                      dateFormat="yyyy-MM-dd"
-                      className="form-control"
-                      name="selectedAddedDate"
-                      value={watch("selectedAddedDate")}
-                      // {...register("selectedAddedDate", {
-                      //   //   required: true,
-                      // })}
-                    />
-                  </Col>
-                </Row>
-                <br />
-              </form>
-            </div>
-          </Modal.Body>
-          <br />
 
-          <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={handleClose}
-              style={{ width: "1100px" }}
-            >
-              Close
-            </Button>
-            <Button
-              style={{ width: "1100px" }}
-              variant="primary"
-              onClick={handleSubmit((data) => {
-                console.log(data);
-                addEvent(data);
-                handleClose(); // Move handleClose to onSubmit handler
-              })}
-              className="gradient-background" // Apply the gradient background style
-            >
-              Add Event
-            </Button>
-          </Modal.Footer>
-        </Modal>
-        <div style={{ padding: "30px" }}>
-          <center>
-            <Row style={{ padding: "20px" }}>
-              <Col>
-                <Form className="d-flex">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search here..."
-                    className="me-2"
-                    aria-label="Search"
-                    style={{ width: "400px", marginLeft: "400px" }}
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                </Form>
-              </Col>
-              <Col>
-                <Button
-                  style={{
-                    backgroundColor: "black",
-                    borderBlockColor: "black",
-                  }}
-                  onClick={handleShow}
-                  className="gradient-background"
-                >
-                  Add Event
-                </Button>
-              </Col>
-              <Col>
-                <Button
-                  style={{
-                    backgroundColor: "black",
-                    borderBlockColor: "black",
-                  }}
-                  onClick={downloadPdfReport}
-                >
-                  Download Report
-                </Button>
-              </Col>
-            </Row>
-          </center>
-
-          <Table
-            style={{ marginLeft: "270px", width: "1100px" }}
-            striped
-            bordered
-            hover
-          >
-            <thead>
-              <tr>
-                <th>Event ID</th>
-                <th>Event Title</th>
-                <th>Description</th>
-                <th>Date</th>
-
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {data
-                .filter((member) =>
-                  Object.values(member).some((value) =>
-                    value
-                      .toString()
-                      .toLowerCase()
-                      .includes(searchQuery.toLowerCase())
-                  )
-                )
-                .map((member) => (
-                  <tr key={member.eventId}>
-                    <td>{member.eventId}</td>
-                    <td>{member.eventTitle}</td>
-                    <td>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: member.description,
-                        }}
-                      />
-                    </td>
-                    <td>{new Date(member.startDate).toLocaleDateString()}</td>
-
-                    <td>
-                      <EditLineIcon
-                        onClick={() => {
-                          editEventForm.reset({
-                            _id: member._id,
-                            eventTitle: member.eventTitle,
-                            description: member.description,
-                            startDate: member.startDate,
-                          });
-                          setShowEdit(true);
-                        }}
-                      />
-                      <DeleteBinLineIcon
-                        onClick={() => {
-                          handleDelete(member._id);
-                        }}
-                      />
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </Table>
-        </div>
-        <Modal show={showDelete} onHide={handleCloseDelete}>
-          <Modal.Header closeButton>
-            <Modal.Title>Delete Event</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Are you sure!</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseDelete}>
-              Close
-            </Button>
-            <Button
-              variant="primary"
-              onClick={() => {
-                deleteEvent(deleteID);
-              }}
-            >
-              Yes
-            </Button>
-          </Modal.Footer>
-        </Modal>
-        <Modal show={showEdit} onHide={handleCloseEdit} size="lg">
-          <Modal.Header closeButton>
-            <Modal.Title>Edit Event Details</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Row>
-                <Col>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput1"
+                <Modal.Footer>
+                  <Button
+                    variant="secondary"
+                    onClick={handleClose}
+                    style={{ width: "1100px" }}
                   >
-                    <Form.Label>Event Title</Form.Label>
-                    <Form.Control
-                      type="name"
-                      {...editEventForm.register("eventTitle", {})}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
+                    Close
+                  </Button>
+                  <Button
+                    style={{ width: "1100px" }}
+                    variant="primary"
+                    onClick={handleSubmit((data) => {
+                      console.log(data);
+                      addEvent(data);
+                      handleClose(); // Move handleClose to onSubmit handler
+                    })}
+                    className="gradient-background" // Apply the gradient background style
+                  >
+                    Add Event
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+              <div style={{ padding: "30px" }}>
+                <center>
+                  <Row style={{ padding: "20px", marginLeft: "-200px" }}>
+                    <Col>
+                      <Form className="d-flex">
+                        <Form.Control
+                          type="search"
+                          placeholder="Search here..."
+                          className="me-2"
+                          aria-label="Search"
+                          style={{ width: "400px", marginLeft: "400px" }}
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                      </Form>
+                    </Col>
+                    <Col>
+                      <Button
+                        style={{
+                          backgroundColor: "black",
+                          borderBlockColor: "black",
+                        }}
+                        onClick={handleShow}
+                        className="gradient-background"
+                      >
+                        Add Event
+                      </Button>
+                    </Col>
+                    <Col>
+                      <Button
+                        style={{
+                          backgroundColor: "black",
+                          borderBlockColor: "black",
+                        }}
+                        onClick={downloadPdfReport}
+                      >
+                        Download Report
+                      </Button>
+                    </Col>
+                  </Row>
+                </center>
 
-              {/* <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Table style={{ width: "77rem" }} striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Event ID</th>
+                      <th>Event Title</th>
+                      <th>Description</th>
+                      <th>Date</th>
+
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data
+                      .filter((member) =>
+                        Object.values(member).some((value) =>
+                          value
+                            .toString()
+                            .toLowerCase()
+                            .includes(searchQuery.toLowerCase())
+                        )
+                      )
+                      .map((member) => (
+                        <tr key={member.eventId}>
+                          <td>{member.eventId}</td>
+                          <td>{member.eventTitle}</td>
+                          <td>
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: member.description,
+                              }}
+                            />
+                          </td>
+                          <td>
+                            {new Date(member.startDate).toLocaleDateString()}
+                          </td>
+
+                          <td>
+                            <EditLineIcon
+                              onClick={() => {
+                                editEventForm.reset({
+                                  _id: member._id,
+                                  eventTitle: member.eventTitle,
+                                  description: member.description,
+                                  startDate: member.startDate,
+                                });
+                                setShowEdit(true);
+                              }}
+                            />
+                            <DeleteBinLineIcon
+                              onClick={() => {
+                                handleDelete(member._id);
+                              }}
+                            />
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </Table>
+              </div>
+              <Modal show={showDelete} onHide={handleCloseDelete}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Delete Event</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure!</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleCloseDelete}>
+                    Close
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      deleteEvent(deleteID);
+                    }}
+                  >
+                    Yes
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+              <Modal show={showEdit} onHide={handleCloseEdit} size="lg">
+                <Modal.Header closeButton>
+                  <Modal.Title>Edit Event Details</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form>
+                    <Row>
+                      <Col>
+                        <Form.Group
+                          className="mb-3"
+                          controlId="exampleForm.ControlInput1"
+                        >
+                          <Form.Label>Event Title</Form.Label>
+                          <Form.Control
+                            type="name"
+                            {...editEventForm.register("eventTitle", {})}
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+
+                    {/* <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label> Description</Form.Label>
                   <Form.Control
                     type="text"
@@ -485,72 +491,72 @@ function AdminEvent() {
                   <br />
                   </Form.Group> */}
 
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                  type="text"
-                  style={{ width: "600px", height: "120px" }}
-                  {...editEventForm.register("description")}
-                />
-              </Form.Group>
-              <br />
-
-              <Row>
-                <Col>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput2"
-                  >
-                    <Form.Label>
-                      Date <span className="text-danger">*</span>
-                    </Form.Label>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>Description</Form.Label>
+                      <Form.Control
+                        type="text"
+                        style={{ width: "600px", height: "120px" }}
+                        {...editEventForm.register("description")}
+                      />
+                    </Form.Group>
                     <br />
 
-                    <DatePicker
-                      selected={editEventForm.watch("startDate")} // Use watch to get the current value
-                      onChange={(date) =>
-                        editEventForm.setValue("startDate", date)
-                      } // Manually update the form value
-                      onSelect={(date) => setSelectedAddedDate(date)} // Update selectedAddedDate state if needed
-                      dateFormat="yyyy-MM-dd"
-                      className="form-control"
-                    />
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlInput2"
-                  >
-                    <br />
-                  </Form.Group>
-                </Col>
-              </Row>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={handleCloseEdit}
-              style={{ width: "1100px" }}
-            >
-              Close
-            </Button>
-            <Button
-              variant="primary"
-              onClick={() => editEvent()}
-              style={{ width: "1100px" }}
-              className="gradient-background"
-            >
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
+                    <Row>
+                      <Col>
+                        <Form.Group
+                          className="mb-3"
+                          controlId="exampleForm.ControlInput2"
+                        >
+                          <Form.Label>
+                            Date <span className="text-danger">*</span>
+                          </Form.Label>
+                          <br />
 
-        {/* <Table
+                          <DatePicker
+                            selected={editEventForm.watch("startDate")} // Use watch to get the current value
+                            onChange={(date) =>
+                              editEventForm.setValue("startDate", date)
+                            } // Manually update the form value
+                            onSelect={(date) => setSelectedAddedDate(date)} // Update selectedAddedDate state if needed
+                            dateFormat="yyyy-MM-dd"
+                            className="form-control"
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group
+                          className="mb-3"
+                          controlId="exampleForm.ControlInput2"
+                        >
+                          <br />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                  </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant="secondary"
+                    onClick={handleCloseEdit}
+                    style={{ width: "1100px" }}
+                  >
+                    Close
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => editEvent()}
+                    style={{ width: "1100px" }}
+                    className="gradient-background"
+                  >
+                    Save Changes
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+
+              {/* <Table
               style={{ marginLeft: "270px", width: "1100px" }}
               striped
               bordered
@@ -614,8 +620,11 @@ function AdminEvent() {
                   ))}
               </tbody>
             </Table> */}
-      </div>
-    </center>
+            </div>
+          </center>
+        </Grid>
+      </Grid>
+    </>
   );
 }
 export default AdminEvent;

@@ -14,9 +14,7 @@ import SideNavbar from "../AdminDashboard/SideNavbar";
 import { Col, Container, Row } from "react-bootstrap";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-
-
-
+import { Grid } from "@mui/material";
 
 function Rvw() {
   const [show, setShow] = useState(false);
@@ -24,7 +22,6 @@ function Rvw() {
   const [deleteID, setDeleteID] = useState("");
   const [showEdit, setShowEdit] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
- 
 
   const {
     register,
@@ -36,10 +33,9 @@ function Rvw() {
   } = useForm({
     validateInputChanges: true,
     initialValues: {
-      code:   "",
+      code: "",
       rating: "",
       review: "",
-      
     },
   });
 
@@ -47,13 +43,11 @@ function Rvw() {
     validateInputChanges: true,
     initialValues: {
       _id: "",
-      code:   "",
+      code: "",
       rating: "",
       review: "",
-      
     },
   });
-
 
   //use react query and fetch rvw data
   const { data, isLoading, isError, refetch } = useQuery(
@@ -164,258 +158,262 @@ function Rvw() {
     )
   );
 
-
-    const downloadPdfReport = () => {
-      const doc = new jsPDF();
-      autoTable(doc, {
-        theme: "striped",
-        head: [["code", "rating", "review"]],
-        body: data.map((item) => [
-          item.code,
-          item.rating,
-          item.review,
-        ]),
-        columnStyles: { 0: { cellWidth: "auto" } },
-      });
-      doc.save("Review Report.pdf");
-    };
+  const downloadPdfReport = () => {
+    const doc = new jsPDF();
+    autoTable(doc, {
+      theme: "striped",
+      head: [["code", "rating", "review"]],
+      body: data.map((item) => [item.code, item.rating, item.review]),
+      columnStyles: { 0: { cellWidth: "auto" } },
+    });
+    doc.save("Review Report.pdf");
+  };
 
   return (
     <>
-      <center>
-        <div>
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
           <SideNavbar />
-          <br></br>
-          <h2>Shop Reviews</h2>
-          <br></br>
+        </Grid>
+        <Grid item xs={9}>
+          <center>
+            <div>
+              <br></br>
+              <h2>Shop Reviews</h2>
+              <br></br>
 
-          <Modal show={show} onHide={handleClose} size="lg">
-            <Modal.Header closeButton>
-              <Modal.Title>Add Rvws</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>
-                    Shop Code <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="number"
-                    {...register("code", {
-                      required: true,
-                    })}
-                  />
-                </Form.Group>
+              <Modal show={show} onHide={handleClose} size="lg">
+                <Modal.Header closeButton>
+                  <Modal.Title>Add Rvws</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>
+                        Shop Code <span className="text-danger">*</span>
+                      </Form.Label>
+                      <Form.Control
+                        type="number"
+                        {...register("code", {
+                          required: true,
+                        })}
+                      />
+                    </Form.Group>
 
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>
-                    Shop Name <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    {...register("rating", {
-                      required: true,
-                    })}
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>
-                    Review <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    {...register("review", {
-                      required: true,
-                    })}
-                  />
-                </Form.Group>
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-              <Button
-                variant="primary"
-                onClick={handleSubmit((data) => {
-                  console.log(data);
-                  addRvw(data);
-                  handleClose(); // Move handleClose to onSubmit handler
-                })}
-              >
-                Add Rvw
-              </Button>
-            </Modal.Footer>
-          </Modal>
-          <div style={{ padding: "30px" }}>
-            <center>
-              <Row style={{ padding: "20px" }}>
-                <Col>
-                  <Form className="d-flex">
-                    <Form.Control
-                      type="search"
-                      placeholder="Search by Shop Name"
-                      className="me-2"
-                      aria-label="Search"
-                      style={{ width: "400px", marginLeft: "400px" }}
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                    />
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>
+                        Shop Name <span className="text-danger">*</span>
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        {...register("rating", {
+                          required: true,
+                        })}
+                      />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>
+                        Review <span className="text-danger">*</span>
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        {...register("review", {
+                          required: true,
+                        })}
+                      />
+                    </Form.Group>
                   </Form>
-                </Col>
-                <Col>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
                   <Button
-                    style={{
-                      backgroundColor: "black",
-                      borderBlockColor: "black",
-                    }}
-                    onClick={handleShow}
+                    variant="primary"
+                    onClick={handleSubmit((data) => {
+                      console.log(data);
+                      addRvw(data);
+                      handleClose(); // Move handleClose to onSubmit handler
+                    })}
                   >
                     Add Rvw
                   </Button>
-                  </Col>
-                  <Col>
-                    <Button
-                      style={{
-                        backgroundColor: "black",
-                        borderBlockColor: "black",
-                      }}
-                      onClick={downloadPdfReport}
+                </Modal.Footer>
+              </Modal>
+              <div style={{ padding: "30px" }}>
+                <center>
+                  <Row style={{ padding: "20px", marginLeft: "-400px" }}>
+                    <Col>
+                      <Form className="d-flex">
+                        <Form.Control
+                          type="search"
+                          placeholder="Search by Shop Name"
+                          className="me-2"
+                          aria-label="Search"
+                          style={{ width: "400px", marginLeft: "400px" }}
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                      </Form>
+                    </Col>
+                    <Col>
+                      <Button
+                        style={{
+                          backgroundColor: "black",
+                          borderBlockColor: "black",
+                        }}
+                        onClick={handleShow}
+                      >
+                        Add Rvw
+                      </Button>
+                    </Col>
+                    <Col>
+                      <Button
+                        style={{
+                          backgroundColor: "black",
+                          borderBlockColor: "black",
+                        }}
+                        onClick={downloadPdfReport}
+                      >
+                        Download Report
+                      </Button>
+                    </Col>
+                  </Row>
+                </center>
+
+                <Container>
+                  <Row className="justify-content-md-center">
+                    <Col
+                      md={10}
+                      style={{ width: "90rem", marginLeft: "-200px" }}
                     >
-                      Download Report
-                    </Button>
-                  </Col>
-              </Row>
-            </center>
+                      <Table striped bordered hover>
+                        <thead>
+                          <tr>
+                            <th>Shop Code</th>
+                            <th>Shop Name</th>
+                            <th>Review</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {filteredData.map((review) => (
+                            <tr key={review._id}>
+                              <td>{review.code}</td>
+                              <td>{review.rating}</td>
+                              <td>{review.review}</td>
+                              <td>
+                                <EditLineIcon
+                                  onClick={() => {
+                                    editRvwForm.reset({
+                                      _id: review._id,
+                                      code: review.code,
+                                      rating: review.rating,
+                                      review: review.review,
+                                    });
+                                    setShowEdit(true);
+                                  }}
+                                  style={{ color: "blue", cursor: "pointer" }} // Adjust color and other styles as needed
+                                />
+                                <DeleteBinLineIcon
+                                  onClick={() => {
+                                    handleDelete(review._id);
+                                  }}
+                                  style={{ color: "red", cursor: "pointer" }} // Adjust color and other styles as needed
+                                />
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </Table>
+                    </Col>
+                  </Row>
+                </Container>
+              </div>
+              <Modal show={showDelete} onHide={handleCloseDelete}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Delete Rvw</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Are you sure!</Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleCloseDelete}>
+                    Close
+                  </Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      deleteRvw(deleteID);
+                    }}
+                  >
+                    Yes
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+              <Modal show={showEdit} onHide={handleCloseEdit}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Edit Rvw</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Form>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>Shop Code</Form.Label>
+                      <Form.Control
+                        type="name"
+                        {...editRvwForm.register("code", {})}
+                      />
+                    </Form.Group>
 
-            <Container>
-              <Row className="justify-content-md-center">
-                <Col md={10} style={{ maxWidth: "1800px" }}>
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>Shop Code</th>
-                        <th>Shop Name</th>
-                        <th>Review</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {filteredData.map((review) => (
-                        <tr key={review._id}>
-                          <td>{review.code}</td>
-                          <td>{review.rating}</td>
-                          <td>{review.review}</td>
-                          <td>
-                            <EditLineIcon
-                              onClick={() => {
-                                editRvwForm.reset({
-                                  _id: review._id,
-                                  code: review.code,
-                                  rating: review.rating,
-                                  review: review.review,
-                                });
-                                setShowEdit(true);
-                              }}
-                              style={{ color: "blue", cursor: "pointer" }} // Adjust color and other styles as needed
-                            />
-                            <DeleteBinLineIcon
-                              onClick={() => {
-                                handleDelete(review._id);
-                              }}
-                              style={{ color: "red", cursor: "pointer" }} // Adjust color and other styles as needed
-                            />
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
-                </Col>
-              </Row>
-            </Container>
-          </div>
-          <Modal show={showDelete} onHide={handleCloseDelete}>
-            <Modal.Header closeButton>
-              <Modal.Title>Delete Rvw</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Are you sure!</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleCloseDelete}>
-                Close
-              </Button>
-              <Button
-                variant="primary"
-                onClick={() => {
-                  deleteRvw(deleteID);
-                }}
-              >
-                Yes
-              </Button>
-            </Modal.Footer>
-          </Modal>
-          <Modal show={showEdit} onHide={handleCloseEdit}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Rvw</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>Shop Code</Form.Label>
-                  <Form.Control
-                    type="name"
-                    {...editRvwForm.register("code", {})}
-                  />
-                </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>Shop Name</Form.Label>
+                      <Form.Control
+                        type="name"
+                        {...editRvwForm.register("rating", {})}
+                      />
+                    </Form.Group>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label>Rvw Review</Form.Label>
+                      <Form.Control
+                        type="text"
+                        {...editRvwForm.register("review")}
+                      />
+                    </Form.Group>
 
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>Shop Name</Form.Label>
-                  <Form.Control
-                    type="name"
-                    {...editRvwForm.register("rating", {})}
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>Rvw Review</Form.Label>
-                  <Form.Control
-                    type="text"
-                    {...editRvwForm.register("review")}
-                  />
-                </Form.Group>
-
-                {errors.country && (
-                  <span className="text-danger">This is required.</span>
-                )}
-                <br />
-              </Form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleCloseEdit}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={() => editRvw()}>
-                Save Changes
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-      </center>
+                    {errors.country && (
+                      <span className="text-danger">This is required.</span>
+                    )}
+                    <br />
+                  </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={handleCloseEdit}>
+                    Close
+                  </Button>
+                  <Button variant="primary" onClick={() => editRvw()}>
+                    Save Changes
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </div>
+          </center>
+        </Grid>
+      </Grid>
     </>
   );
 }
