@@ -3,7 +3,6 @@ import { Container, Button, Col, Row } from "react-bootstrap";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Carousel from "react-bootstrap/Carousel";
-import img01 from "../assets/img01.png";
 import img02 from "../assets/ofer.png";
 import { useHotkeys } from "react-hotkeys-hook";
 import Card from "react-bootstrap/Card";
@@ -178,7 +177,7 @@ function LandingPage() {
           }}
         >
           <marquee width="85%">
-            Welcome to ShopHub.lk. We're delighted to have you here. Explore a
+            Welcome to ShopHub.lk. We are delighted to have you here. Explore a
             world of shopping, dining, and entertainment with us.
           </marquee>
         </div>
